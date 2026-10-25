@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.golf-teplice.cz/</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.golf-teplice.cz/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.golf-teplice.cz/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.golf-teplice.cz/"/>
+  </url>
+  <url>
+    <loc>https://www.golf-teplice.cz/?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.golf-teplice.cz/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.golf-teplice.cz/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.golf-teplice.cz/"/>
+  </url>
+</urlset>

@@ -1,0 +1,62 @@
+# Golf Club Teplice – nastavení pro hosting s Apache (mod_rewrite).
+# Na jiném serveru (nginx apod.) je potřeba pravidla přepsat do jeho konfigurace.
+
+RewriteEngine On
+
+# --- HTTPS a www -------------------------------------------------------------
+# Pokud hosting přesměrování na HTTPS řeší sám (nebo běží za proxy), tento blok smažte,
+# jinak hrozí nekonečné přesměrování.
+RewriteCond %{HTTP_HOST} ^golf-teplice\.cz$ [NC,OR]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} ^(www\.)?golf-teplice\.cz$ [NC]
+RewriteRule ^ https://www.golf-teplice.cz%{REQUEST_URI} [R=301,NE,L]
+
+# --- Staré adresy webu → sekce nové jednostránky (301 = trvale) --------------
+RewriteRule ^onas/?$            /#onas            [R=301,NE,L]
+RewriteRule ^aktuality/?$       /#aktuality       [R=301,NE,L]
+RewriteRule ^cenik/?$           /#cenik           [R=301,NE,L]
+RewriteRule ^hriste/?$          /#hriste          [R=301,NE,L]
+RewriteRule ^treninky/?$        /#treninky        [R=301,NE,L]
+RewriteRule ^turnaje/?$         /#turnaje         [R=301,NE,L]
+RewriteRule ^fotogalerie/?$     /#fotogalerie     [R=301,NE,L]
+RewriteRule ^pujcovna-bezek/?$  /#pujcovna-bezek  [R=301,NE,L]
+RewriteRule ^kontakty/?$        /#kontakty        [R=301,NE,L]
+
+# Jazykové verze starého webu (index.php?mutace=de / cs)
+RewriteCond %{QUERY_STRING} (^|&)mutace=de(&|$) [NC]
+RewriteRule ^(index\.php)?$ /?lang=de [R=301,QSD,L]
+RewriteCond %{QUERY_STRING} (^|&)mutace=cs(&|$) [NC]
+RewriteRule ^(index\.php)?$ / [R=301,QSD,L]
+RewriteRule ^index\.php$ / [R=301,L]
+
+# Ceník v PDF ze starého umístění
+RewriteRule ^files/cenik/golf-teplice-cenik\.pdf$ /assets/cenik/golf-teplice-cenik.pdf [R=301,L]
+
+# --- Bezpečnostní hlavičky ---------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# --- Komprese a cache --------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/pdf "access plus 1 week"
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+</IfModule>
+
+Options -Indexes

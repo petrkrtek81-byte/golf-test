@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /kontakt.php
+
+Sitemap: https://www.golf-teplice.cz/sitemap.xml
