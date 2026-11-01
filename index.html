@@ -525,8 +525,8 @@ ul{ margin:0; padding:0; list-style:none; }
 .price-card__alt{ margin:1rem 0 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); font-size:.84rem; opacity:.62; }
 
 .price-extras{ display:grid; gap:1rem; margin-top:1.4rem; }
-@media (min-width:700px){ .price-extras{ grid-template-columns:repeat(2, 1fr); } }
-@media (min-width:1080px){ .price-extras{ grid-template-columns:repeat(4, 1fr); } }
+@media (min-width:700px){ .price-extras{ grid-template-columns:repeat(2, 1fr); align-items:start; } }
+@media (min-width:1080px){ .price-extras{ grid-template-columns:repeat(3, 1fr) 1.6fr; } } /* širší sloupec pro účet s QR */
 .extra{ display:flex; gap:1rem; align-items:flex-start; padding:1.3rem 1.4rem; border-radius:20px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); }
 .extra__icon{ width:44px; height:44px; flex:none; display:grid; place-items:center; border-radius:14px; background:rgba(201,169,97,.14); color:var(--gold-2); }
 .extra__icon .i{ width:1.35em; height:1.35em; }
@@ -535,6 +535,10 @@ ul{ margin:0; padding:0; list-style:none; }
 .extra--account{ flex-direction:column; gap:.7rem; }
 @media (min-width:1080px){ .extra--account{ grid-column:span 1; } }
 .account{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
+.account-iban{ margin:-.2rem 0 0; font-size:.78rem; letter-spacing:.02em; opacity:.75; }
+.account-qr{ display:flex; align-items:center; gap:.9rem; margin:0; }
+.account-qr img{ flex:none; width:124px; height:124px; padding:6px; border-radius:12px; background:#fff; }
+.account-qr figcaption{ font-size:.8rem; line-height:1.45; opacity:.75; }
 .account code{ font-family:var(--ff-sans); font-size:1.25rem; font-weight:800; letter-spacing:.04em; color:var(--gold-2); }
 .copy-btn{ display:inline-flex; align-items:center; gap:.4rem; padding:.42rem .8rem; border-radius:999px; font-size:.76rem; font-weight:700; color:var(--cream); border:1px solid rgba(245,240,230,.25); transition:all .3s; }
 .copy-btn:hover{ background:var(--gold); color:var(--forest); border-color:var(--gold); }
@@ -550,6 +554,7 @@ ul{ margin:0; padding:0; list-style:none; }
 .gf__row{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:.5rem 0; font-size:.92rem; }
 .gf__row + .gf__row{ border-top:1px dashed rgba(255,255,255,.1); }
 .gf__row span{ opacity:.75; }
+.gf__who{ display:block; margin-top:.1rem; font-size:.74rem; line-height:1.35; opacity:.85; }
 .gf__row b{ font-family:var(--ff-display); font-size:1.35rem; font-weight:500; color:var(--gold-2); white-space:nowrap; }
 .greenfee__note{ display:flex; gap:.6rem; align-items:flex-start; margin:1.2rem 0 0; font-size:.88rem; opacity:.7; }
 .greenfee__note .i{ margin-top:.25rem; color:var(--gold-2); }
@@ -1060,6 +1065,32 @@ em, i{ font-style:normal; }
 .ring-badge__center strong{ font-size:clamp(1.6rem, 2.3vw, 2.1rem); font-weight:700; }
 
 /* =====================================================================
+   24c. MOBIL – informační karty vedle sebe (posun prstem do strany)
+   ===================================================================== */
+.hours__row .is-closed{ color:#b5473c; }
+.swipe-hint{ display:none; align-items:center; gap:.5rem; margin:0 0 .8rem; font-size:.8rem; font-weight:600; opacity:.65; }
+@media (max-width:699px){
+  .swipe-hint{ display:flex; }
+  .price-cards, .price-extras, .gf-grid{
+    display:flex; gap:.8rem; overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; scrollbar-width:none;
+    margin-inline:calc(-1 * var(--gutter)); padding:.2rem var(--gutter) .8rem; scroll-padding-inline:var(--gutter);
+  }
+  .price-cards::-webkit-scrollbar, .price-extras::-webkit-scrollbar, .gf-grid::-webkit-scrollbar{ display:none; }
+  .price-card{ flex:0 0 78%; scroll-snap-align:start; padding:1.6rem 1.4rem; }
+  .extra{ flex:0 0 74%; scroll-snap-align:start; }
+  .price-extras, .gf-grid{ align-items:flex-start; }
+  .extra--account{ flex-basis:90%; order:-1; } /* účet s QR jako první */
+  .greenfee .gf-grid{ margin-inline:-1.6rem; padding-inline:1.6rem; scroll-padding-inline:1.6rem; }
+  .gf{ flex:0 0 84%; scroll-snap-align:start; }
+  /* kontakty v jedné společné kartě */
+  .contact-list{ gap:0; border-radius:22px; background:#fff; border:1px solid var(--line); overflow:hidden; }
+  .contact-item{ border:0; border-radius:0; padding:.95rem 1.1rem; }
+  .contact-item + .contact-item{ border-top:1px solid var(--line); }
+  a.contact-item:hover{ transform:none; }
+}
+
+/* =====================================================================
    25. PREFERS-REDUCED-MOTION – vypnutí pohybu
    ===================================================================== */
 @media (prefers-reduced-motion:reduce){
@@ -1331,7 +1362,7 @@ em, i{ font-style:normal; }
           <div class="hours__rows">
             <div class="hours__row"><span>Sezóna</span><strong>duben – listopad</strong></div>
             <div class="hours__row"><span>Provoz hřiště</span><strong>9:30 – do setmění</strong></div>
-            <div class="hours__row"><span>Driving range</span><strong>9:30 – do setmění</strong></div>
+            <div class="hours__row"><span>Driving range</span><strong class="is-closed">uzavřen</strong></div>
           </div>
         </div>
       </div>
@@ -1472,6 +1503,7 @@ em, i{ font-style:normal; }
       </div>
     </div>
 
+    <p class="swipe-hint"><svg class="i"><use href="#i-swipe"/></svg>Posuňte do strany</p>
     <div class="price-cards">
       <article class="price-card reveal">
         <h3 class="price-card__name">Dospělý</h3>
@@ -1515,6 +1547,11 @@ em, i{ font-style:normal; }
           <code id="accountNo">6918554389/0800</code>
           <button class="copy-btn" type="button" data-copy="6918554389/0800"><svg class="i"><use href="#i-copy"/></svg> Kopírovat</button>
         </div>
+        <p class="account-iban">IBAN CZ18 0800 0000 0069 1855 4389 · BIC GIBACZPX</p>
+        <figure class="account-qr">
+          <img src="assets/qr-platba.svg" alt="QR platba na účet 6918554389/0800" width="124" height="124" loading="lazy">
+          <figcaption>QR platba – naskenujte v bankovní aplikaci a doplňte částku.</figcaption>
+        </figure>
         <small>Do zprávy pro příjemce uveďte celé jméno (příp. jména), za které je placeno.</small>
       </div>
     </div>
@@ -1525,15 +1562,15 @@ em, i{ font-style:normal; }
         <h3>Green fee</h3>
       </div>
       <div class="gf-grid">
-        <div class="gf"><h4>9 jamek</h4><div class="gf__row"><span>Denní fee</span><b>600 Kč</b></div><div class="gf__row"><span>Sleva 30 %</span><b>400 Kč</b></div></div>
-        <div class="gf"><h4>18 jamek</h4><div class="gf__row"><span>Denní fee</span><b>800 Kč</b></div><div class="gf__row"><span>Sleva 30 %</span><b>600 Kč</b></div></div>
+        <div class="gf"><h4>9 jamek</h4><div class="gf__row"><span>Denní fee</span><b>600 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b>400 Kč</b></div></div>
+        <div class="gf"><h4>18 jamek</h4><div class="gf__row"><span>Denní fee</span><b>800 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b>600 Kč</b></div></div>
       </div>
-      <p class="greenfee__note"><svg class="i"><use href="#i-info"/></svg><span>Sleva 30 % platí pouze pro seniory, juniory a členy klubů Barbora, Terezín, Janov, Malevil, Bítozeves a Libouchec.</span></p>
+      <p class="greenfee__note"><svg class="i"><use href="#i-info"/></svg><span>* Sleva 30 % platí pouze pro seniory, juniory a členy klubů Barbora, Terezín, Janov, Malevil, Bítozeves a Libouchec.</span></p>
     </div>
 
     <div class="price-actions">
       <p>Členové hrají v rezervačním systému automaticky za 0 Kč, senioři a junioři mají slevu.</p>
-      <a class="btn btn--gold" href="assets/cenik/golf-teplice-cenik.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#i-download"/></svg> Stáhnout kompletní ceník (PDF)</a>
+      <a class="btn btn--gold" href="assets/cenik/golf-teplice-cenik.pdf" data-href-de="assets/cenik/golf-teplice-preisliste-de.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#i-download"/></svg> Stáhnout kompletní ceník (PDF)</a>
     </div>
   </div>
 </section>
@@ -1640,7 +1677,7 @@ em, i{ font-style:normal; }
           <li><svg class="i"><use href="#i-check"/></svg>Vstupní poplatek do klubu</li>
           <li><svg class="i"><use href="#i-check"/></svg>Zapůjčení vybavení</li>
         </ul>
-        <a class="btn btn--gold" href="mailto:mysik@golf-teplice.cz?subject=Golfový%20kurz">Mám zájem o kurz <svg class="i i--go"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--gold" href="mailto:mysik@golf-teplice.cz?subject=Golfový%20kurz" data-href-de="mailto:mysik@golf-teplice.cz?subject=Golfkurs">Mám zájem o kurz <svg class="i i--go"><use href="#i-arrow"/></svg></a>
       </article>
 
       <article class="train-card reveal" style="--d:.1s">
@@ -1658,7 +1695,7 @@ em, i{ font-style:normal; }
           <li><svg class="i"><use href="#i-check"/></svg>Zapůjčení vybavení</li>
           <li><svg class="i"><use href="#i-check"/></svg>Klubový míček</li>
         </ul>
-        <a class="btn btn--dark" href="mailto:mysik@golf-teplice.cz?subject=Seznámení%20s%20golfem">Objednat seznámení <svg class="i i--go"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--dark" href="mailto:mysik@golf-teplice.cz?subject=Seznámení%20s%20golfem" data-href-de="mailto:mysik@golf-teplice.cz?subject=Golf-Schnupperkurs">Objednat seznámení <svg class="i i--go"><use href="#i-arrow"/></svg></a>
       </article>
 
       <article class="train-card reveal" style="--d:.2s">
@@ -1815,7 +1852,7 @@ em, i{ font-style:normal; }
           </a>
           <div class="contact-item reveal" style="--d:.18s">
             <span class="contact-item__icon"><svg class="i"><use href="#i-clock"/></svg></span>
-            <div><small>Otevírací doba</small><strong>Sezóna duben – listopad</strong><span>Hřiště i driving range 9:30 – do setmění</span></div>
+            <div><small>Otevírací doba</small><strong>Sezóna duben – listopad</strong><span>Hřiště 9:30 – do setmění · driving range uzavřen</span></div>
           </div>
         </div>
         <!-- Mapa Google se načte až po kliknutí (do té doby web Google nekontaktuje) -->
@@ -2052,7 +2089,7 @@ em, i{ font-style:normal; }
         <h4>Cookies und Dienste Dritter</h4>
         <p>Die Website verwendet keine Analyse- oder Werbe-Cookies. Im Browser wird nur die gewählte Sprache gespeichert. Die Schriften liegen direkt auf unserer Website. Die Google-Karte wird erst nach einem Klick auf „Karte anzeigen“ geladen – danach kann Google Daten über Ihren Besuch (z. B. die IP-Adresse) gemäß seinen eigenen Richtlinien verarbeiten. Links zu Facebook und zu Partnern führen auf Seiten Dritter.</p>
         <h4>Ihre Rechte</h4>
-        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit, das Recht auf Widerspruch sowie auf Widerruf Ihrer Einwilligung. Beschwerden können Sie beim tschechischen Datenschutzamt einreichen (<a href="https://uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>
+        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit, das Recht auf Widerspruch sowie auf Widerruf Ihrer Einwilligung. Beschwerden können Sie beim tschechischen Datenschutzamt einreichen (<a href="https://uoou.gov.cz/en" target="_blank" rel="noopener">uoou.gov.cz/en</a>).</p>
       </div>
     </div>
   </div>
@@ -2272,8 +2309,8 @@ const GALLERY = [
 const PARTNERS = [
   { name: 'DanCzek',                                url: 'https://www.danczek.com',       logo: 'danczek.png' },
   { name: 'XXL Auto',                               url: 'https://www.xxlauto.cz',        logo: 'xxlauto.png' },
-  { name: 'Vaněrka – výtahové technologie',         url: 'https://www.vytahy-vanerka.cz', logo: 'vanerka.png' },
-  { name: 'VUM park – samoobslužné sklady Teplice', url: 'https://sklady-teplice.cz',     logo: 'vum-park.svg' }
+  { name: 'Vaněrka',                                url: 'https://www.vytahy-vanerka.cz', logo: 'vanerka.png' },
+  { name: 'VUM park',                               url: 'https://sklady-teplice.cz',     logo: 'vum-park.svg' }
 ];
 
 /* -----------------------------------------------------------------------
@@ -2420,19 +2457,26 @@ const DE = {
   '500 Kč / hra': '500 CZK / Runde',
   'Parkování pro členy': 'Parken für Mitglieder',
   'Zdarma': 'Kostenlos',
-  'Nové číslo účtu od sezóny 2026': 'Neue Kontonummer ab der Saison 2026',
+  'Nové číslo účtu od sezóny 2026': 'Neue Bankverbindung ab der Saison 2026',
   'Kopírovat': 'Kopieren',
-  'Číslo účtu {x} zkopírováno': 'Kontonummer {x} kopiert',
+  'Číslo účtu {x} zkopírováno': 'IBAN {x} kopiert',
   'Do zprávy pro příjemce uveďte celé jméno (příp. jména), za které je placeno.': 'Bitte geben Sie im Verwendungszweck den vollständigen Namen (bzw. die Namen) an, für den gezahlt wird.',
   'Green fee': 'Greenfee',
   '9 jamek': '9 Löcher',
   'Denní fee': 'Tagesfee',
   'Sleva 30 %': '30 % Rabatt',
-  'Sleva 30 % platí pouze pro seniory, juniory a členy klubů Barbora, Terezín, Janov, Malevil, Bítozeves a Libouchec.':
-    'Der Rabatt von 30 % gilt nur für Senioren, Jugendliche und Mitglieder der Clubs Barbora, Terezín, Janov, Malevil, Bítozeves und Libouchec.',
+  '* Sleva 30 % platí pouze pro seniory, juniory a členy klubů Barbora, Terezín, Janov, Malevil, Bítozeves a Libouchec.':
+    '* Der Rabatt von 30 % gilt nur für Senioren, Jugendliche und Mitglieder der Clubs Barbora, Terezín, Janov, Malevil, Bítozeves und Libouchec.',
+  'senioři, junioři a členové vybraných klubů*': 'Senioren, Jugendliche und Mitglieder ausgewählter Clubs*',
+  'QR platba – naskenujte v bankovní aplikaci a doplňte částku.': 'GiroCode (SEPA) – in der Banking-App scannen und Betrag ergänzen.',
+  'QR platba na účet 6918554389/0800': 'GiroCode für die Überweisung auf IBAN CZ18 0800 0000 0069 1855 4389',
+  'Vyplňte prosím toto pole.': 'Bitte füllen Sie dieses Feld aus.',
+  'Zadejte platnou e-mailovou adresu.': 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+  'Pro odeslání je potřeba souhlas.': 'Zum Absenden ist Ihre Zustimmung erforderlich.',
+  'Posuňte do strany': 'Zur Seite wischen',
   '18 jamek': '18 Löcher',
   'Členové hrají v rezervačním systému automaticky za 0 Kč, senioři a junioři mají slevu.': 'Mitglieder spielen im Reservierungssystem automatisch für 0 CZK, Senioren und Jugendliche erhalten Rabatt.',
-  'Stáhnout kompletní ceník (PDF)': 'Komplette Preisliste herunterladen (PDF, tschechisch)',
+  'Stáhnout kompletní ceník (PDF)': 'Komplette Preisliste herunterladen (PDF)',
 
   // hřiště
   'Devět jamek,': 'Neun Löcher,',
@@ -2602,7 +2646,8 @@ const DE = {
   'Telefon · rezervace tee time': 'Telefon · Tee-Time-Reservierung',
   'E-mail': 'E-Mail',
   'Sezóna duben – listopad': 'Saison April – November',
-  'Hřiště i driving range 9:30 – do setmění': 'Platz und Driving Range 9:30 – bis zur Dämmerung',
+  'Hřiště 9:30 – do setmění · driving range uzavřen': 'Platz 9:30 – bis zur Dämmerung · Driving Range geschlossen',
+  'uzavřen': 'geschlossen',
   'Mapa – Golf Club Teplice, Cínovec 275': 'Karte – Golf Club Teplice, Cínovec 275',
   'Navigovat': 'Route planen',
   'Napište nám dotaz či vzkaz': 'Schreiben Sie uns',
@@ -2634,6 +2679,7 @@ const DE = {
   'Rezervace on-line': 'Online-Reservierung',
   'Nahoru': 'Nach oben',
   'Zavřít': 'Schließen',
+  'Golf club Teplice z.s. · IČO 26643120': 'Golf club Teplice z.s. · Id.-Nr. (IČO) 26643120',
   'Sezóna {y} otevřena': 'Saison {y} eröffnet',
   'Sezóna {y} začíná v dubnu': 'Die Saison {y} beginnt im April',
   'Ochrana osobních údajů': 'Datenschutz',
@@ -2724,7 +2770,7 @@ const NEWS_DE = {
         '<li><span>Senioren (über 65 Jahre)</span><b>5 500 CZK · 6 000 CZK</b></li>' +
         '<li><span>Aufnahmegebühr für neue Mitglieder</span><b>1 000 CZK</b></li>' +
       '</ul>',
-      '<strong>Achtung – ab der Saison 2026 gilt eine neue Kontonummer: 6918554389/0800.</strong> Bitte geben Sie im Verwendungszweck den vollständigen Namen bzw. die Namen an, für die gezahlt wird.',
+      '<strong>Achtung – ab der Saison 2026 gilt eine neue Kontonummer: 6918554389/0800</strong> (IBAN CZ18 0800 0000 0069 1855 4389, BIC GIBACZPX). Bitte geben Sie im Verwendungszweck den vollständigen Namen bzw. die Namen an, für die gezahlt wird.',
       'Vielen Dank für Ihre Treue und Ihre Freude am Spiel bei uns.'
     ],
     ctaLabel: 'Preise anzeigen'
@@ -3232,6 +3278,25 @@ refreshers.push(seasonStatus);
   refreshers.push(() => { nowText(); setPeriod(selected, false); });
 })();
 
+(function bankAccount() {
+  const ACC = '6918554389/0800';
+  const IBAN = 'CZ18 0800 0000 0069 1855 4389';
+  const BIC = 'GIBACZPX';
+  const code = $('#accountNo');
+  const btn = $('.extra--account [data-copy]');
+  const line = $('.account-iban');
+  const qr = $('.account-qr img');
+  function update() {
+    const de = LANG === 'de';
+    code.textContent = de ? IBAN : ACC;
+    btn.dataset.copy = de ? IBAN.replace(/\s/g, '') : ACC;
+    line.textContent = de ? `BIC ${BIC} · Konto ${ACC} · Empfänger: Golf club Teplice z.s.` : `IBAN ${IBAN} · BIC ${BIC}`;
+    qr.src = de ? 'assets/qr-platba-de.svg' : 'assets/qr-platba.svg';
+  }
+  update();
+  refreshers.push(update);
+})();
+
 $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
   const text = btn.dataset.copy;
   try {
@@ -3606,6 +3671,17 @@ async function sendForm(formEl, type) {
   });
   $('#formReset').addEventListener('click', () => card.classList.remove('is-sent'));
 
+  $$('#contactForm input, #contactForm textarea, #newsletterForm input').forEach(el => {
+    el.addEventListener('invalid', () => {
+      const v = el.validity;
+      el.setCustomValidity(v.valueMissing
+        ? t(el.type === 'checkbox' ? 'Pro odeslání je potřeba souhlas.' : 'Vyplňte prosím toto pole.')
+        : v.typeMismatch ? t('Zadejte platnou e-mailovou adresu.') : '');
+    });
+    ['input', 'change'].forEach(ev => el.addEventListener(ev, () => el.setCustomValidity('')));
+    refreshers.push(() => el.setCustomValidity('')); // po přepnutí jazyka nenechat hlášku v jiném jazyce
+  });
+
   const nl = $('#newsletterForm');
   nl.addEventListener('submit', async e => {
     e.preventDefault();
@@ -3625,11 +3701,16 @@ async function sendForm(formEl, type) {
 })();
 
 /* ---------- MAPA – iframe Google se vloží až po kliknutí ---------- */
+const mapSrc = () => 'https://maps.google.com/maps?q=C%C3%ADnovec%20275%2C%20417%2032%20Dub%C3%AD&z=14&output=embed&hl=' + (LANG === 'de' ? 'de' : 'cs');
+refreshers.push(() => {
+  const frame = $('#mapEmbed iframe');
+  if (frame) { frame.src = mapSrc(); frame.title = t('Mapa – Golf Club Teplice, Cínovec 275'); }
+});
 $('#mapLoad').addEventListener('click', () => {
   const frame = document.createElement('iframe');
   frame.title = t('Mapa – Golf Club Teplice, Cínovec 275');
   frame.referrerPolicy = 'no-referrer-when-downgrade';
-  frame.src = 'https://maps.google.com/maps?q=C%C3%ADnovec%20275%2C%20417%2032%20Dub%C3%AD&z=14&output=embed';
+  frame.src = mapSrc();
   $('#mapEmbed .map-consent').replaceWith(frame);
 });
 
@@ -3671,7 +3752,7 @@ $$('[data-toast]:not(#galleryFilters [data-toast])').forEach(b => b.addEventList
 const I18N_SKIP = [
   'script', 'style', 'svg', 'code', '[data-i18n-skip]',
   '.hero__title', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
-  '#priceNow', '#seasonStatus', '#seasonBadge', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
+  '#priceNow', '#seasonStatus', '#seasonBadge', '.account-iban', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
   '#newsModal .modal__body', '#newsModalThumbs', '#tourList', '#gallery', '#distTable',
   '#courseMap .hotspot', '#holePicker .hole-pick', '#holeDots', '#lbCounter', '#lbCaption',
   '#partnersMarquee', '#toasts'
@@ -3712,6 +3793,11 @@ function setLang(lang, remember = true) {
   document.title = t(META_CS.title);
   metaDesc.content = t(META_CS.desc);
   ringText.textContent = t(RING_CS);
+  // odkazy s německou variantou (PDF ceník, předmět e-mailu…)
+  $$('[data-href-de]').forEach(a => {
+    if (!a.dataset.hrefCs) a.dataset.hrefCs = a.getAttribute('href');
+    a.setAttribute('href', LANG === 'de' ? a.dataset.hrefDe : a.dataset.hrefCs);
+  });
   splitWords(heroSub, t(heroSub.dataset.cs));
   $$('.lang [data-lang]').forEach(b => {
     const on = b.dataset.lang === LANG;
