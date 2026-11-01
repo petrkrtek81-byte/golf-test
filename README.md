@@ -47,3 +47,17 @@ Nová fotka: vložte ji do `assets/img/` a zmenšenou (šířka 800 px) do `asse
 - Fotky do úvodního slideru ve vysokém rozlišení (min. 2400 × 1350 px) a logo ve formátu SVG.
 - Kontrola zásad ochrany osobních údajů (dialog v patičce) a německého překladu rodilým mluvčím.
 - Rozhodnout, zda stačí upravovat aktuality v souboru, nebo je potřeba redakční systém.
+
+## Okno „Vyzkoušejte nový web“ na starém webu
+
+Soubor `pro-stary-web/novy-web.js` patří do STARÉHO webu (golf-teplice.cz) na přechodné období.
+Správce starého webu vloží do společné šablony stránek těsně před `</body>` jeden řádek:
+
+```html
+<script src="https://petrkrtek81-byte.github.io/golf-test/pro-stary-web/novy-web.js" defer></script>
+```
+
+- Okno nabídne přechod na nový web (do odpovídající sekce, česky nebo německy podle starého webu).
+- Křížkem / „Zůstat na starém webu“ se zavře a 3 dny se znovu neukáže.
+- Adresa nového webu je v proměnné `NEW_SITE` na začátku souboru – po přesunu na vlastní doménu ji stačí změnit.
+- Po definitivní výměně webu se řádek ze starého webu jednoduše odstraní.
