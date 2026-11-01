@@ -235,7 +235,6 @@ ul{ margin:0; padding:0; list-style:none; }
 .lang button:hover{ opacity:.9; }
 .lang button.is-active{ background:rgba(255,255,255,.18); opacity:1; }
 .lang svg{ width:18px; height:12px; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.18); }
-.nav .lang{ display:none; }
 
 /* Hamburger */
 .burger{ width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,.3); display:grid; place-items:center; transition:border-color .3s, background .3s; }
@@ -252,7 +251,6 @@ ul{ margin:0; padding:0; list-style:none; }
 
 @media (min-width:1280px){
   .nav__menu{ display:flex; }
-  .nav .lang{ display:inline-flex; }
   .burger{ display:none; }
 }
 @media (max-width:767px){
@@ -261,6 +259,14 @@ ul{ margin:0; padding:0; list-style:none; }
   .nav__logo img{ height:60px; }
   .nav__cta{ padding:.68rem 1rem; }
   .nav__cta .long{ display:none; }
+  .nav__actions{ gap:.5rem; }
+  .nav .lang button{ gap:0; padding:.38rem .45rem; font-size:0; } /* jen vlajky */
+  .nav .lang svg{ width:20px; height:14px; }
+}
+@media (max-width:480px){
+  .nav__cta{ width:44px; height:44px; padding:0; }
+  .nav__cta > span{ display:none; } /* jen ikona kalendáře */
+  .nav__logo img{ height:54px; }
 }
 
 /* =====================================================================
@@ -1252,7 +1258,7 @@ em, i{ font-style:normal; }
           <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
           <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
         </div>
-        <a class="btn btn--gold nav__cta" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener">
+        <a class="btn btn--gold nav__cta" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener" aria-label="Rezervovat on-line">
           <svg class="i"><use href="#i-calendar"/></svg><span>Rezervovat<span class="long"> on-line</span></span>
         </a>
         <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -1284,11 +1290,7 @@ em, i{ font-style:normal; }
       <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> +420 777 943 219</a>
       <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg> golf@golf-teplice.cz</a>
     </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem">
-      <div class="lang" role="group" aria-label="Jazyk">
-        <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
-        <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
-      </div>
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:1rem">
       <div class="socials" style="margin:0">
         <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
         <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
