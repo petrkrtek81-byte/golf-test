@@ -10,7 +10,7 @@ Jednostránkový web (HTML + CSS + JS v `index.html`), bez databáze a bez sesta
 | `assets/img/` | fotky v plném rozlišení (lightbox, hero, modaly) |
 | `assets/img/thumbs/` | náhledy 800 px (galerie, karty aktualit) |
 | `assets/hriste/`, `assets/partneri/` | plánky jamek 1–9, loga partnerů 1–10 |
-| `assets/fonts/` | písma Audiowide (nadpisy, ve stylu loga „urban“), Michroma (popisky) a Manrope (text) – bez Google Fonts |
+| `assets/fonts/` | písma Baloo 2 (nadpisy, čísla, popisky – zaoblené jako logo „urban“) a Manrope (text) – bez Google Fonts |
 | `assets/cenik/` | PDF ceník |
 | `kontakt.php` | odesílání kontaktního formuláře a přihlášek k novinkám e-mailem |
 | `.htaccess` | HTTPS, přesměrování starých adres (`/onas`, `/cenik`…), cache |

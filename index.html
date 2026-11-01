@@ -16,8 +16,8 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/favicon.ico">
 
-<!-- Písma: Audiowide (nadpisy, ve stylu loga) + Michroma (popisky) + Manrope (text) – uložená přímo na webu -->
-<link rel="preload" href="assets/fonts/audiowide-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Písma: Baloo 2 (nadpisy, čísla, popisky – zaoblené, vybráno podle loga „urban“) + Manrope (text) – uložená přímo na webu -->
+<link rel="preload" href="assets/fonts/baloo-2-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 
@@ -72,8 +72,7 @@
   --ice:#9fd0f5;
   --frost:#dbe9f4;
 
-  --ff-display:'Audiowide', 'Manrope', system-ui, sans-serif; /* nadpisy a čísla – styl loga „urban“ */
-  --ff-wide:'Michroma', 'Manrope', system-ui, sans-serif;      /* drobné popisky velkými písmeny */
+  --ff-display:'Baloo 2', 'Manrope', system-ui, sans-serif; /* nadpisy, čísla a popisky – zaoblené jako logo „urban“ */
   --ff-sans:'Manrope', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius:18px;
@@ -1017,48 +1016,48 @@ html[lang="de"] [data-lang-block="cs"], html:not([lang="de"]) [data-lang-block="
 @media (max-width:767px){ .js .reveal--left, .js .reveal--right{ transform:translateY(34px); } }
 
 /* =====================================================================
-   24b. PÍSMO VE STYLU LOGA „URBAN“
-   Audiowide je širší než původní Playfair a nemá kurzívu – nadpisy jsou menší
-   a dřívější kurzívní akcenty jsou jen barevné.
+   24b. PÍSMO BALOO 2 (vybráno podle loga „urban“)
+   Zaoblené písmo s řezy 400–800, bez kurzívy – dřívější kurzívní akcenty
+   v nadpisech jsou jen barevné. Běžný text zůstává v Manrope.
    ===================================================================== */
-h1, h2, h3, h4{ font-weight:400; letter-spacing:0; }
+h1, h2, h3, h4{ font-weight:700; letter-spacing:-.005em; }
 em, i{ font-style:normal; }
-.hero__title{ font-size:clamp(2.2rem, 6.4vw, 5.3rem); line-height:1; letter-spacing:-.005em; }
-.hero__sub{ font-family:var(--ff-wide); font-size:clamp(.9rem, 1.55vw, 1.2rem); line-height:1.6; letter-spacing:.02em; max-width:none; }
-.hero__caption, .lightbox__caption{ font-family:var(--ff-sans); font-size:.9rem; letter-spacing:.02em; }
-.h2{ font-size:clamp(1.7rem, 3.5vw, 2.7rem); line-height:1.15; }
-.h3{ font-size:clamp(1.4rem, 2.3vw, 1.85rem); line-height:1.2; }
-.band h2{ font-size:clamp(1.8rem, 4.2vw, 3.3rem); line-height:1.15; }
-.eyebrow, .footer h4, .partners__title, .drawer__eyebrow{ font-family:var(--ff-wide); font-weight:400; letter-spacing:.14em; }
-.eyebrow{ font-size:.64rem; }
-.footer h4, .partners__title{ font-size:.66rem; }
-.stat__num{ font-size:clamp(2.1rem, 4.6vw, 3.4rem); }
-.stat__pre, .stat__unit{ font-family:var(--ff-sans); font-weight:600; }
-.tl-item__year{ font-size:clamp(1.8rem, 3.2vw, 2.4rem); }
-.tl-item__title{ font-size:1.1rem; line-height:1.3; }
-.news-card__title{ font-size:1.15rem; line-height:1.35; }
-.news-card--featured .news-card__title{ font-size:1.55rem; }
-.news-card__date b, .tour__date b{ font-size:1.35rem; }
-.price-card__name{ font-size:1.4rem; }
-.price-card__price{ font-size:clamp(2.1rem, 3.4vw, 2.7rem); }
-.extra strong{ font-size:1.15rem; }
-.gf__row b{ font-size:1.1rem; }
-.train-card h3{ font-size:1.4rem; }
-.train-card__price{ font-size:2.2rem; }
-.tour__name{ font-size:1.15rem; line-height:1.3; }
-.coach__body h3{ font-size:clamp(1.5rem, 2.6vw, 2rem); }
-.coach__initials{ font-size:clamp(2.6rem, 4vw, 3.6rem); }
-.ski__price{ font-size:1.25rem; }
-.tee-sum p b{ font-size:1.1rem; }
-.hole-stats dd{ font-size:1.15rem; }
-.drawer__num{ font-size:3.4rem; }
-.drawer__par strong{ font-size:1.7rem; }
-.form-card h3{ font-size:1.6rem; }
-.newsletter h3{ font-size:1.35rem; }
-.modal__body h3{ font-size:clamp(1.35rem, 2.6vw, 1.9rem); line-height:1.25; }
-.mobile-menu__links a{ font-size:clamp(1.5rem, 6.4vw, 2.1rem); line-height:1.45; }
-.footer__wordmark{ font-size:clamp(1.9rem, 8.2vw, 7.2rem); letter-spacing:0; }
-.ring-badge__center strong{ font-size:clamp(1.3rem, 1.9vw, 1.7rem); }
+.hero__title{ font-size:clamp(2.8rem, 8vw, 6.6rem); font-weight:800; line-height:1; letter-spacing:-.01em; }
+.hero__sub{ font-family:var(--ff-display); font-weight:500; font-size:clamp(1.15rem, 2vw, 1.55rem); line-height:1.4; }
+.hero__caption, .lightbox__caption{ font-family:var(--ff-display); font-weight:500; font-size:1rem; }
+.h2{ font-size:clamp(2rem, 4.2vw, 3.3rem); line-height:1.1; }
+.h3{ font-size:clamp(1.6rem, 2.6vw, 2.1rem); line-height:1.15; }
+.band h2{ font-size:clamp(2.2rem, 5vw, 4rem); line-height:1.1; }
+.eyebrow, .footer h4, .partners__title, .drawer__eyebrow{ font-family:var(--ff-display); font-weight:700; letter-spacing:.16em; }
+.eyebrow{ font-size:.8rem; }
+.footer h4, .partners__title{ font-size:.8rem; }
+.stat__num{ font-size:clamp(2.6rem, 5.4vw, 4rem); font-weight:700; }
+.stat__pre, .stat__unit{ font-family:var(--ff-display); font-weight:600; }
+.tl-item__year{ font-size:clamp(2.2rem, 3.8vw, 2.9rem); font-weight:700; }
+.tl-item__title{ font-size:1.3rem; }
+.news-card__title{ font-size:1.4rem; line-height:1.2; }
+.news-card--featured .news-card__title{ font-size:1.9rem; }
+.news-card__date b, .tour__date b{ font-size:1.6rem; font-weight:700; }
+.price-card__name{ font-size:1.7rem; }
+.price-card__price{ font-size:clamp(2.6rem, 4.2vw, 3.3rem); font-weight:700; }
+.extra strong{ font-size:1.4rem; font-weight:700; }
+.gf__row b{ font-size:1.35rem; font-weight:700; }
+.train-card h3{ font-size:1.7rem; }
+.train-card__price{ font-size:2.6rem; font-weight:700; }
+.tour__name{ font-size:1.35rem; line-height:1.2; }
+.coach__body h3{ font-size:clamp(1.8rem, 3vw, 2.4rem); }
+.coach__initials{ font-size:clamp(3rem, 4.6vw, 4.2rem); font-weight:700; }
+.ski__price{ font-size:1.5rem; font-weight:700; }
+.tee-sum p b{ font-size:1.3rem; font-weight:700; }
+.hole-stats dd{ font-size:1.35rem; font-weight:700; }
+.drawer__num{ font-size:4rem; font-weight:800; }
+.drawer__par strong{ font-size:2rem; font-weight:700; }
+.form-card h3{ font-size:1.9rem; }
+.newsletter h3{ font-size:1.6rem; }
+.modal__body h3{ font-size:clamp(1.7rem, 3.2vw, 2.3rem); line-height:1.15; }
+.mobile-menu__links a{ font-size:clamp(1.9rem, 8vw, 2.7rem); font-weight:700; line-height:1.25; }
+.footer__wordmark{ font-size:clamp(2.6rem, 11vw, 9.5rem); font-weight:800; letter-spacing:-.01em; color:rgba(201,169,97,.09); -webkit-text-stroke:0; } /* obrys by u variabilního písma ukázal překryvy tahů */
+.ring-badge__center strong{ font-size:clamp(1.6rem, 2.3vw, 2.1rem); font-weight:700; }
 
 /* =====================================================================
    25. PREFERS-REDUCED-MOTION – vypnutí pohybu
