@@ -9,7 +9,7 @@ Jednostránkový web (HTML + CSS + JS v `index.html`), bez databáze a bez sesta
 | `index.html` | celý web: styly, obsah, skript (CZ i DE) |
 | `assets/img/` | fotky v plném rozlišení (lightbox, hero, modaly) |
 | `assets/img/thumbs/` | náhledy 800 px (galerie, karty aktualit) |
-| `assets/hriste/`, `assets/partneri/` | plánky jamek 1–9, loga partnerů 1–10 |
+| `assets/hriste/`, `assets/partneri/` | plánky jamek 1–9, loga partnerů (DanCzek, XXL Auto, Vaněrka, VUM park) |
 | `assets/fonts/` | písma Baloo 2 (nadpisy, čísla, popisky – zaoblené jako logo „urban“) a Manrope (text) – bez Google Fonts |
 | `assets/cenik/` | PDF ceník |
 | `kontakt.php` | odesílání kontaktního formuláře a přihlášek k novinkám e-mailem |
@@ -42,7 +42,7 @@ Nová fotka: vložte ji do `assets/img/` a zmenšenou (šířka 800 px) do `asse
 
 - Potvrdit ceny, kde se web liší od PDF ceníku (duben 2026): vstupní poplatek 1 000 × 1 500 Kč, golfový kurz 6 990 × „Golfový kurz 54“ 7 500 Kč.
 - Skutečný kalendář turnajů, foto trenéra, popis jamky 4, délky jamek po přeměření 2025.
-- Aktuální seznam partnerů (weby Trailservis a V-troll nefungují) a souhlas s propagací Krušnohorského dvora.
+- Souhlas s propagací Krušnohorského dvora; u partnera DanCzek (tabák) ověřit, že logo na webu sportovního klubu nevadí zákonu o regulaci reklamy.
 - Fotky do úvodního slideru ve vysokém rozlišení (min. 2400 × 1350 px) a logo ve formátu SVG.
 - Kontrola zásad ochrany osobních údajů (dialog v patičce) a německého překladu rodilým mluvčím.
 - Rozhodnout, zda stačí upravovat aktuality v souboru, nebo je potřeba redakční systém.

@@ -823,8 +823,8 @@ a.contact-item:hover{ transform:translateX(5px); border-color:rgba(201,169,97,.5
 .marquee:hover .marquee__track, .marquee:focus-within .marquee__track{ animation-play-state:paused; }
 .marquee__group{ display:flex; gap:1.1rem; padding-right:1.1rem; }
 @keyframes marquee{ to{ transform:translateX(-50%); } }
-.partner{ width:184px; height:112px; flex:none; display:grid; place-items:center; padding:.5rem; border-radius:20px; background:#fff; border:1px solid var(--line); transition:transform .45s var(--ease), box-shadow .45s, border-color .4s; }
-.partner img{ max-height:96px; width:auto; mix-blend-mode:multiply; filter:grayscale(1) contrast(1.05); opacity:.72; transition:filter .45s, opacity .45s; }
+.partner{ width:232px; height:120px; flex:none; display:grid; place-items:center; padding:.5rem; border-radius:20px; background:#fff; border:1px solid var(--line); transition:transform .45s var(--ease), box-shadow .45s, border-color .4s; }
+.partner img{ max-width:84%; max-height:64px; width:auto; height:auto; object-fit:contain; mix-blend-mode:multiply; filter:grayscale(1) contrast(1.05); opacity:.72; transition:filter .45s, opacity .45s; }
 .partner:hover, .partner:focus-visible{ transform:translateY(-4px); box-shadow:var(--shadow-sm); border-color:rgba(201,169,97,.5); }
 .partner:hover img, .partner:focus-visible img{ filter:none; opacity:1; }
 
@@ -1069,7 +1069,7 @@ em, i{ font-style:normal; }
   .hero__slide img{ transform:none !important; animation:none !important; }
   .marquee__track{ animation:none; width:auto; }
   .marquee__group{ flex-wrap:wrap; justify-content:center; padding:0; }
-  .marquee__group[aria-hidden="true"]{ display:none; }
+  .marquee__group[aria-hidden="true"], .marquee .is-dup{ display:none; }
   .marquee{ -webkit-mask-image:none; mask-image:none; }
   .hotspot::before, .ring-badge svg, .hero__scroll-line::after{ animation:none; }
   #snow{ display:none; }
@@ -2268,19 +2268,12 @@ const GALLERY = [
   { f: '03.jpg', w: 1920, h: 412, cat: 'okoli', t: 'Panorama Cínovce' }
 ];
 
-/* Partneři – loga 1–10.png ze starého webu */
+/* Partneři – logo = soubor ve složce assets/partneri/ */
 const PARTNERS = [
-  // url: null = web partnera nefunguje (ověřeno 10/2026), logo se zobrazí bez odkazu
-  { name: 'Trailservis',        url: null },
-  { name: 'V-troll',            url: null },
-  { name: 'Krušnohorský dvůr',  url: 'https://krusnohorskydvur.cz' },
-  { name: 'Hotel Pomezí',       url: 'https://hotelpomezi.cz' },
-  { name: 'Marcafé',            url: 'http://marcafe.cz' },
-  { name: 'Daitl',              url: 'https://www.daitl.cz' },
-  { name: 'KN optik',           url: 'https://www.kn-optik.cz' },
-  { name: 'ČSOB',               url: 'https://www.csob.cz' },
-  { name: 'Lanos',              url: 'https://www.lanos.cz' },
-  { name: 'Váhy pro',           url: 'https://vahypro.cz' }
+  { name: 'DanCzek',                                url: 'https://www.danczek.com',       logo: 'danczek.png' },
+  { name: 'XXL Auto',                               url: 'https://www.xxlauto.cz',        logo: 'xxlauto.png' },
+  { name: 'Vaněrka – výtahové technologie',         url: 'https://www.vytahy-vanerka.cz', logo: 'vanerka.png' },
+  { name: 'VUM park – samoobslužné sklady Teplice', url: 'https://sklady-teplice.cz',     logo: 'vum-park.svg' }
 ];
 
 /* -----------------------------------------------------------------------
@@ -3652,13 +3645,17 @@ document.addEventListener('click', e => {
 /* ---------- PARTNEŘI – nekonečný pás ---------- */
 (function partners() {
   const track = $('#partnersMarquee .marquee__track');
-  const item = (p, k, hidden) => {
-    const img = `<img src="${PARTNER_IMG}${k + 1}.png" alt="${hidden ? '' : esc(p.name)}" width="246" height="162" loading="lazy">`;
+  const reps = Math.max(1, Math.ceil(8 / PARTNERS.length)); // aspoň ~8 log na skupinu
+  const item = (p, hidden, dup) => {
+    const img = `<img src="${PARTNER_IMG}${p.logo}" alt="${hidden ? '' : esc(p.name)}" loading="lazy">`;
+    const cls = 'partner' + (dup ? ' is-dup' : '');
     return p.url
-      ? `<a class="partner" href="${p.url}" target="_blank" rel="noopener" ${hidden ? 'tabindex="-1"' : ''} aria-label="${esc(p.name)}">${img}</a>`
-      : `<span class="partner">${img}</span>`;
+      ? `<a class="${cls}" href="${p.url}" target="_blank" rel="noopener" ${hidden ? 'tabindex="-1" aria-hidden="true"' : ''} aria-label="${esc(p.name)}">${img}</a>`
+      : `<span class="${cls}">${img}</span>`;
   };
-  const group = hidden => `<div class="marquee__group" ${hidden ? 'aria-hidden="true"' : ''}>${PARTNERS.map((p, k) => item(p, k, hidden)).join('')}</div>`;
+  const group = hidden => `<div class="marquee__group" ${hidden ? 'aria-hidden="true"' : ''}>${
+    Array.from({ length: reps }, (_, r) => PARTNERS.map(p => item(p, hidden || r > 0, r > 0)).join('')).join('')
+  }</div>`;
   track.innerHTML = group(false) + group(true); // druhá kopie = plynulá smyčka
 })();
 
