@@ -714,6 +714,7 @@ ul{ margin:0; padding:0; list-style:none; }
 @media (min-width:560px){ .gallery{ columns:2; } }
 @media (min-width:900px){ .gallery{ columns:3; } }
 @media (min-width:1240px){ .gallery{ columns:4; } }
+.gallery-more{ display:none; justify-content:center; margin-top:1.2rem; }
 .g-item{ position:relative; display:block; width:100%; margin:0 0 1rem; break-inside:avoid; border-radius:18px; overflow:hidden; cursor:zoom-in; background:rgba(255,255,255,.05); }
 .g-item[hidden]{ display:none; }
 /* Skeleton „shimmer“ dokud se fotka nenačte */
@@ -1071,16 +1072,39 @@ em, i{ font-style:normal; }
 .swipe-hint{ display:none; align-items:center; gap:.5rem; margin:0 0 .8rem; font-size:.8rem; font-weight:600; opacity:.65; }
 @media (max-width:699px){
   .swipe-hint{ display:flex; }
-  .price-cards, .price-extras, .gf-grid{
+  .price-cards, .gf-grid{
     display:flex; gap:.8rem; overflow-x:auto; overscroll-behavior-x:contain;
     scroll-snap-type:x mandatory; scrollbar-width:none;
     margin-inline:calc(-1 * var(--gutter)); padding:.2rem var(--gutter) .8rem; scroll-padding-inline:var(--gutter);
   }
-  .price-cards::-webkit-scrollbar, .price-extras::-webkit-scrollbar, .gf-grid::-webkit-scrollbar{ display:none; }
+  .price-cards::-webkit-scrollbar, .gf-grid::-webkit-scrollbar{ display:none; }
   .price-card{ flex:0 0 78%; scroll-snap-align:start; padding:1.6rem 1.4rem; }
-  .extra{ flex:0 0 74%; scroll-snap-align:start; }
-  .price-extras, .gf-grid{ align-items:flex-start; }
-  .extra--account{ flex-basis:90%; order:-1; } /* účet s QR jako první */
+  .gf-grid{ align-items:flex-start; }
+  /* doplňky pod sebou, kompaktně */
+  .price-extras{ gap:.6rem; }
+  .extra{ align-items:center; padding:.85rem 1rem; }
+  .extra--account{ align-items:stretch; }
+
+  /* aktuality jako kompaktní řádky: malá fotka vlevo, text vpravo */
+  .news-grid{ gap:.7rem; }
+  .news-card{ flex-direction:row; border-radius:18px; }
+  .news-card:hover{ transform:none; }
+  .news-card__media{ flex:0 0 108px; aspect-ratio:auto; min-height:124px; }
+  .news-card__date{ top:.45rem; left:.45rem; min-width:42px; padding:.3rem .35rem .28rem; border-radius:10px; }
+  .news-card__date b{ font-size:1.1rem; }
+  .news-card__date span{ font-size:.52rem; letter-spacing:.08em; }
+  .news-card__body{ padding:.75rem .9rem .8rem; }
+  .news-card__body .tag{ display:none; }
+  .news-card__title, .news-card--featured .news-card__title{ margin-bottom:.25rem; font-size:1.05rem; line-height:1.25; }
+  .news-card__excerpt{ margin-bottom:.35rem; font-size:.82rem; line-height:1.45; -webkit-line-clamp:2; }
+  .news-card__more{ font-size:.8rem; }
+  .news-more{ margin-top:1.4rem; }
+
+  /* fotky ve 2 sloupcích, nejdřív jen část */
+  .gallery{ columns:2; column-gap:.6rem; }
+  .g-item{ margin-bottom:.6rem; border-radius:12px; }
+  .gallery.is-limited .g-item.is-over{ display:none; }
+  .gallery-more{ display:flex; }
   .greenfee .gf-grid{ margin-inline:-1.6rem; padding-inline:1.6rem; scroll-padding-inline:1.6rem; }
   .gf{ flex:0 0 84%; scroll-snap-align:start; }
   /* kontakty v jedné společné kartě */
@@ -1802,6 +1826,7 @@ em, i{ font-style:normal; }
       </div>
     </div>
     <div class="gallery" id="gallery"></div>
+    <div class="gallery-more"><button class="btn btn--outline" type="button" id="galleryMore" hidden>Zobrazit všechny fotky</button></div>
   </div>
 </section>
 
@@ -2710,6 +2735,7 @@ const DE = {
   'Rezervace on-line': 'Online-Reservierung',
   'Nahoru': 'Nach oben',
   'Zavřít': 'Schließen',
+  'Zobrazit všechny fotky': 'Alle Fotos anzeigen',
   'Původní web': 'Bisherige Website',
   'Chcete starý web?': 'Lieber die alte Website?',
   'Původní stránky klubu jsou zatím stále dostupné.': 'Die bisherigen Seiten des Clubs sind vorerst weiterhin erreichbar.',
@@ -3565,7 +3591,20 @@ $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
     im.addEventListener('error', done, { once: true });
   });
 
-  function updateVisible() { visible = $$('.g-item:not([hidden])', wrap); }
+  function updateVisible() { visible = $$('.g-item:not([hidden])', wrap); applyLimit(); }
+
+  // na telefonu nejdřív jen PHONE_LIMIT fotek, zbytek po kliknutí na tlačítko (lightbox ukazuje všechny)
+  const PHONE_LIMIT = 10;
+  const moreBtn = $('#galleryMore');
+  let showAll = false;
+  function applyLimit() {
+    const limited = !showAll && visible.length > PHONE_LIMIT;
+    wrap.classList.toggle('is-limited', limited);
+    visible.forEach((item, i) => item.classList.toggle('is-over', i >= PHONE_LIMIT));
+    moreBtn.hidden = !limited;
+    moreBtn.textContent = `${t('Zobrazit všechny fotky')} (${visible.length})`;
+  }
+  moreBtn.addEventListener('click', () => { showAll = true; applyLimit(); });
   updateVisible();
 
   $('#galleryFilters').addEventListener('click', e => {
@@ -3629,7 +3668,7 @@ $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
     touchX = null;
   });
 
-  refreshers.push(() => { labelGallery(); if (lb.open) show(index, false); });
+  refreshers.push(() => { labelGallery(); applyLimit(); if (lb.open) show(index, false); });
 })();
 
 /* ---------- SNĚŽENÍ v sekci Půjčovna běžek (canvas) ---------- */
@@ -3821,7 +3860,7 @@ $$('[data-toast]:not(#galleryFilters [data-toast])').forEach(b => b.addEventList
 const I18N_SKIP = [
   'script', 'style', 'svg', 'code', '[data-i18n-skip]',
   '.hero__title', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
-  '#priceNow', '#seasonStatus', '#seasonBadge', '.account-iban', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
+  '#priceNow', '#seasonStatus', '#seasonBadge', '.account-iban', '#galleryMore', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
   '#newsModal .modal__body', '#newsModalThumbs', '#tourList', '#gallery', '#distTable',
   '#courseMap .hotspot', '#holePicker .hole-pick', '#holeDots', '#lbCounter', '#lbCaption',
   '#partnersMarquee', '#toasts'
