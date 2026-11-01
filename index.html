@@ -1091,6 +1091,29 @@ em, i{ font-style:normal; }
 }
 
 /* =====================================================================
+   24d. MALÉ UPOZORNĚNÍ „CHCETE STARÝ WEB?“ (vlevo dole, na mobilu nad lištou rezervace)
+   ===================================================================== */
+.old-site{ position:fixed; left:20px; bottom:20px; z-index:44; width:min(300px, calc(100% - 40px)); padding:1rem 1.1rem 1.05rem; border-radius:18px;
+  color:var(--cream); background:rgba(10,33,22,.92); border:1px solid rgba(201,169,97,.35); box-shadow:var(--shadow-lg);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  opacity:0; transform:translateY(calc(100% + 30px)); transition:transform .6s var(--ease-out), opacity .4s; }
+.old-site.is-visible{ opacity:1; transform:none; }
+.old-site__close{ position:absolute; top:.4rem; right:.4rem; width:32px; height:32px; display:grid; place-items:center; border-radius:50%; color:var(--cream); opacity:.7; transition:opacity .3s, background .3s; }
+.old-site__close:hover{ opacity:1; background:rgba(255,255,255,.1); }
+.old-site__title{ margin:0 2rem .2rem 0; font-family:var(--ff-display); font-size:1.1rem; font-weight:700; line-height:1.25; }
+.old-site__text{ margin:0 0 .8rem; font-size:.84rem; line-height:1.45; opacity:.75; }
+.old-site__btn{ display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .95rem; border-radius:999px; font-size:.82rem; font-weight:700; color:var(--forest); background:var(--gold); transition:background .3s; }
+.old-site__btn:hover{ background:var(--gold-2); }
+@media (max-width:767px){
+  .old-site{ left:12px; right:12px; width:auto; bottom:calc(84px + env(safe-area-inset-bottom));
+    display:grid; grid-template-columns:1fr auto; align-items:center; gap:.2rem .7rem; padding:.7rem 2.7rem .7rem 1rem; }
+  .old-site__title{ margin:0; font-size:1rem; }
+  .old-site__text{ display:none; }
+  .old-site__btn{ padding:.45rem .8rem; }
+  .old-site__close{ top:50%; margin-top:-16px; }
+}
+
+/* =====================================================================
    25. PREFERS-REDUCED-MOTION – vypnutí pohybu
    ===================================================================== */
 @media (prefers-reduced-motion:reduce){
@@ -2095,6 +2118,14 @@ em, i{ font-style:normal; }
   </div>
 </dialog>
 
+<!-- Malé upozornění v rohu: odkaz na původní web (jen po dobu přechodu, viz OLD_SITE ve skriptu) -->
+<aside class="old-site" id="oldSite" hidden aria-label="Původní web">
+  <button class="old-site__close" type="button" aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <p class="old-site__title">Chcete starý web?</p>
+  <p class="old-site__text">Původní stránky klubu jsou zatím stále dostupné.</p>
+  <a class="old-site__btn" id="oldSiteLink" href="https://www.golf-teplice.cz/">Přejít na starý web <svg class="i"><use href="#i-arrow"/></svg></a>
+</aside>
+
 <div class="toasts" id="toasts" aria-live="polite"></div>
 
 <script>
@@ -2679,6 +2710,10 @@ const DE = {
   'Rezervace on-line': 'Online-Reservierung',
   'Nahoru': 'Nach oben',
   'Zavřít': 'Schließen',
+  'Původní web': 'Bisherige Website',
+  'Chcete starý web?': 'Lieber die alte Website?',
+  'Původní stránky klubu jsou zatím stále dostupné.': 'Die bisherigen Seiten des Clubs sind vorerst weiterhin erreichbar.',
+  'Přejít na starý web': 'Zur alten Website',
   'Golf club Teplice z.s. · IČO 26643120': 'Golf club Teplice z.s. · Id.-Nr. (IČO) 26643120',
   'Sezóna {y} otevřena': 'Saison {y} eröffnet',
   'Sezóna {y} začíná v dubnu': 'Die Saison {y} beginnt im April',
@@ -3742,6 +3777,40 @@ document.addEventListener('click', e => {
 
 /* ---------- Ostatní tlačítka s oznámením ---------- */
 $$('[data-toast]:not(#galleryFilters [data-toast])').forEach(b => b.addEventListener('click', () => toast(b.dataset.toast, 'i-info')));
+
+/* ---------- MALÉ UPOZORNĚNÍ „Chcete starý web?“ (jen po dobu přechodu) ----------
+   OLD_SITE = null upozornění vypne. Na doméně golf-teplice.cz se samo neukáže,
+   takže po definitivní výměně webu nezůstane viset odkaz na neexistující starý web. */
+(function oldSiteNotice() {
+  const OLD_SITE = 'https://www.golf-teplice.cz/';
+  const KEY = 'gct-stary-web-zavreno';
+  const HIDE_DAYS = 7;
+  const box = $('#oldSite');
+  if (!OLD_SITE || !box || /(^|\.)golf-teplice\.cz$/.test(location.hostname)) return;
+  try {
+    const closedAt = Number(localStorage.getItem(KEY) || 0);
+    if (closedAt && Date.now() - closedAt < HIDE_DAYS * 864e5) return;
+  } catch { /* bez úložiště */ }
+
+  // odkaz vede na stránku starého webu podle sekce, kterou má návštěvník právě na obrazovce
+  const OLD_PAGES = ['onas', 'aktuality', 'cenik', 'hriste', 'treninky', 'turnaje', 'fotogalerie', 'pujcovna-bezek', 'kontakty'];
+  const link = $('#oldSiteLink');
+  link.addEventListener('click', () => {
+    if (LANG === 'de') { link.href = OLD_SITE + 'index.php?mutace=de'; return; }
+    const active = $('.nav__link.is-active');
+    const id = active ? active.getAttribute('href').slice(1) : '';
+    link.href = OLD_SITE + (OLD_PAGES.includes(id) ? id : 'index.php?mutace=cs');
+  });
+  $('.old-site__close', box).addEventListener('click', () => {
+    box.classList.remove('is-visible');
+    try { localStorage.setItem(KEY, String(Date.now())); } catch { /* bez úložiště */ }
+    setTimeout(() => { box.hidden = true; }, 600);
+  });
+  setTimeout(() => {
+    box.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('is-visible')));
+  }, 4000);
+})();
 
 /* ---------- JAZYKOVÁ VERZE CZ / DE ----------
    1) Statické texty a atributy se při startu uloží (česky) a při přepnutí se
