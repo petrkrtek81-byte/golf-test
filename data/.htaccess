@@ -1,0 +1,21 @@
+# Složka data/: prohlížeč smí číst jen obsah webu (obsah.json).
+# Heslo administrace, zálohy a záznamy přihlášení jsou zvenku nedostupné.
+Options -Indexes
+<IfModule mod_authz_core.c>
+  Require all denied
+  <Files "obsah.json">
+    Require all granted
+  </Files>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order deny,allow
+  Deny from all
+  <Files "obsah.json">
+    Allow from all
+  </Files>
+</IfModule>
+<IfModule mod_headers.c>
+  <Files "obsah.json">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>

@@ -41,7 +41,10 @@
 </script>
 
 <!-- Třída .js zapne skryté výchozí stavy animací jen tehdy, když běží JavaScript -->
-<script>document.documentElement.classList.add('js');</script>
+<script>document.documentElement.classList.add('js');
+// obsah webu (aktuality, ceník, galerie…) – stahuje se souběžně se zbytkem stránky
+window.GCT_OBSAH = fetch('data/obsah.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)));
+window.GCT_OBSAH.catch(() => {});</script>
 
 <style>
 /* =====================================================================
@@ -678,6 +681,10 @@ ul{ margin:0; padding:0; list-style:none; }
 .coach__photo{ position:relative; min-height:300px; display:grid; place-items:center; overflow:hidden; background:radial-gradient(100% 80% at 50% 0%, var(--grass-2), var(--forest) 75%); }
 .coach__initials{ display:grid; place-items:center; width:min(58%, 190px); aspect-ratio:1; border-radius:50%; border:1px solid rgba(201,169,97,.55); box-shadow:0 0 0 14px rgba(201,169,97,.07), 0 0 0 30px rgba(201,169,97,.04); font-family:var(--ff-display); font-style:italic; font-size:clamp(3.2rem, 5vw, 4.4rem); color:var(--cream); transition:transform 1s var(--ease); }
 .coach:hover .coach__initials{ transform:scale(1.05); }
+.coach + .coach{ margin-top:1.4rem; }
+.coach__photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 1.2s var(--ease); }
+.coach:hover .coach__photo img{ transform:scale(1.04); }
+.news-empty{ grid-column:1 / -1; margin:0; padding:2rem; border-radius:20px; text-align:center; color:var(--muted); background:var(--cream-2); border:1px dashed var(--line); }
 .coach__photo .tag{ position:absolute; top:1.2rem; left:1.2rem; background:rgba(255,255,255,.14); color:var(--cream); border-color:rgba(255,255,255,.35); }
 .coach__body{ padding:clamp(1.8rem, 4vw, 3.2rem); align-self:center; }
 .coach__body h3{ margin:0 0 .3rem; font-size:clamp(1.8rem, 3vw, 2.4rem); }
@@ -1326,7 +1333,7 @@ em, i{ font-style:normal; }
      ===================================================================== -->
 <section class="hero" id="top" aria-label="Úvod">
   <!-- Slidy: přidáním dalšího <div class="hero__slide"> se rozšíří i ovládání -->
-  <div class="hero__slides">
+  <div class="hero__slides" id="heroSlides">
     <div class="hero__slide is-active" data-caption="Green s výhledem do kraje">
       <img src="assets/img/901224_10151579493184174_1058721581_o.jpg" alt="" fetchpriority="high">
     </div>
@@ -1538,9 +1545,9 @@ em, i{ font-style:normal; }
   <div class="container">
     <div class="section-head section-head--split">
       <div>
-        <p class="eyebrow reveal">Ceník 2026</p>
+        <p class="eyebrow reveal" id="priceEyebrow">Ceník 2026</p>
         <h2 class="h2 reveal" style="--d:.08s">Členství <em>v klubu</em></h2>
-        <p class="lead reveal" style="--d:.16s">Roční členské poplatky Golf Club Teplice z.s. pro sezónu 2026. Všichni členové mají parkování zdarma.</p>
+        <p class="lead reveal" style="--d:.16s" id="priceLead">Roční členské poplatky Golf Club Teplice z.s. pro sezónu 2026. Všichni členové mají parkování zdarma.</p>
       </div>
       <div class="reveal" style="--d:.2s">
         <div class="price-toggle" id="priceToggle" role="group" aria-label="Termín platby">
@@ -1577,11 +1584,11 @@ em, i{ font-style:normal; }
     <div class="price-extras">
       <div class="extra reveal">
         <span class="extra__icon"><svg class="i"><use href="#i-ticket"/></svg></span>
-        <div><h4>Vstupní poplatek nového člena</h4><strong>1 000 Kč</strong></div>
+        <div><h4>Vstupní poplatek nového člena</h4><strong id="priceEntry">1 000 Kč</strong></div>
       </div>
       <div class="extra reveal" style="--d:.08s">
         <span class="extra__icon"><svg class="i"><use href="#i-cart"/></svg></span>
-        <div><h4>Buggy golf cart</h4><strong>500 Kč / hra</strong></div>
+        <div><h4>Buggy golf cart</h4><strong id="priceBuggy">500 Kč / hra</strong></div>
       </div>
       <div class="extra reveal" style="--d:.16s">
         <span class="extra__icon"><svg class="i"><use href="#i-parking"/></svg></span>
@@ -1611,15 +1618,15 @@ em, i{ font-style:normal; }
         <h3>Green fee</h3>
       </div>
       <div class="gf-grid">
-        <div class="gf"><h4>9 jamek</h4><div class="gf__row"><span>Denní fee</span><b>600 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b>400 Kč</b></div></div>
-        <div class="gf"><h4>18 jamek</h4><div class="gf__row"><span>Denní fee</span><b>800 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b>600 Kč</b></div></div>
+        <div class="gf"><h4>9 jamek</h4><div class="gf__row"><span>Denní fee</span><b data-gf="d9">600 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b data-gf="s9">400 Kč</b></div></div>
+        <div class="gf"><h4>18 jamek</h4><div class="gf__row"><span>Denní fee</span><b data-gf="d18">800 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b data-gf="s18">600 Kč</b></div></div>
       </div>
       <p class="greenfee__note"><svg class="i"><use href="#i-info"/></svg><span>* Sleva 30 % platí pouze pro seniory, juniory a členy klubů Barbora, Terezín, Janov, Malevil, Bítozeves a Libouchec.</span></p>
     </div>
 
     <div class="price-actions">
       <p>Členové hrají v rezervačním systému automaticky za 0 Kč, senioři a junioři mají slevu.</p>
-      <a class="btn btn--gold" href="assets/cenik/golf-teplice-cenik.pdf" data-href-de="assets/cenik/golf-teplice-preisliste-de.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#i-download"/></svg> Stáhnout kompletní ceník (PDF)</a>
+      <a class="btn btn--gold" id="pricePdf" href="assets/cenik/golf-teplice-cenik.pdf" data-href-de="assets/cenik/golf-teplice-preisliste-de.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#i-download"/></svg> Stáhnout kompletní ceník (PDF)</a>
     </div>
   </div>
 </section>
@@ -1765,7 +1772,8 @@ em, i{ font-style:normal; }
       </article>
     </div>
 
-    <!-- Trenér – TODO: nahradit placeholder skutečnou fotkou (img do .coach__photo) -->
+    <!-- Trenéři – vykreslují se z data/obsah.json (administrace → Trenéři) -->
+    <div class="coaches" id="coaches">
     <article class="coach reveal">
       <div class="coach__photo">
         <span class="coach__initials" aria-hidden="true">KM</span>
@@ -1783,6 +1791,7 @@ em, i{ font-style:normal; }
         </div>
       </div>
     </article>
+    </div>
   </div>
 </section>
 
@@ -2161,7 +2170,7 @@ em, i{ font-style:normal; }
    Část A: DATA (zde se upravuje obsah aktualit, jamek, turnajů, galerie…)
    Část B: LOGIKA (animace, modaly, mapa, galerie…)
    ======================================================================= */
-(() => {
+(async () => {
 'use strict';
 
 /* -----------------------------------------------------------------------
@@ -2175,100 +2184,19 @@ const PARTNER_IMG = 'assets/partneri/';
 const CGF_URL   = 'https://www.cgf.cz/cz/turnaje/turnaje-vyhledavani';
 const FORM_ENDPOINT = 'kontakt.php'; // PHP skript na hostingu, který odešle formulář e-mailem // TODO: odkaz na konkrétní turnaj v systému ČGF
 
-/* Aktuality – nejnovější první. img/gallery = názvy souborů ze starého webu. */
-const NEWS = [
-  {
-    date: '2026-07-10', tag: 'Služby', title: 'Buggy golf cart',
-    img: 'WhatsApp Image 2026-07-08 at 11-38-12.jpeg',
-    excerpt: 'K zapůjčení máme Buggy Golf Cart. Cena 500 Kč / hra, rezervace na telefonu.',
-    body: [
-      'V případě zájmu máme k zapůjčení <strong>Buggy Golf Cart</strong>.',
-      'Cena: <strong>500 Kč / hra</strong>.',
-      'Rezervace na tel. <a href="tel:+420777943219">+420 777 943 219</a>.'
-    ],
-    cta: { label: 'Zavolat a rezervovat', href: 'tel:+420777943219', icon: 'i-phone' }
-  },
-  {
-    date: '2026-05-05', tag: 'Rezervace', title: 'Spuštění rezervací přes TYCKO.CZ',
-    img: 'rezervacni_portal_4_3.jpg',
-    excerpt: 'Letos nově rezervace přes TYCKO.CZ. Prosíme všechny včetně členů, aby si tee time rezervovali on-line.',
-    body: [
-      'Letos nově rezervace přes <strong>TYCKO.CZ</strong>. Žádáme všechny, i naše členy, aby se rezervovali přes tento rezervační systém: <a href="' + RES_URL + '" target="_blank" rel="noopener">rezervace.golf-teplice.cz/rezervace</a>.',
-      'Členům automaticky vyjede cena <strong>NULA</strong>. Seniorům a juniorům bude zohledněna sleva.',
-      'Prosíme tedy, abyste před příchodem na hřiště měli <strong>rezervováno</strong>. Děkujeme.'
-    ],
-    cta: { label: 'Rezervovat on-line', href: RES_URL, icon: 'i-calendar', external: true }
-  },
-  {
-    date: '2026-04-11', tag: 'Sezóna', title: 'Dnes otevíráme sezónu 2026',
-    img: 'OTEVRENO.jpg', gallery: ['OTEVRENO.jpg', '02 (2).jpeg', '03 (1).jpeg'],
-    excerpt: 'Hřiště se po náročné zimě podařilo udržet v solidním stavu. Těšíme se na vás!',
-    body: [
-      'Dnes <strong>otevíráme hřiště</strong>! Těšíme se na vás a přejeme hezkou sezónu 2026.',
-      'Hřiště se povedlo po náročné zimě udržet v solidním stavu. Dále pracujeme na úklidu větví a čištění hřiště. Věříme, že v nejbližších dnech bude vše hotovo.'
-    ]
-  },
-  {
-    date: '2026-04-06', tag: 'Sezóna', title: 'V sobotu 18. 4. 2026 otevíráme golfové hřiště',
-    img: '2026-04-18 OTEVICKA HRISTE.jpg',
-    excerpt: 'Otevíráme od 10 hodin. Parkujte prosím na horním parkovišti u odpaliště jamky č. 1.',
-    body: [
-      'V sobotu <strong>18. 4. 2026 od 10 hodin</strong> pro vás otevíráme naše golfové hřiště!',
-      'Prosím parkujte na <strong>horním parkovišti</strong> hned u silnice u odpaliště jamky č. 1. Recepci a platební automat najdete také na parkovišti.',
-      'Těšíme se na vás a přejeme hezkou sezónu 2026!'
-    ]
-  },
-  {
-    date: '2026-02-26', tag: 'Hřiště', title: 'Údržba hřiště i v zimním období',
-    img: '01 (1).jpeg', gallery: ['01 (1).jpeg', '02.jpeg', '03.jpeg', '04.jpeg'],
-    excerpt: 'Hřiště udržujeme i v zimě – všechny greeny jsou čisté od sněhu a ledu.',
-    body: [
-      'Hřiště udržujeme i v zimním období.',
-      'Všechny greeny jsou čisté od sněhu a ledu a čekají na první jarní paprsky slunce.'
-    ]
-  },
-  {
-    date: '2026-02-24', tag: 'Klub', title: 'Nový systém ČGF je již plně funkční',
-    img: 'IMG_0383 (1).jpg',
-    excerpt: 'Všichni naši členové byli znovu zapsáni pod klub Golf club Teplice z.s.',
-    body: [
-      'Česká golfová federace již spustila nový systém.',
-      'Všichni naši členové byli do systému opětovně zapsáni pod náš klub – <strong>Golf club Teplice z.s.</strong>'
-    ]
-  },
-  {
-    date: '2026-02-10', tag: 'Klub', title: 'Přijetí do Golfové federace',
-    img: 'Prijeti do Golfove federace.jpg',
-    excerpt: 'Klub od roku 2026 přešel na spolek Golf club Teplice z.s., který byl 10. 2. 2026 znovu přijat do ČGF.',
-    body: [
-      'Vzhledem ke změně vlastnictví celého hřiště Cínovec a přilehlého hotelu Krušnohorský dvůr jsme byli nuceni počínaje rokem 2026 přejít na nový „starý“, vám dobře známý spolek <strong>Golf club Teplice z.s.</strong> Dnešním dnem 10. 2. 2026 byl spolek opětovně přijat do České golfové federace.',
-      'Od příštího týdne by bylo teoreticky možné opětovně přihlašovat členy do nového spolku. ČGF však koncem týdne přechází na nový systém, a celý proces se tedy malinko zpozdí. Jakmile bude od ČGF vše funkční, budete jako členové ihned v systému aktivováni a bude možné přihlašovat se na vámi vybrané turnaje. O plné funkčnosti vás budeme informovat zde na stránkách. Předpokládaný termín je podle informací ČGF druhá polovina února.',
-      'Doufáme, že vás tyto administrativní kroky nijak neomezí, a těšíme se na vás v sezóně 2026. Děkujeme za vaši přízeň.',
-      '<em>Poznámka:</em> Přípravy na novou sezónu jsou již zahájeny. Opravami nyní procházejí všechny stroje potřebné pro údržbu hřiště. Jakmile to dovolí počasí, začneme s úpravou vašeho hřiště.'
-    ]
-  },
-  {
-    date: '2025-12-04', tag: 'Členství', title: 'Poplatky na rok 2026',
-    img: '99690585.jpg',
-    excerpt: 'Změna vlastnické struktury areálu, plánované investice a členské poplatky pro sezónu 2026.',
-    body: [
-      'Vážení členové golfového klubu na Cínovci,',
-      'na konci roku 2025 došlo k zásadní změně ve vlastnické struktuře golfového areálu včetně přilehlého hotelu a restaurace. Noví majitelé plánují postupně investovat do celého resortu s důrazem na zkvalitnění hracích ploch, strojového parku, závlahového systému atd. Věříme tedy, že se tato významná změna pozitivně projeví jak na kvalitě samotného golfového hřiště, tak v nabízených službách.',
-      'Pro všechny členy je zajištěno <strong>bezplatné parkování</strong> vozidla.',
-      '<strong>Členské poplatky na rok 2026:</strong>',
-      '<ul class="modal-fees">' +
-        '<li><span>Dospělý</span><b>7 000 Kč do 31. 3. · 7 500 Kč po 31. 3.</b></li>' +
-        '<li><span>Junior (do 18 let)</span><b>5 500 Kč · 6 000 Kč</b></li>' +
-        '<li><span>Senior (nad 65 let)</span><b>5 500 Kč · 6 000 Kč</b></li>' +
-        '<li><span>Vstupní poplatek nového člena</span><b>1 000 Kč</b></li>' +
-      '</ul>',
-      '<strong>Pozor – od sezóny 2026 je nové číslo účtu: 6918554389/0800.</strong> Do popisu platby (zpráva pro příjemce) uveďte celé jméno, příp. jména, za která je placeno.',
-      'Děkujeme za vaši přízeň a chuť u nás hrát.'
-    ],
-    cta: { label: 'Zobrazit ceník', href: '#cenik', icon: 'i-arrow' }
-  }
-];
+/* Obsah, který se mění přes administraci (admin.php), je v souboru data/obsah.json:
+   aktuality, slider, ceník, trenéři, turnaje, fotogalerie a partneři.
+   Soubory fotek: holý název = assets/img/…, cesta se lomítkem (uploads/img/…) = nahráno administrací. */
+let NEWS = [];          // aktuality (seřadí se od nejnovější)
+let SLIDES = [];        // fotky v úvodním slideru
+let PRICES = null;      // ceník
+let COACHES = [];       // trenéři (jen aktivní)
+let TOURNAMENTS = [];   // turnaje
+let TOURNAMENTS_PUBLISHED = false; // false → místo seznamu „Kalendář turnajů připravujeme“
+let GALLERY = [];       // fotogalerie (w/h = rozměry fotky, rezervuje místo v masonry)
+let PARTNERS = [];      // partneři (logo = soubor v assets/partneri/ nebo cesta uploads/…)
 const NEWS_INITIAL = 5; // kolik karet je vidět před kliknutím na „Zobrazit starší“
+const NEWS_FALLBACK_IMG = '99690585.jpg'; // fotka pro aktualitu bez vlastní fotky
 
 /* Jamky – x/y = pozice čísla jamky v mapa.png (v %), hcp = [1.–9., 10.–18.]
    yellow = žlutá odpaliště (muži), red = červená (ženy). */
@@ -2314,69 +2242,12 @@ const HOLES = [
    Volitelně lze zadat yellowBack (jiná délka na 2. devítce). Oficiální součty ČGF „Cínovec 2025“
    jsou přímo v HTML (sekce Hřiště, karty .tee-sum). */
 
-/* Turnaje – UKÁZKOVÁ DATA, nahradit skutečným kalendářem.
-   TOURNAMENTS_PUBLISHED = false → místo seznamu se zobrazí „Kalendář turnajů připravujeme“.
-   Po doplnění skutečných turnajů přepněte na true. */
-const TOURNAMENTS_PUBLISHED = false;
-const TOURNAMENTS = [
-  { date: '2026-04-25', name: 'Úvodní turnaj sezóny',  format: 'Stableford · jednotlivci',  cat: 'Otevřený' },
-  { date: '2026-05-23', name: 'Jarní cena Cínovce',    format: 'Stableford · HCP kategorie', cat: 'Otevřený' },
-  { date: '2026-06-13', name: 'Turnaj seniorů',        format: 'Stableford',                  cat: 'Senioři' },
-  { date: '2026-07-18', name: 'Turnaj juniorů',        format: 'Stroke play',                 cat: 'Junioři' },
-  { date: '2026-08-15', name: 'Klubové mistrovství',   format: 'Stroke play · 36 jamek',      cat: 'Klubový' },
-  { date: '2026-09-12', name: 'Texas scramble dvojic', format: 'Texas scramble · dvojice',    cat: 'Otevřený' },
-  { date: '2026-10-31', name: 'Závěrečný turnaj sezóny', format: 'Stableford · jednotlivci', cat: 'Otevřený' }
-];
-
-/* Fotogalerie – w/h = rozměry originálu (rezervuje místo v masonry) */
-const GALLERY = [
-  { f: 'slider2.jpg', w: 1920, h: 412, cat: 'okoli', t: 'Západ slunce nad Cínovcem' },
-  { f: '901224_10151579493184174_1058721581_o.jpg', w: 1855, h: 1080, cat: 'okoli', t: 'Green s výhledem do kraje' },
-  { f: 'IMG-20250331-WA0003 (2).jpg', w: 810, h: 1080, cat: 'hriste-2024', t: 'Fairway za jarního dne' },
-  { f: 'golf1.jpg', w: 1024, h: 576, cat: 'okoli', t: 'Green obklopený lesem' },
-  { f: '13475130_838632482938527_8570459729176729686_o.jpg', w: 1627, h: 1080, cat: 'turnaje', t: 'Turnajová hra na greenu' },
-  { f: '99690585.jpg', w: 1024, h: 767, cat: 'okoli', t: 'Hřiště z ptačí perspektivy' },
-  { f: 'dvur.jpg', w: 1424, h: 789, cat: 'zima', t: 'Krušnohorský dvůr v zimě' },
-  { f: 'IMG-20250331-WA0005 (2).jpg', w: 810, h: 1080, cat: 'hriste-2024', t: 'Bunker u greenu' },
-  { f: '02.jpg', w: 1920, h: 412, cat: 'okoli', t: 'Green a bunkery v ranním světle' },
-  { f: 'img_5474.jpg', w: 1621, h: 1080, cat: 'teambuilding', t: 'Teambuilding na hřišti' },
-  { f: '894749_10151501515009174_1468383992_o.jpg', w: 1272, h: 739, cat: 'turnaje', t: 'Odpal' },
-  { f: 'IMG-20250331-WA0001 (2).jpg', w: 1200, h: 900, cat: 'hriste-2024', t: 'Údržba fairwaye' },
-  { f: '14_img-034-web.jpg', w: 1500, h: 1001, cat: 'zima', t: 'Krušnohorský dvůr za soumraku' },
-  { f: '9110_10151641973199174_1063629513_n.jpg', w: 960, h: 720, cat: 'okoli', t: 'Hřiště s klubovnou' },
-  { f: 'img_5558.jpg', w: 1621, h: 1080, cat: 'teambuilding', t: 'Výuka odpalu' },
-  { f: 'IMG-20250331-WA0011.jpg', w: 810, h: 1080, cat: 'hriste-2024', t: 'Fairway' },
-  { f: 'bez-nazvu-1.jpg', w: 1920, h: 412, cat: 'okoli', t: 'Putting green s výhledem na České středohoří' },
-  { f: 'bezkyhezky.jpg', w: 871, h: 799, cat: 'zima', t: 'Zasněžená cesta mezi smrky' },
-  { f: '922771_10151575883069174_1069602554_n.jpg', w: 960, h: 720, cat: 'turnaje', t: 'Hráči na fairwayi' },
-  { f: 'IMG-20250331-WA0007 (2).jpg', w: 1200, h: 900, cat: 'hriste-2024', t: 'Čerstvě posečené fairwaye' },
-  { f: '11406784_10153315514129174_2389650611697125742_n.jpg', w: 960, h: 720, cat: 'okoli', t: 'Fairwaye a bunkery' },
-  { f: 'img_5405.jpg', w: 1621, h: 1080, cat: 'teambuilding', t: 'Občerstvení pro skupiny' },
-  { f: 'dvur4.jpg', w: 1872, h: 640, cat: 'zima', t: 'Zasněžený areál' },
-  { f: '12003206_10153550598314174_1990178346341988856_n.jpg', w: 960, h: 720, cat: 'okoli', t: 'Jamka na greenu' },
-  { f: 'IMG-20250331-WA0009.jpg', w: 1200, h: 900, cat: 'hriste-2024', t: 'Hřiště pod mraky' },
-  { f: 'img_5634.jpg', w: 1621, h: 1080, cat: 'teambuilding', t: 'Skupina na hřišti' },
-  { f: 'dvur2.jpg', w: 960, h: 544, cat: 'zima', t: 'Běžkařské stopy' },
-  { f: 'slider1.jpg', w: 1920, h: 412, cat: 'okoli', t: 'Fairwaye mezi smrky' },
-  { f: '13590354_10154241479699174_7567974977912618154_n.jpg', w: 960, h: 540, cat: 'okoli', t: 'Cvičné plochy' },
-  { f: 'fotka.jpg', w: 960, h: 720, cat: 'zima', t: 'Zimní Cínovec' },
-  { f: '03.jpg', w: 1920, h: 412, cat: 'okoli', t: 'Panorama Cínovce' }
-];
-
-/* Partneři – logo = soubor ve složce assets/partneri/ */
-const PARTNERS = [
-  { name: 'DanCzek',                                url: 'https://www.danczek.com',       logo: 'danczek.png' },
-  { name: 'XXL Auto',                               url: 'https://www.xxlauto.cz',        logo: 'xxlauto.png' },
-  { name: 'Vaněrka',                                url: 'https://www.vytahy-vanerka.cz', logo: 'vanerka.png' },
-  { name: 'VUM park',                               url: 'https://sklady-teplice.cz',     logo: 'vum-park.svg' }
-];
-
 /* -----------------------------------------------------------------------
    A2. NĚMECKÁ VERZE (DE)
    DE = slovník pro statické texty a krátké texty ze skriptu: klíč je český text
    (mezery se normalizují), hodnota německý překlad. Když změníte český text
-   v HTML, upravte i klíč zde. Delší obsah (aktuality, jamky, turnaje) má
-   německé verze níže v NEWS_DE / HOLES_DE / TOURNAMENTS_DE.
+   v HTML, upravte i klíč zde. Jamky mají německé popisy níže v HOLES_DE;
+   aktuality, turnaje, galerie a slider mají němčinu přímo v data/obsah.json.
    ----------------------------------------------------------------------- */
 const MONTHS_DE = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
 
@@ -2498,10 +2369,12 @@ const DE = {
   'Termín platby': 'Zahlungstermin',
   'Placeno do 31. 3.': 'Zahlung bis 31. 3.',
   'Placeno po 31. 3.': 'Zahlung nach 31. 3.',
-  'Aktuálně platí ceny při platbě po 31. 3. 2026': 'Aktuell gelten die Preise bei Zahlung nach dem 31. 3. 2026',
-  'Při platbě do 31. 3. 2026 ušetříte': 'Bei Zahlung bis zum 31. 3. 2026 sparen Sie',
-  'Při platbě po 31. 3. 2026:': 'Bei Zahlung nach dem 31. 3. 2026:',
-  'Při platbě do 31. 3. 2026:': 'Bei Zahlung bis zum 31. 3. 2026:',
+  'Aktuálně platí ceny při platbě po {d}': 'Aktuell gelten die Preise bei Zahlung nach dem {d}',
+  'Při platbě do {d} ušetříte': 'Bei Zahlung bis zum {d} sparen Sie',
+  'Při platbě po {d}:': 'Bei Zahlung nach dem {d}:',
+  'Při platbě do {d}:': 'Bei Zahlung bis zum {d}:',
+  'Zatím zde nejsou žádné aktuality.': 'Derzeit gibt es keine Neuigkeiten.',
+  'Obsah se nepodařilo načíst. Zkuste prosím stránku obnovit.': 'Der Inhalt konnte nicht geladen werden. Bitte laden Sie die Seite neu.',
   'Dospělý': 'Erwachsene',
   'Roční členský poplatek': 'Jährlicher Mitgliedsbeitrag',
   'Kč / rok': 'CZK / Jahr',
@@ -2754,92 +2627,6 @@ const DE = {
   'Turnaje v kalendáři ČGF': 'Turniere im ČGF-Kalender'
 };
 
-/* Aktuality – německé verze (klíč = datum aktuality) */
-const NEWS_DE = {
-  '2026-07-10': {
-    tag: 'Service', title: 'Golf-Buggy',
-    excerpt: 'Wir verleihen einen Golf-Buggy. Preis 500 CZK pro Runde, Reservierung telefonisch.',
-    body: [
-      'Auf Wunsch verleihen wir einen <strong>Golf-Buggy</strong>.',
-      'Preis: <strong>500 CZK / Runde</strong>.',
-      'Reservierung unter Tel. <a href="tel:+420777943219">+420 777 943 219</a>.'
-    ],
-    ctaLabel: 'Anrufen und reservieren'
-  },
-  '2026-05-05': {
-    tag: 'Reservierung', title: 'Reservierungen jetzt über TYCKO.CZ',
-    excerpt: 'Neu in dieser Saison: Reservierung über TYCKO.CZ. Bitte reservieren alle – auch Mitglieder – ihre Startzeit online.',
-    body: [
-      'Neu in dieser Saison wird über <strong>TYCKO.CZ</strong> reserviert. Wir bitten alle, auch unsere Mitglieder, dieses Reservierungssystem zu nutzen: <a href="' + RES_URL + '" target="_blank" rel="noopener">rezervace.golf-teplice.cz/rezervace</a>.',
-      'Für Mitglieder wird automatisch ein Preis von <strong>NULL</strong> angezeigt. Senioren und Jugendliche erhalten einen Rabatt.',
-      'Bitte haben Sie vor Ihrer Ankunft auf dem Platz eine <strong>Reservierung</strong>. Vielen Dank.'
-    ],
-    ctaLabel: 'Online reservieren'
-  },
-  '2026-04-11': {
-    tag: 'Saison', title: 'Heute eröffnen wir die Saison 2026',
-    excerpt: 'Der Platz hat den harten Winter in solidem Zustand überstanden. Wir freuen uns auf Sie!',
-    body: [
-      'Heute <strong>eröffnen wir den Platz</strong>! Wir freuen uns auf Sie und wünschen eine schöne Saison 2026.',
-      'Der Platz hat den harten Winter in solidem Zustand überstanden. Wir räumen weiterhin Äste weg und säubern den Platz. Wir sind zuversichtlich, dass in den nächsten Tagen alles fertig ist.'
-    ]
-  },
-  '2026-04-06': {
-    tag: 'Saison', title: 'Am Samstag, 18. 4. 2026, eröffnen wir den Golfplatz',
-    excerpt: 'Geöffnet ab 10 Uhr. Bitte parken Sie auf dem oberen Parkplatz am Abschlag von Loch 1.',
-    body: [
-      'Am Samstag, <strong>18. 4. 2026, ab 10 Uhr</strong> öffnen wir unseren Golfplatz für Sie!',
-      'Bitte parken Sie auf dem <strong>oberen Parkplatz</strong> direkt an der Straße beim Abschlag von Loch 1. Rezeption und Zahlungsautomat finden Sie ebenfalls am Parkplatz.',
-      'Wir freuen uns auf Sie und wünschen eine schöne Saison 2026!'
-    ]
-  },
-  '2026-02-26': {
-    tag: 'Platz', title: 'Platzpflege auch im Winter',
-    excerpt: 'Wir pflegen den Platz auch im Winter – alle Grüns sind frei von Schnee und Eis.',
-    body: [
-      'Wir pflegen den Platz auch in der Wintersaison.',
-      'Alle Grüns sind frei von Schnee und Eis und warten auf die ersten Frühlingssonnenstrahlen.'
-    ]
-  },
-  '2026-02-24': {
-    tag: 'Club', title: 'Das neue ČGF-System ist voll funktionsfähig',
-    excerpt: 'Alle unsere Mitglieder wurden erneut unter dem Club Golf club Teplice z.s. registriert.',
-    body: [
-      'Der Tschechische Golfverband hat sein neues System in Betrieb genommen.',
-      'Alle unsere Mitglieder wurden im System erneut unter unserem Club registriert – <strong>Golf club Teplice z.s.</strong>'
-    ]
-  },
-  '2026-02-10': {
-    tag: 'Club', title: 'Aufnahme in den Golfverband',
-    excerpt: 'Der Club ist ab 2026 als Verein Golf club Teplice z.s. organisiert, der am 10. 2. 2026 erneut in den ČGF aufgenommen wurde.',
-    body: [
-      'Aufgrund des Eigentümerwechsels des gesamten Golfplatzes Cínovec und des angrenzenden Hotels Krušnohorský dvůr mussten wir ab 2026 zum „neuen alten“, Ihnen gut bekannten Verein <strong>Golf club Teplice z.s.</strong> wechseln. Am heutigen 10. 2. 2026 wurde der Verein erneut in den Tschechischen Golfverband aufgenommen.',
-      'Ab nächster Woche wäre es theoretisch möglich, Mitglieder wieder im neuen Verein anzumelden. Der ČGF stellt jedoch Ende der Woche auf ein neues System um, daher verzögert sich der Vorgang etwas. Sobald beim ČGF alles funktioniert, werden Sie als Mitglieder sofort im System aktiviert und können sich für Turniere Ihrer Wahl anmelden. Über die volle Funktionsfähigkeit informieren wir Sie hier auf der Website. Laut ČGF ist sie für die zweite Februarhälfte geplant.',
-      'Wir hoffen, dass Sie diese administrativen Schritte nicht einschränken, und freuen uns auf Sie in der Saison 2026. Vielen Dank für Ihre Treue.',
-      '<em>Hinweis:</em> Die Vorbereitungen auf die neue Saison haben bereits begonnen. Derzeit werden alle für die Platzpflege benötigten Maschinen repariert. Sobald es das Wetter erlaubt, beginnen wir mit der Pflege Ihres Platzes.'
-    ]
-  },
-  '2025-12-04': {
-    tag: 'Mitgliedschaft', title: 'Gebühren für 2026',
-    excerpt: 'Eigentümerwechsel der Anlage, geplante Investitionen und Mitgliedsbeiträge für die Saison 2026.',
-    body: [
-      'Liebe Mitglieder des Golfclubs in Cínovec,',
-      'Ende 2025 hat sich die Eigentümerstruktur der Golfanlage einschließlich des angrenzenden Hotels und Restaurants grundlegend geändert. Die neuen Eigentümer planen, schrittweise in das gesamte Resort zu investieren – mit Schwerpunkt auf besseren Spielflächen, dem Maschinenpark, der Bewässerung usw. Wir sind überzeugt, dass sich diese wichtige Veränderung positiv auf die Qualität des Golfplatzes und auf die angebotenen Leistungen auswirken wird.',
-      'Alle Mitglieder <strong>parken kostenlos</strong>.',
-      '<strong>Mitgliedsbeiträge für 2026:</strong>',
-      '<ul class="modal-fees">' +
-        '<li><span>Erwachsene</span><b>7 000 CZK bis 31. 3. · 7 500 CZK nach 31. 3.</b></li>' +
-        '<li><span>Jugendliche (bis 18 Jahre)</span><b>5 500 CZK · 6 000 CZK</b></li>' +
-        '<li><span>Senioren (über 65 Jahre)</span><b>5 500 CZK · 6 000 CZK</b></li>' +
-        '<li><span>Aufnahmegebühr für neue Mitglieder</span><b>1 000 CZK</b></li>' +
-      '</ul>',
-      '<strong>Achtung – ab der Saison 2026 gilt eine neue Kontonummer: 6918554389/0800</strong> (IBAN CZ18 0800 0000 0069 1855 4389, BIC GIBACZPX). Bitte geben Sie im Verwendungszweck den vollständigen Namen bzw. die Namen an, für die gezahlt wird.',
-      'Vielen Dank für Ihre Treue und Ihre Freude am Spiel bei uns.'
-    ],
-    ctaLabel: 'Preise anzeigen'
-  }
-};
-
 /* Jamky – německé popisy a tipy (klíč = číslo jamky) */
 const HOLES_DE = {
   1: { desc: 'Zum Auftakt kein Einspielloch – ein Dogleg nach links mit Aus und Wasser auf der rechten Seite und einem mittelgroßen Grün.',
@@ -2869,21 +2656,8 @@ const HOLES_DE = {
        bogey: 'Vorsicht vor getoppten Bällen, die meist im bereits erwähnten Bunker hinter dem Grün landen.' }
 };
 
-/* Turnaje – německé verze ukázkových dat (klíč = datum) */
-const TOURNAMENTS_DE = {
-  '2026-04-25': { name: 'Saisoneröffnungsturnier',        format: 'Stableford · Einzel',         cat: 'Offen' },
-  '2026-05-23': { name: 'Frühlingspreis von Cínovec',     format: 'Stableford · HCP-Klassen',    cat: 'Offen' },
-  '2026-06-13': { name: 'Seniorenturnier',                format: 'Stableford',                  cat: 'Senioren' },
-  '2026-07-18': { name: 'Jugendturnier',                  format: 'Zählspiel',                   cat: 'Jugend' },
-  '2026-08-15': { name: 'Clubmeisterschaft',              format: 'Zählspiel · 36 Löcher',       cat: 'Club' },
-  '2026-09-12': { name: 'Texas Scramble für Zweierteams', format: 'Texas Scramble · Zweierteams', cat: 'Offen' },
-  '2026-10-31': { name: 'Saisonabschlussturnier',         format: 'Stableford · Einzel',         cat: 'Offen' }
-};
-
 // připojení německých verzí k datům
-NEWS.forEach(n => { n.de = NEWS_DE[n.date]; });
 HOLES.forEach(h => { h.de = HOLES_DE[h.n]; });
-TOURNAMENTS.forEach(x => { x.de = TOURNAMENTS_DE[x.date]; });
 
 /* -----------------------------------------------------------------------
    B. LOGIKA
@@ -2896,8 +2670,9 @@ const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 const fmt = n => Math.round(n).toLocaleString('cs-CZ');
 // názvy souborů ze starého webu → bezpečné názvy v assets/ (stejná funkce jako při stahování)
 const slug = f => f.replace(/[^A-Za-z0-9._-]+/g, '-').replace(/-+\./g, '.').replace(/-+/g, '-');
-const imgUrl = f => IMG + slug(f);
-const thumbUrl = f => THUMB + slug(f);
+const isPath = f => String(f).includes('/');
+const imgUrl = f => isPath(f) ? f : IMG + slug(f);
+const thumbUrl = f => isPath(f) ? f.replace(/[^/]+$/, m => 'thumbs/' + m) : THUMB + slug(f);
 const MONTHS = ['led', 'úno', 'bře', 'dub', 'kvě', 'čvn', 'čvc', 'srp', 'zář', 'říj', 'lis', 'pro'];
 const parseDate = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d); };
 const czDate = iso => {
@@ -2921,9 +2696,129 @@ function t(cs, vars) {
   if (vars) Object.keys(vars).forEach(k => { out = String(out).split('{' + k + '}').join(vars[k]); });
   return out;
 }
-const L = (item, key) => (LANG === 'de' && item.de && item.de[key] != null) ? item.de[key] : item[key];
+const L = (item, key) => (LANG === 'de' && item.de && item.de[key]) ? item.de[key] : item[key];
 const icon = (id, cls = '') => `<svg class="i ${cls}"><use href="#${id}"/></svg>`;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// odkaz jen s povoleným začátkem (obsah z administrace)
+const safeHref = h => /^(https?:\/\/|tel:|mailto:|#)/i.test(String(h || '').trim()) ? String(h).trim() : '';
+
+/* Text aktuality z administrace → HTML.
+   Prázdný řádek = nový odstavec, **tučně**, řádky „- popis: hodnota“ = tabulka,
+   odkazy (https://…) a telefonní čísla (+420 …) se proklikají samy. */
+function richText(src) {
+  const inline = str => esc(str)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/https?:\/\/[^\s<]*[^\s<.,;:!?)]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a>`)
+    .replace(/\+\d{2,3}(?:[ \u00a0]?\d{3}){3}\b/g, n => `<a href="tel:${n.replace(/[ \u00a0]/g, '')}">${n}</a>`);
+  return String(src || '').replace(/\r/g, '').split(/\n[ \t]*\n/).map(block => {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    if (!lines.length) return '';
+    if (lines.every(l => /^[-•]\s/.test(l))) {
+      return '<ul class="modal-fees">' + lines.map(l => {
+        const item = l.replace(/^[-•]\s+/, '');
+        const k = item.indexOf(': ');
+        return k > 0 ? `<li><span>${inline(item.slice(0, k))}</span><b>${inline(item.slice(k + 2))}</b></li>` : `<li><span>${inline(item)}</span></li>`;
+      }).join('') + '</ul>';
+    }
+    return '<p>' + lines.map(inline).join('<br>') + '</p>';
+  }).join('');
+}
+
+/* ---------- OBSAH Z data/obsah.json ---------- */
+let contentOk = true;
+try {
+  const c = await Promise.race([
+    window.GCT_OBSAH || Promise.reject(new Error('bez načítání')),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('časový limit')), 10000))
+  ]);
+  NEWS = (c.news || []).filter(n => n && n.date && n.title).sort((a, b) => b.date.localeCompare(a.date));
+  SLIDES = (c.slider || []).filter(x => x && x.f);
+  PRICES = c.prices || null;
+  COACHES = (c.coaches || []).filter(x => x && x.active !== false && x.name);
+  TOURNAMENTS_PUBLISHED = !!(c.tournaments && c.tournaments.published);
+  TOURNAMENTS = ((c.tournaments && c.tournaments.list) || []).filter(x => x && x.date && x.name).sort((a, b) => a.date.localeCompare(b.date));
+  GALLERY = (c.gallery || []).filter(g => g && g.f).map(g => ({ ...g, w: Number(g.w) || 1200, h: Number(g.h) || 900 }));
+  PARTNERS = (c.partners || []).filter(p => p && p.logo);
+} catch (err) {
+  contentOk = false;
+  console.warn('Obsah webu (data/obsah.json) se nepodařilo načíst:', err);
+}
+
+// ceník: datum zvýhodněné platby („31. 3.“ / „31. 3. 2026“) a rok sezóny
+const PRICE_DEADLINE = (PRICES && /^\d{4}-\d{2}-\d{2}$/.test(PRICES.deadline || '')) ? PRICES.deadline : '2026-03-31';
+const deadlineDate = () => { const d = parseDate(PRICE_DEADLINE); d.setHours(23, 59, 59); return d; };
+const deadlineShort = () => { const d = parseDate(PRICE_DEADLINE); return `${d.getDate()}. ${d.getMonth() + 1}.`; };
+const deadlineLong = () => `${deadlineShort()} ${parseDate(PRICE_DEADLINE).getFullYear()}`;
+
+(function applyPrices() {
+  if (!PRICES) return;
+  const p = PRICES;
+  const kc = n => fmt(Number(n) || 0) + ' Kč';
+  const season = String(p.season || parseDate(PRICE_DEADLINE).getFullYear());
+  // texty s rokem / datem: česky v obsahu, německy v data-de (přebírá je přepínač jazyka)
+  const setText = (el, cs, de) => { if (!el) return; el.textContent = cs; el.dataset.de = de; };
+  setText($('#priceEyebrow'), `Ceník ${season}`, `Preise ${season}`);
+  setText($('#priceLead'), `Roční členské poplatky Golf Club Teplice z.s. pro sezónu ${season}. Všichni členové mají parkování zdarma.`,
+    `Jährliche Mitgliedsbeiträge des Golf Club Teplice z.s. für die Saison ${season}. Alle Mitglieder parken kostenlos.`);
+  setText($('[data-period="early"]'), `Placeno do ${deadlineShort()}`, `Zahlung bis ${deadlineShort()}`);
+  setText($('[data-period="late"]'), `Placeno po ${deadlineShort()}`, `Zahlung nach ${deadlineShort()}`);
+  const m = p.membership || {};
+  $$('[data-price]').forEach((el, k) => {
+    const v = m[['adult', 'junior', 'senior'][k]];
+    if (Array.isArray(v)) { el.dataset.early = Number(v[0]) || 0; el.dataset.late = Number(v[1]) || 0; }
+  });
+  if (p.entryFee != null) setText($('#priceEntry'), kc(p.entryFee), kc(p.entryFee).replace('Kč', 'CZK'));
+  if (p.buggy != null) setText($('#priceBuggy'), kc(p.buggy) + ' / hra', kc(p.buggy).replace('Kč', 'CZK') + ' / Runde');
+  const gf = p.greenFee || {};
+  $$('[data-gf]').forEach(el => { if (gf[el.dataset.gf] != null) el.textContent = kc(gf[el.dataset.gf]); });
+  const pdf = $('#pricePdf');
+  if (pdf && p.pdfCs) { pdf.setAttribute('href', p.pdfCs); pdf.dataset.hrefDe = p.pdfDe || p.pdfCs; }
+})();
+
+(function renderSlides() {
+  const box = $('#heroSlides');
+  if (!SLIDES.length) return;
+  const sig = list => list.map(x => x.src + '|' + x.cap).join('\n');
+  const now = $$('.hero__slide', box).map(el => ({ src: el.querySelector('img').getAttribute('src'), cap: el.dataset.caption || '' }));
+  const next = SLIDES.map(x => ({ src: imgUrl(x.f), cap: x.t || '' }));
+  if (sig(now) !== sig(next)) {
+    box.innerHTML = SLIDES.map((x, k) => `
+    <div class="hero__slide${k ? '' : ' is-active'}" data-caption="${esc(x.t || '')}">
+      <img src="${esc(imgUrl(x.f))}" alt="" ${k ? 'decoding="async"' : 'fetchpriority="high"'}>
+    </div>`).join('');
+  }
+  $$('.hero__slide', box).forEach((el, k) => { el.dataset.captionDe = SLIDES[k].tDe || ''; });
+})();
+
+// trenéři (víc trenérů pod sebou; bez fotky = iniciály)
+const coachBox = $('#coaches');
+function renderCoaches(instant) {
+  if (!contentOk || !coachBox) return;
+  coachBox.hidden = !COACHES.length;
+  coachBox.innerHTML = COACHES.map(c => {
+    const initials = c.name.replace(/\b(Ing|Mgr|Bc|MUDr|JUDr|PhDr|RNDr|Dr|Ph\.D)\.?/g, '').trim().split(/\s+/).map(w => w[0] || '').join('').slice(0, 2).toUpperCase();
+    const tags = String(L(c, 'tags') || '').split(',').map(x => x.trim()).filter(Boolean);
+    const tel = String(c.phone || '').replace(/[^\d+]/g, '');
+    return `
+    <article class="coach reveal${instant ? ' is-visible' : ''}">
+      <div class="coach__photo">
+        ${c.photo ? `<img src="${esc(thumbUrl(c.photo))}" alt="${esc(c.name)}" loading="lazy">` : `<span class="coach__initials" aria-hidden="true">${esc(initials)}</span>`}
+      </div>
+      <div class="coach__body">
+        <p class="eyebrow">${t('Váš trenér')}</p>
+        <h3>${esc(c.name)}</h3>
+        ${L(c, 'role') ? `<p class="coach__role">${esc(L(c, 'role'))}</p>` : ''}
+        ${tags.length ? `<div class="coach__skills">${tags.map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div>` : ''}
+        <div class="coach__actions">
+          ${tel ? `<a class="btn btn--dark" href="tel:${esc(tel)}">${icon('i-phone')} ${esc(c.phone)}</a>` : ''}
+          ${c.email ? `<a class="btn btn--outline" href="mailto:${esc(c.email)}">${icon('i-mail')} ${esc(c.email)}</a>` : ''}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+renderCoaches(false);
+refreshers.push(() => renderCoaches(true));
 
 /* ---------- Toast (krátká oznámení) ---------- */
 const toastBox = $('#toasts');
@@ -3093,6 +2988,7 @@ function splitWords(el, text) {
 /* ---------- Hero slider (crossfade + Ken Burns v CSS) ---------- */
 (function heroSlider() {
   const slides = $$('.hero__slide');
+  const capOf = s => (LANG === 'de' ? (s.dataset.captionDe || t(s.dataset.caption || '')) : s.dataset.caption) || '';
   const dotsBox = $('#heroDots');
   const caption = $('#heroCaption');
   const DURATION = 6500;
@@ -3104,7 +3000,7 @@ function splitWords(el, text) {
     b.type = 'button';
     b.className = 'hero__dot';
     b.setAttribute('role', 'tab');
-    b.setAttribute('aria-label', t('Fotografie {k}: {c}', { k: k + 1, c: s.dataset.caption }));
+    b.setAttribute('aria-label', t('Fotografie {k}: {c}', { k: k + 1, c: capOf(s) }));
     b.addEventListener('click', () => { go(k); restart(); });
     dotsBox.appendChild(b);
     return b;
@@ -3127,7 +3023,7 @@ function splitWords(el, text) {
     void dots[next].offsetWidth; // restart animace výplně
     dots[next].classList.add('is-active');
     caption.style.opacity = 0;
-    setTimeout(() => { caption.textContent = slides[next].dataset.caption || ''; caption.style.opacity = ''; }, 300);
+    setTimeout(() => { caption.textContent = capOf(slides[next]); caption.style.opacity = ''; }, 300);
     current = next;
   }
   function restart() {
@@ -3139,8 +3035,8 @@ function splitWords(el, text) {
   // pauza, když je karta prohlížeče skrytá
   document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) : restart());
   refreshers.push(() => {
-    caption.textContent = slides[current].dataset.caption || '';
-    dots.forEach((d, k) => d.setAttribute('aria-label', t('Fotografie {k}: {c}', { k: k + 1, c: slides[k].dataset.caption })));
+    caption.textContent = capOf(slides[current]);
+    dots.forEach((d, k) => d.setAttribute('aria-label', t('Fotografie {k}: {c}', { k: k + 1, c: capOf(slides[k]) })));
   });
 })();
 
@@ -3211,6 +3107,11 @@ refreshers.push(seasonStatus);
 
   // instant = bez scroll-reveal animace (při přepnutí jazyka)
   function render(instant) {
+    if (!NEWS.length) {
+      grid.innerHTML = `<p class="news-empty">${t(contentOk ? 'Zatím zde nejsou žádné aktuality.' : 'Obsah se nepodařilo načíst. Zkuste prosím stránku obnovit.')}</p>`;
+      moreBtn.hidden = true;
+      return;
+    }
     grid.innerHTML = NEWS.map((n, k) => {
       const d = parseDate(n.date);
       const hidden = !expanded && k >= NEWS_INITIAL;
@@ -3218,7 +3119,7 @@ refreshers.push(seasonStatus);
       <article class="news-card reveal${instant ? ' is-visible' : ''} ${k === 0 ? 'news-card--featured' : ''}" style="--d:${(k % 3) * 0.08}s" ${hidden ? 'hidden' : ''}>
         <div class="news-card__media">
           <span class="news-card__date"><b>${d.getDate()}</b><span>${monthName(d)} ${d.getFullYear()}</span></span>
-          <img src="${thumbUrl(n.img)}" alt="" loading="lazy" decoding="async">
+          <img src="${esc(thumbUrl(n.img || NEWS_FALLBACK_IMG))}" alt="" loading="lazy" decoding="async">
         </div>
         <div class="news-card__body">
           <span class="tag">${esc(L(n, 'tag'))}</span>
@@ -3260,21 +3161,24 @@ refreshers.push(seasonStatus);
     const time = $('#newsModalDate');
     time.textContent = czDate(n.date);
     time.dateTime = n.date;
-    $('#newsModalText').innerHTML = L(n, 'body').map(p => p.startsWith('<ul') ? p : `<p>${p}</p>`).join('');
+    $('#newsModalText').innerHTML = richText(L(n, 'body'));
     img.alt = L(n, 'title');
     const gal = n.gallery || [];
     thumbs.innerHTML = gal.length > 1
-      ? gal.map(f => `<button type="button" data-f="${esc(f)}" aria-label="${t('Zobrazit fotku')}"><img src="${thumbUrl(f)}" alt="" loading="lazy"></button>`).join('')
+      ? gal.map(f => `<button type="button" data-f="${esc(f)}" aria-label="${t('Zobrazit fotku')}"><img src="${esc(thumbUrl(f))}" alt="" loading="lazy"></button>`).join('')
       : '';
     thumbs.hidden = gal.length <= 1;
     const cta = n.cta;
-    $('#newsModalCta').innerHTML = cta
-      ? `<a class="btn btn--dark" href="${cta.href}" ${cta.external ? 'target="_blank" rel="noopener"' : ''}>${icon(cta.icon || 'i-arrow')} ${esc(L(n, 'ctaLabel') || cta.label)}</a>`
+    const href = cta ? safeHref(cta.href) : '';
+    const ext = /^https?:/i.test(href);
+    const ctaIcon = /^tel:/i.test(href) ? 'i-phone' : /^mailto:/i.test(href) ? 'i-mail' : /rezervace/i.test(href) ? 'i-calendar' : ext ? 'i-external' : 'i-arrow';
+    $('#newsModalCta').innerHTML = href && cta.label
+      ? `<a class="btn btn--dark" href="${esc(href)}" ${ext ? 'target="_blank" rel="noopener"' : ''}>${icon(ctaIcon)} ${esc(L(n, 'ctaLabel') || cta.label)}</a>`
       : '';
   }
   function openNews(k) {
     fillNews(k);
-    showImage(NEWS[k].img);
+    showImage(NEWS[k].img || NEWS_FALLBACK_IMG);
     openDialog(modal);
     $('.modal__scroll', modal).scrollTop = 0;
   }
@@ -3287,7 +3191,8 @@ refreshers.push(seasonStatus);
     if (!a) return;
     e.preventDefault();
     closeDialog(modal);
-    setTimeout(() => $(a.getAttribute('href')).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }), 380);
+    const target = document.getElementById(a.getAttribute('href').slice(1));
+    if (target) setTimeout(() => target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }), 380);
   });
 
   refreshers.push(() => {
@@ -3302,14 +3207,13 @@ refreshers.push(seasonStatus);
   const pill = $('.price-toggle__pill', toggle);
   const buttons = $$('button', toggle);
   const prices = $$('[data-price]');
-  const deadline = new Date(2026, 2, 31, 23, 59, 59);
-  const current = new Date() > deadline ? 'late' : 'early';
+  const current = new Date() > deadlineDate() ? 'late' : 'early';
   let selected = current;
 
   const nowText = () => {
     $('#priceNow').textContent = t(current === 'late'
-      ? 'Aktuálně platí ceny při platbě po 31. 3. 2026'
-      : 'Při platbě do 31. 3. 2026 ušetříte');
+      ? 'Aktuálně platí ceny při platbě po {d}'
+      : 'Při platbě do {d} ušetříte', { d: deadlineLong() });
   };
   function movePill(btn) {
     pill.style.width = btn.offsetWidth + 'px';
@@ -3329,7 +3233,7 @@ refreshers.push(seasonStatus);
       animate ? animateNumber(el, from, to, 600) : (el.textContent = fmt(to));
       const other = period === 'early' ? 'late' : 'early';
       const alt = el.closest('.price-card').querySelector('[data-price-alt]');
-      alt.textContent = t(other === 'late' ? 'Při platbě po 31. 3. 2026:' : 'Při platbě do 31. 3. 2026:')
+      alt.textContent = t(other === 'late' ? 'Při platbě po {d}:' : 'Při platbě do {d}:', { d: deadlineLong() })
         + ' ' + fmt(Number(el.dataset[other])) + ' ' + t('Kč');
     });
   }
@@ -3569,16 +3473,17 @@ $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
   let visible = [];
   let index = 0;
 
+  const capOf = g => (LANG === 'de' ? (g.tDe || t(g.t || '')) : g.t) || '';
   wrap.innerHTML = GALLERY.map((g, k) => `
-    <figure class="g-item ${g.w / g.h > 2.2 ? 'is-pano' : ''}" data-cat="${g.cat}" data-k="${k}" tabindex="0" role="button">
-      <img src="${thumbUrl(g.f)}" alt="" width="${g.w}" height="${g.h}" loading="lazy" decoding="async">
+    <figure class="g-item ${g.w / g.h > 2.2 ? 'is-pano' : ''}" data-cat="${esc(g.cat || '')}" data-k="${k}" tabindex="0" role="button">
+      <img src="${esc(thumbUrl(g.f))}" alt="" width="${g.w}" height="${g.h}" loading="lazy" decoding="async">
       <figcaption><span></span>${icon('i-zoom')}</figcaption>
     </figure>`).join('');
 
   // popisky fotek podle jazyka (český popisek je klíč do slovníku DE)
   function labelGallery() {
     $$('.g-item', wrap).forEach(fig => {
-      const caption = t(GALLERY[Number(fig.dataset.k)].t);
+      const caption = capOf(GALLERY[Number(fig.dataset.k)]);
       fig.setAttribute('aria-label', t('Zvětšit: {x}', { x: caption }));
       fig.querySelector('img').alt = caption;
       fig.querySelector('figcaption span').textContent = caption;
@@ -3633,8 +3538,8 @@ $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
     const g = GALLERY[Number(visible[index].dataset.k)];
     const apply = () => {
       lbImg.src = imgUrl(g.f);
-      lbImg.alt = t(g.t);
-      $('#lbCaption').textContent = t(g.t);
+      lbImg.alt = capOf(g);
+      $('#lbCaption').textContent = capOf(g);
       $('#lbCounter').textContent = `${index + 1} / ${visible.length}`;
       lbImg.classList.remove('is-swapping');
       // přednačtení sousedních fotek
@@ -3802,12 +3707,15 @@ document.addEventListener('click', e => {
 /* ---------- PARTNEŘI – nekonečný pás ---------- */
 (function partners() {
   const track = $('#partnersMarquee .marquee__track');
+  if (!PARTNERS.length) { $('#partnersMarquee').hidden = true; return; }
   const reps = Math.max(1, Math.ceil(8 / PARTNERS.length)); // aspoň ~8 log na skupinu
   const item = (p, hidden, dup) => {
-    const img = `<img src="${PARTNER_IMG}${p.logo}" alt="${hidden ? '' : esc(p.name)}" loading="lazy">`;
+    const src = isPath(p.logo) ? p.logo : PARTNER_IMG + p.logo;
+    const img = `<img src="${esc(src)}" alt="${hidden ? '' : esc(p.name || '')}" loading="lazy">`;
     const cls = 'partner' + (dup ? ' is-dup' : '');
-    return p.url
-      ? `<a class="${cls}" href="${p.url}" target="_blank" rel="noopener" ${hidden ? 'tabindex="-1" aria-hidden="true"' : ''} aria-label="${esc(p.name)}">${img}</a>`
+    const url = /^https?:\/\//i.test(p.url || '') ? p.url : '';
+    return url
+      ? `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener" ${hidden ? 'tabindex="-1" aria-hidden="true"' : ''} aria-label="${esc(p.name || '')}">${img}</a>`
       : `<span class="${cls}">${img}</span>`;
   };
   const group = hidden => `<div class="marquee__group" ${hidden ? 'aria-hidden="true"' : ''}>${
@@ -3861,7 +3769,7 @@ $$('[data-toast]:not(#galleryFilters [data-toast])').forEach(b => b.addEventList
    Volba jazyka se pamatuje v prohlížeči; odkaz s ?lang=de otevře rovnou němčinu. */
 const I18N_SKIP = [
   'script', 'style', 'svg', 'code', '[data-i18n-skip]',
-  '.hero__title', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
+  '.hero__title', '.hero__slides', '#coaches', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
   '#priceNow', '#seasonStatus', '#seasonBadge', '.account-iban', '#galleryMore', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
   '#newsModal .modal__body', '#newsModalThumbs', '#tourList', '#gallery', '#distTable',
   '#courseMap .hotspot', '#holePicker .hole-pick', '#holeDots', '#lbCounter', '#lbCaption',

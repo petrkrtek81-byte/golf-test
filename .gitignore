@@ -1,0 +1,8 @@
+# Obsah spravovaný administrací přímo na hostingu – do gitu nepatří
+data/admin-heslo.php
+data/prihlaseni.json
+data/zalohy/
+data/.zamek
+data/*.tmp-*
+uploads/*
+!uploads/.htaccess

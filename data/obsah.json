@@ -1,0 +1,643 @@
+{
+  "version": 1,
+  "updated": "2026-11-06T17:35:35.478Z",
+  "slider": [
+    {
+      "id": "s1",
+      "f": "901224_10151579493184174_1058721581_o.jpg",
+      "t": "Green s výhledem do kraje",
+      "tDe": "Grün mit Weitblick"
+    },
+    {
+      "id": "s2",
+      "f": "IMG-20250331-WA0007-2.jpg",
+      "t": "Čerstvě posečené fairwaye",
+      "tDe": "Frisch gemähte Fairways"
+    },
+    {
+      "id": "s3",
+      "f": "99690585.jpg",
+      "t": "Hřiště z ptačí perspektivy",
+      "tDe": "Der Platz aus der Vogelperspektive"
+    },
+    {
+      "id": "s4",
+      "f": "golf1.jpg",
+      "t": "Green obklopený horským lesem",
+      "tDe": "Grün inmitten von Bergwald"
+    },
+    {
+      "id": "s5",
+      "f": "13475130_838632482938527_8570459729176729686_o.jpg",
+      "t": "Turnajová hra na greenu",
+      "tDe": "Turnierspiel auf dem Grün"
+    }
+  ],
+  "news": [
+    {
+      "id": "a1",
+      "date": "2026-07-10",
+      "img": "WhatsApp Image 2026-07-08 at 11-38-12.jpeg",
+      "gallery": [],
+      "tag": "Služby",
+      "title": "Buggy golf cart",
+      "excerpt": "K zapůjčení máme Buggy Golf Cart. Cena 500 Kč / hra, rezervace na telefonu.",
+      "body": "V případě zájmu máme k zapůjčení **Buggy Golf Cart**.\n\nCena: **500 Kč / hra**.\n\nRezervace na tel. +420 777 943 219.",
+      "cta": {
+        "href": "tel:+420777943219",
+        "label": "Zavolat a rezervovat",
+        "external": false
+      },
+      "de": {
+        "tag": "Service",
+        "title": "Golf-Buggy",
+        "excerpt": "Wir verleihen einen Golf-Buggy. Preis 500 CZK pro Runde, Reservierung telefonisch.",
+        "body": "Auf Wunsch verleihen wir einen **Golf-Buggy**.\n\nPreis: **500 CZK / Runde**.\n\nReservierung unter Tel. +420 777 943 219.",
+        "ctaLabel": "Anrufen und reservieren"
+      }
+    },
+    {
+      "id": "a2",
+      "date": "2026-05-05",
+      "img": "rezervacni_portal_4_3.jpg",
+      "gallery": [],
+      "tag": "Rezervace",
+      "title": "Spuštění rezervací přes TYCKO.CZ",
+      "excerpt": "Letos nově rezervace přes TYCKO.CZ. Prosíme všechny včetně členů, aby si tee time rezervovali on-line.",
+      "body": "Letos nově rezervace přes **TYCKO.CZ**. Žádáme všechny, i naše členy, aby se rezervovali přes tento rezervační systém: https://rezervace.golf-teplice.cz/rezervace.\n\nČlenům automaticky vyjede cena **NULA**. Seniorům a juniorům bude zohledněna sleva.\n\nProsíme tedy, abyste před příchodem na hřiště měli **rezervováno**. Děkujeme.",
+      "cta": {
+        "href": "https://rezervace.golf-teplice.cz/rezervace",
+        "label": "Rezervovat on-line",
+        "external": true
+      },
+      "de": {
+        "tag": "Reservierung",
+        "title": "Reservierungen jetzt über TYCKO.CZ",
+        "excerpt": "Neu in dieser Saison: Reservierung über TYCKO.CZ. Bitte reservieren alle – auch Mitglieder – ihre Startzeit online.",
+        "body": "Neu in dieser Saison wird über **TYCKO.CZ** reserviert. Wir bitten alle, auch unsere Mitglieder, dieses Reservierungssystem zu nutzen: https://rezervace.golf-teplice.cz/rezervace.\n\nFür Mitglieder wird automatisch ein Preis von **NULL** angezeigt. Senioren und Jugendliche erhalten einen Rabatt.\n\nBitte haben Sie vor Ihrer Ankunft auf dem Platz eine **Reservierung**. Vielen Dank.",
+        "ctaLabel": "Online reservieren"
+      }
+    },
+    {
+      "id": "a3",
+      "date": "2026-04-11",
+      "img": "OTEVRENO.jpg",
+      "gallery": [
+        "OTEVRENO.jpg",
+        "02 (2).jpeg",
+        "03 (1).jpeg"
+      ],
+      "tag": "Sezóna",
+      "title": "Dnes otevíráme sezónu 2026",
+      "excerpt": "Hřiště se po náročné zimě podařilo udržet v solidním stavu. Těšíme se na vás!",
+      "body": "Dnes **otevíráme hřiště**! Těšíme se na vás a přejeme hezkou sezónu 2026.\n\nHřiště se povedlo po náročné zimě udržet v solidním stavu. Dále pracujeme na úklidu větví a čištění hřiště. Věříme, že v nejbližších dnech bude vše hotovo.",
+      "cta": null,
+      "de": {
+        "tag": "Saison",
+        "title": "Heute eröffnen wir die Saison 2026",
+        "excerpt": "Der Platz hat den harten Winter in solidem Zustand überstanden. Wir freuen uns auf Sie!",
+        "body": "Heute **eröffnen wir den Platz**! Wir freuen uns auf Sie und wünschen eine schöne Saison 2026.\n\nDer Platz hat den harten Winter in solidem Zustand überstanden. Wir räumen weiterhin Äste weg und säubern den Platz. Wir sind zuversichtlich, dass in den nächsten Tagen alles fertig ist.",
+        "ctaLabel": ""
+      }
+    },
+    {
+      "id": "a4",
+      "date": "2026-04-06",
+      "img": "2026-04-18 OTEVICKA HRISTE.jpg",
+      "gallery": [],
+      "tag": "Sezóna",
+      "title": "V sobotu 18. 4. 2026 otevíráme golfové hřiště",
+      "excerpt": "Otevíráme od 10 hodin. Parkujte prosím na horním parkovišti u odpaliště jamky č. 1.",
+      "body": "V sobotu **18. 4. 2026 od 10 hodin** pro vás otevíráme naše golfové hřiště!\n\nProsím parkujte na **horním parkovišti** hned u silnice u odpaliště jamky č. 1. Recepci a platební automat najdete také na parkovišti.\n\nTěšíme se na vás a přejeme hezkou sezónu 2026!",
+      "cta": null,
+      "de": {
+        "tag": "Saison",
+        "title": "Am Samstag, 18. 4. 2026, eröffnen wir den Golfplatz",
+        "excerpt": "Geöffnet ab 10 Uhr. Bitte parken Sie auf dem oberen Parkplatz am Abschlag von Loch 1.",
+        "body": "Am Samstag, **18. 4. 2026, ab 10 Uhr** öffnen wir unseren Golfplatz für Sie!\n\nBitte parken Sie auf dem **oberen Parkplatz** direkt an der Straße beim Abschlag von Loch 1. Rezeption und Zahlungsautomat finden Sie ebenfalls am Parkplatz.\n\nWir freuen uns auf Sie und wünschen eine schöne Saison 2026!",
+        "ctaLabel": ""
+      }
+    },
+    {
+      "id": "a5",
+      "date": "2026-02-26",
+      "img": "01 (1).jpeg",
+      "gallery": [
+        "01 (1).jpeg",
+        "02.jpeg",
+        "03.jpeg",
+        "04.jpeg"
+      ],
+      "tag": "Hřiště",
+      "title": "Údržba hřiště i v zimním období",
+      "excerpt": "Hřiště udržujeme i v zimě – všechny greeny jsou čisté od sněhu a ledu.",
+      "body": "Hřiště udržujeme i v zimním období.\n\nVšechny greeny jsou čisté od sněhu a ledu a čekají na první jarní paprsky slunce.",
+      "cta": null,
+      "de": {
+        "tag": "Platz",
+        "title": "Platzpflege auch im Winter",
+        "excerpt": "Wir pflegen den Platz auch im Winter – alle Grüns sind frei von Schnee und Eis.",
+        "body": "Wir pflegen den Platz auch in der Wintersaison.\n\nAlle Grüns sind frei von Schnee und Eis und warten auf die ersten Frühlingssonnenstrahlen.",
+        "ctaLabel": ""
+      }
+    },
+    {
+      "id": "a6",
+      "date": "2026-02-24",
+      "img": "IMG_0383 (1).jpg",
+      "gallery": [],
+      "tag": "Klub",
+      "title": "Nový systém ČGF je již plně funkční",
+      "excerpt": "Všichni naši členové byli znovu zapsáni pod klub Golf club Teplice z.s.",
+      "body": "Česká golfová federace již spustila nový systém.\n\nVšichni naši členové byli do systému opětovně zapsáni pod náš klub – **Golf club Teplice z.s.**",
+      "cta": null,
+      "de": {
+        "tag": "Club",
+        "title": "Das neue ČGF-System ist voll funktionsfähig",
+        "excerpt": "Alle unsere Mitglieder wurden erneut unter dem Club Golf club Teplice z.s. registriert.",
+        "body": "Der Tschechische Golfverband hat sein neues System in Betrieb genommen.\n\nAlle unsere Mitglieder wurden im System erneut unter unserem Club registriert – **Golf club Teplice z.s.**",
+        "ctaLabel": ""
+      }
+    },
+    {
+      "id": "a7",
+      "date": "2026-02-10",
+      "img": "Prijeti do Golfove federace.jpg",
+      "gallery": [],
+      "tag": "Klub",
+      "title": "Přijetí do Golfové federace",
+      "excerpt": "Klub od roku 2026 přešel na spolek Golf club Teplice z.s., který byl 10. 2. 2026 znovu přijat do ČGF.",
+      "body": "Vzhledem ke změně vlastnictví celého hřiště Cínovec a přilehlého hotelu Krušnohorský dvůr jsme byli nuceni počínaje rokem 2026 přejít na nový „starý“, vám dobře známý spolek **Golf club Teplice z.s.** Dnešním dnem 10. 2. 2026 byl spolek opětovně přijat do České golfové federace.\n\nOd příštího týdne by bylo teoreticky možné opětovně přihlašovat členy do nového spolku. ČGF však koncem týdne přechází na nový systém, a celý proces se tedy malinko zpozdí. Jakmile bude od ČGF vše funkční, budete jako členové ihned v systému aktivováni a bude možné přihlašovat se na vámi vybrané turnaje. O plné funkčnosti vás budeme informovat zde na stránkách. Předpokládaný termín je podle informací ČGF druhá polovina února.\n\nDoufáme, že vás tyto administrativní kroky nijak neomezí, a těšíme se na vás v sezóně 2026. Děkujeme za vaši přízeň.\n\nPoznámka: Přípravy na novou sezónu jsou již zahájeny. Opravami nyní procházejí všechny stroje potřebné pro údržbu hřiště. Jakmile to dovolí počasí, začneme s úpravou vašeho hřiště.",
+      "cta": null,
+      "de": {
+        "tag": "Club",
+        "title": "Aufnahme in den Golfverband",
+        "excerpt": "Der Club ist ab 2026 als Verein Golf club Teplice z.s. organisiert, der am 10. 2. 2026 erneut in den ČGF aufgenommen wurde.",
+        "body": "Aufgrund des Eigentümerwechsels des gesamten Golfplatzes Cínovec und des angrenzenden Hotels Krušnohorský dvůr mussten wir ab 2026 zum „neuen alten“, Ihnen gut bekannten Verein **Golf club Teplice z.s.** wechseln. Am heutigen 10. 2. 2026 wurde der Verein erneut in den Tschechischen Golfverband aufgenommen.\n\nAb nächster Woche wäre es theoretisch möglich, Mitglieder wieder im neuen Verein anzumelden. Der ČGF stellt jedoch Ende der Woche auf ein neues System um, daher verzögert sich der Vorgang etwas. Sobald beim ČGF alles funktioniert, werden Sie als Mitglieder sofort im System aktiviert und können sich für Turniere Ihrer Wahl anmelden. Über die volle Funktionsfähigkeit informieren wir Sie hier auf der Website. Laut ČGF ist sie für die zweite Februarhälfte geplant.\n\nWir hoffen, dass Sie diese administrativen Schritte nicht einschränken, und freuen uns auf Sie in der Saison 2026. Vielen Dank für Ihre Treue.\n\nHinweis: Die Vorbereitungen auf die neue Saison haben bereits begonnen. Derzeit werden alle für die Platzpflege benötigten Maschinen repariert. Sobald es das Wetter erlaubt, beginnen wir mit der Pflege Ihres Platzes.",
+        "ctaLabel": ""
+      }
+    },
+    {
+      "id": "a8",
+      "date": "2025-12-04",
+      "img": "99690585.jpg",
+      "gallery": [],
+      "tag": "Členství",
+      "title": "Poplatky na rok 2026",
+      "excerpt": "Změna vlastnické struktury areálu, plánované investice a členské poplatky pro sezónu 2026.",
+      "body": "Vážení členové golfového klubu na Cínovci,\n\nna konci roku 2025 došlo k zásadní změně ve vlastnické struktuře golfového areálu včetně přilehlého hotelu a restaurace. Noví majitelé plánují postupně investovat do celého resortu s důrazem na zkvalitnění hracích ploch, strojového parku, závlahového systému atd. Věříme tedy, že se tato významná změna pozitivně projeví jak na kvalitě samotného golfového hřiště, tak v nabízených službách.\n\nPro všechny členy je zajištěno **bezplatné parkování** vozidla.\n\n**Členské poplatky na rok 2026:**\n\n- Dospělý: 7 000 Kč do 31. 3. · 7 500 Kč po 31. 3.\n- Junior (do 18 let): 5 500 Kč · 6 000 Kč\n- Senior (nad 65 let): 5 500 Kč · 6 000 Kč\n- Vstupní poplatek nového člena: 1 000 Kč\n\n**Pozor – od sezóny 2026 je nové číslo účtu: 6918554389/0800.** Do popisu platby (zpráva pro příjemce) uveďte celé jméno, příp. jména, za která je placeno.\n\nDěkujeme za vaši přízeň a chuť u nás hrát.",
+      "cta": {
+        "href": "#cenik",
+        "label": "Zobrazit ceník",
+        "external": false
+      },
+      "de": {
+        "tag": "Mitgliedschaft",
+        "title": "Gebühren für 2026",
+        "excerpt": "Eigentümerwechsel der Anlage, geplante Investitionen und Mitgliedsbeiträge für die Saison 2026.",
+        "body": "Liebe Mitglieder des Golfclubs in Cínovec,\n\nEnde 2025 hat sich die Eigentümerstruktur der Golfanlage einschließlich des angrenzenden Hotels und Restaurants grundlegend geändert. Die neuen Eigentümer planen, schrittweise in das gesamte Resort zu investieren – mit Schwerpunkt auf besseren Spielflächen, dem Maschinenpark, der Bewässerung usw. Wir sind überzeugt, dass sich diese wichtige Veränderung positiv auf die Qualität des Golfplatzes und auf die angebotenen Leistungen auswirken wird.\n\nAlle Mitglieder **parken kostenlos**.\n\n**Mitgliedsbeiträge für 2026:**\n\n- Erwachsene: 7 000 CZK bis 31. 3. · 7 500 CZK nach 31. 3.\n- Jugendliche (bis 18 Jahre): 5 500 CZK · 6 000 CZK\n- Senioren (über 65 Jahre): 5 500 CZK · 6 000 CZK\n- Aufnahmegebühr für neue Mitglieder: 1 000 CZK\n\n**Achtung – ab der Saison 2026 gilt eine neue Kontonummer: 6918554389/0800** (IBAN CZ18 0800 0000 0069 1855 4389, BIC GIBACZPX). Bitte geben Sie im Verwendungszweck den vollständigen Namen bzw. die Namen an, für die gezahlt wird.\n\nVielen Dank für Ihre Treue und Ihre Freude am Spiel bei uns.",
+        "ctaLabel": "Preise anzeigen"
+      }
+    }
+  ],
+  "prices": {
+    "membership": {
+      "adult": [
+        7000,
+        7500
+      ],
+      "junior": [
+        5500,
+        6000
+      ],
+      "senior": [
+        5500,
+        6000
+      ]
+    },
+    "entryFee": 1000,
+    "buggy": 500,
+    "greenFee": {
+      "d9": 600,
+      "d18": 800,
+      "s9": 400,
+      "s18": 600
+    },
+    "pdfCs": "assets/cenik/golf-teplice-cenik.pdf",
+    "pdfDe": "assets/cenik/golf-teplice-preisliste-de.pdf",
+    "season": "2026",
+    "deadline": "2026-03-31"
+  },
+  "coaches": [
+    {
+      "id": "t1",
+      "active": true,
+      "name": "Ing. Kamil Myšík",
+      "photo": "",
+      "phone": "+420 777 820 971",
+      "email": "mysik@golf-teplice.cz",
+      "role": "Vedení kurzů, zelené karty a tréninky pro začátečníky i pokročilé.",
+      "tags": "Kurzy, Zelené karty, Tréninky",
+      "de": {
+        "role": "Kurse, Platzreife und Training für Anfänger und Fortgeschrittene.",
+        "tags": "Kurse, Platzreife, Training"
+      }
+    }
+  ],
+  "tournaments": {
+    "published": false,
+    "list": [
+      {
+        "id": "u1",
+        "date": "2026-04-25",
+        "name": "Úvodní turnaj sezóny",
+        "format": "Stableford · jednotlivci",
+        "cat": "Otevřený",
+        "de": {
+          "name": "Saisoneröffnungsturnier",
+          "format": "Stableford · Einzel",
+          "cat": "Offen"
+        }
+      },
+      {
+        "id": "u2",
+        "date": "2026-05-23",
+        "name": "Jarní cena Cínovce",
+        "format": "Stableford · HCP kategorie",
+        "cat": "Otevřený",
+        "de": {
+          "name": "Frühlingspreis von Cínovec",
+          "format": "Stableford · HCP-Klassen",
+          "cat": "Offen"
+        }
+      },
+      {
+        "id": "u3",
+        "date": "2026-06-13",
+        "name": "Turnaj seniorů",
+        "format": "Stableford",
+        "cat": "Senioři",
+        "de": {
+          "name": "Seniorenturnier",
+          "format": "Stableford",
+          "cat": "Senioren"
+        }
+      },
+      {
+        "id": "u4",
+        "date": "2026-07-18",
+        "name": "Turnaj juniorů",
+        "format": "Stroke play",
+        "cat": "Junioři",
+        "de": {
+          "name": "Jugendturnier",
+          "format": "Zählspiel",
+          "cat": "Jugend"
+        }
+      },
+      {
+        "id": "u5",
+        "date": "2026-08-15",
+        "name": "Klubové mistrovství",
+        "format": "Stroke play · 36 jamek",
+        "cat": "Klubový",
+        "de": {
+          "name": "Clubmeisterschaft",
+          "format": "Zählspiel · 36 Löcher",
+          "cat": "Club"
+        }
+      },
+      {
+        "id": "u6",
+        "date": "2026-09-12",
+        "name": "Texas scramble dvojic",
+        "format": "Texas scramble · dvojice",
+        "cat": "Otevřený",
+        "de": {
+          "name": "Texas Scramble für Zweierteams",
+          "format": "Texas Scramble · Zweierteams",
+          "cat": "Offen"
+        }
+      },
+      {
+        "id": "u7",
+        "date": "2026-10-31",
+        "name": "Závěrečný turnaj sezóny",
+        "format": "Stableford · jednotlivci",
+        "cat": "Otevřený",
+        "de": {
+          "name": "Saisonabschlussturnier",
+          "format": "Stableford · Einzel",
+          "cat": "Offen"
+        }
+      }
+    ]
+  },
+  "gallery": [
+    {
+      "id": "g1",
+      "f": "slider2.jpg",
+      "w": 1920,
+      "h": 412,
+      "cat": "okoli",
+      "t": "Západ slunce nad Cínovcem",
+      "tDe": "Sonnenuntergang über Cínovec"
+    },
+    {
+      "id": "g2",
+      "f": "901224_10151579493184174_1058721581_o.jpg",
+      "w": 1855,
+      "h": 1080,
+      "cat": "okoli",
+      "t": "Green s výhledem do kraje",
+      "tDe": "Grün mit Weitblick"
+    },
+    {
+      "id": "g3",
+      "f": "IMG-20250331-WA0003 (2).jpg",
+      "w": 810,
+      "h": 1080,
+      "cat": "hriste-2024",
+      "t": "Fairway za jarního dne",
+      "tDe": "Fairway an einem Frühlingstag"
+    },
+    {
+      "id": "g4",
+      "f": "golf1.jpg",
+      "w": 1024,
+      "h": 576,
+      "cat": "okoli",
+      "t": "Green obklopený lesem",
+      "tDe": "Grün inmitten von Wald"
+    },
+    {
+      "id": "g5",
+      "f": "13475130_838632482938527_8570459729176729686_o.jpg",
+      "w": 1627,
+      "h": 1080,
+      "cat": "turnaje",
+      "t": "Turnajová hra na greenu",
+      "tDe": "Turnierspiel auf dem Grün"
+    },
+    {
+      "id": "g6",
+      "f": "99690585.jpg",
+      "w": 1024,
+      "h": 767,
+      "cat": "okoli",
+      "t": "Hřiště z ptačí perspektivy",
+      "tDe": "Der Platz aus der Vogelperspektive"
+    },
+    {
+      "id": "g7",
+      "f": "dvur.jpg",
+      "w": 1424,
+      "h": 789,
+      "cat": "zima",
+      "t": "Krušnohorský dvůr v zimě",
+      "tDe": "Krušnohorský dvůr im Winter"
+    },
+    {
+      "id": "g8",
+      "f": "IMG-20250331-WA0005 (2).jpg",
+      "w": 810,
+      "h": 1080,
+      "cat": "hriste-2024",
+      "t": "Bunker u greenu",
+      "tDe": "Bunker am Grün"
+    },
+    {
+      "id": "g9",
+      "f": "02.jpg",
+      "w": 1920,
+      "h": 412,
+      "cat": "okoli",
+      "t": "Green a bunkery v ranním světle",
+      "tDe": "Grün und Bunker im Morgenlicht"
+    },
+    {
+      "id": "g10",
+      "f": "img_5474.jpg",
+      "w": 1621,
+      "h": 1080,
+      "cat": "teambuilding",
+      "t": "Teambuilding na hřišti",
+      "tDe": "Teambuilding auf dem Platz"
+    },
+    {
+      "id": "g11",
+      "f": "894749_10151501515009174_1468383992_o.jpg",
+      "w": 1272,
+      "h": 739,
+      "cat": "turnaje",
+      "t": "Odpal",
+      "tDe": "Abschlag"
+    },
+    {
+      "id": "g12",
+      "f": "IMG-20250331-WA0001 (2).jpg",
+      "w": 1200,
+      "h": 900,
+      "cat": "hriste-2024",
+      "t": "Údržba fairwaye",
+      "tDe": "Fairwaypflege"
+    },
+    {
+      "id": "g13",
+      "f": "14_img-034-web.jpg",
+      "w": 1500,
+      "h": 1001,
+      "cat": "zima",
+      "t": "Krušnohorský dvůr za soumraku",
+      "tDe": "Krušnohorský dvůr in der Dämmerung"
+    },
+    {
+      "id": "g14",
+      "f": "9110_10151641973199174_1063629513_n.jpg",
+      "w": 960,
+      "h": 720,
+      "cat": "okoli",
+      "t": "Hřiště s klubovnou",
+      "tDe": "Platz mit Clubhaus"
+    },
+    {
+      "id": "g15",
+      "f": "img_5558.jpg",
+      "w": 1621,
+      "h": 1080,
+      "cat": "teambuilding",
+      "t": "Výuka odpalu",
+      "tDe": "Abschlagtraining"
+    },
+    {
+      "id": "g16",
+      "f": "IMG-20250331-WA0011.jpg",
+      "w": 810,
+      "h": 1080,
+      "cat": "hriste-2024",
+      "t": "Fairway",
+      "tDe": "Fairway"
+    },
+    {
+      "id": "g17",
+      "f": "bez-nazvu-1.jpg",
+      "w": 1920,
+      "h": 412,
+      "cat": "okoli",
+      "t": "Putting green s výhledem na České středohoří",
+      "tDe": "Putting Green mit Blick auf das Böhmische Mittelgebirge"
+    },
+    {
+      "id": "g18",
+      "f": "bezkyhezky.jpg",
+      "w": 871,
+      "h": 799,
+      "cat": "zima",
+      "t": "Zasněžená cesta mezi smrky",
+      "tDe": "Verschneiter Weg zwischen Fichten"
+    },
+    {
+      "id": "g19",
+      "f": "922771_10151575883069174_1069602554_n.jpg",
+      "w": 960,
+      "h": 720,
+      "cat": "turnaje",
+      "t": "Hráči na fairwayi",
+      "tDe": "Spieler auf dem Fairway"
+    },
+    {
+      "id": "g20",
+      "f": "IMG-20250331-WA0007 (2).jpg",
+      "w": 1200,
+      "h": 900,
+      "cat": "hriste-2024",
+      "t": "Čerstvě posečené fairwaye",
+      "tDe": "Frisch gemähte Fairways"
+    },
+    {
+      "id": "g21",
+      "f": "11406784_10153315514129174_2389650611697125742_n.jpg",
+      "w": 960,
+      "h": 720,
+      "cat": "okoli",
+      "t": "Fairwaye a bunkery",
+      "tDe": "Fairways und Bunker"
+    },
+    {
+      "id": "g22",
+      "f": "img_5405.jpg",
+      "w": 1621,
+      "h": 1080,
+      "cat": "teambuilding",
+      "t": "Občerstvení pro skupiny",
+      "tDe": "Catering für Gruppen"
+    },
+    {
+      "id": "g23",
+      "f": "dvur4.jpg",
+      "w": 1872,
+      "h": 640,
+      "cat": "zima",
+      "t": "Zasněžený areál",
+      "tDe": "Verschneite Anlage"
+    },
+    {
+      "id": "g24",
+      "f": "12003206_10153550598314174_1990178346341988856_n.jpg",
+      "w": 960,
+      "h": 720,
+      "cat": "okoli",
+      "t": "Jamka na greenu",
+      "tDe": "Loch auf dem Grün"
+    },
+    {
+      "id": "g25",
+      "f": "IMG-20250331-WA0009.jpg",
+      "w": 1200,
+      "h": 900,
+      "cat": "hriste-2024",
+      "t": "Hřiště pod mraky",
+      "tDe": "Der Platz unter Wolken"
+    },
+    {
+      "id": "g26",
+      "f": "img_5634.jpg",
+      "w": 1621,
+      "h": 1080,
+      "cat": "teambuilding",
+      "t": "Skupina na hřišti",
+      "tDe": "Gruppe auf dem Platz"
+    },
+    {
+      "id": "g27",
+      "f": "dvur2.jpg",
+      "w": 960,
+      "h": 544,
+      "cat": "zima",
+      "t": "Běžkařské stopy",
+      "tDe": "Loipen"
+    },
+    {
+      "id": "g28",
+      "f": "slider1.jpg",
+      "w": 1920,
+      "h": 412,
+      "cat": "okoli",
+      "t": "Fairwaye mezi smrky",
+      "tDe": "Fairways zwischen Fichten"
+    },
+    {
+      "id": "g29",
+      "f": "13590354_10154241479699174_7567974977912618154_n.jpg",
+      "w": 960,
+      "h": 540,
+      "cat": "okoli",
+      "t": "Cvičné plochy",
+      "tDe": "Übungsanlagen"
+    },
+    {
+      "id": "g30",
+      "f": "fotka.jpg",
+      "w": 960,
+      "h": 720,
+      "cat": "zima",
+      "t": "Zimní Cínovec",
+      "tDe": "Winterliches Cínovec"
+    },
+    {
+      "id": "g31",
+      "f": "03.jpg",
+      "w": 1920,
+      "h": 412,
+      "cat": "okoli",
+      "t": "Panorama Cínovce",
+      "tDe": "Panorama von Cínovec"
+    }
+  ],
+  "partners": [
+    {
+      "id": "p1",
+      "name": "DanCzek",
+      "url": "https://www.danczek.com",
+      "logo": "danczek.png"
+    },
+    {
+      "id": "p2",
+      "name": "XXL Auto",
+      "url": "https://www.xxlauto.cz",
+      "logo": "xxlauto.png"
+    },
+    {
+      "id": "p3",
+      "name": "Vaněrka",
+      "url": "https://www.vytahy-vanerka.cz",
+      "logo": "vanerka.png"
+    },
+    {
+      "id": "p4",
+      "name": "VUM park",
+      "url": "https://sklady-teplice.cz",
+      "logo": "vum-park.svg"
+    }
+  ]
+}
