@@ -1529,7 +1529,7 @@ function view_cenik(array $d): void
   ?>
   <div class="top">
     <div><h1>Ceník</h1><p>Ceny se na webu zobrazí v sekci Ceník (v němčině automaticky v CZK). Text aktuality „Poplatky na rok…“ se nemění automaticky – upravte ho v Aktualitách.</p></div>
-    <div class="actions"><a class="btn btn--ghost" href="./#cenik" target="_blank" rel="noopener"><?= icon('external') ?> Ceník na webu</a></div>
+    <div class="actions"><a class="btn btn--ghost" href="cenik.html" target="_blank" rel="noopener"><?= icon('external') ?> Ceník na webu</a></div>
   </div>
   <form method="post" action="admin.php?s=cenik" enctype="multipart/form-data">
     <?= csrf_field('prices_save', 's=cenik') ?>

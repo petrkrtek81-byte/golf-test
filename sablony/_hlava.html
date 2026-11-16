@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="cs" data-page="{{page}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="theme-color" content="#0f2e1f">
+<link rel="canonical" href="{{url}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:image" content="https://www.golf-teplice.cz/assets/img/{{ogImage}}">
+<meta property="og:url" content="{{url}}">
+<link rel="alternate" hreflang="cs" href="{{url}}">
+<link rel="alternate" hreflang="de" href="{{url}}?lang=de">
+<link rel="alternate" hreflang="x-default" href="{{url}}">
+<link rel="icon" href="assets/favicon.ico">
+
+<!-- Písma: Baloo 2 (nadpisy, čísla, popisky – zaoblené, vybráno podle loga „urban“) + Manrope (text) – uložená přímo na webu -->
+<link rel="preload" href="assets/fonts/baloo-2-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/web.css?v={{cssVersion}}">
+{{headExtra}}
+<!-- Strukturovaná data pro vyhledávače -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GolfCourse",
+  "name": "Golf Club Teplice",
+  "alternateName": "Golfové hřiště Cínovec",
+  "url": "https://www.golf-teplice.cz/",
+  "image": "https://www.golf-teplice.cz/assets/img/99690585.jpg",
+  "logo": "https://www.golf-teplice.cz/assets/logo.png",
+  "telephone": "+420777943219",
+  "email": "golf@golf-teplice.cz",
+  "address": { "@type": "PostalAddress", "streetAddress": "Cínovec 275", "addressLocality": "Dubí", "postalCode": "417 32", "addressCountry": "CZ" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 50.729167, "longitude": 13.753333 },
+  "sameAs": ["https://www.facebook.com/golfclubteplice/"],
+  "parentOrganization": { "@type": "SportsClub", "name": "Golf club Teplice z.s.", "identifier": "IČO 26643120" }
+}
+</script>
+
+<!-- Třída .js zapne skryté výchozí stavy animací jen tehdy, když běží JavaScript -->
+<script>document.documentElement.classList.add('js');
+// obsah webu (aktuality, ceník, galerie…) – stahuje se souběžně se zbytkem stránky
+window.GCT_OBSAH = fetch('data/obsah.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)));
+window.GCT_OBSAH.catch(() => {});</script>
+</head>
+<body class="page-{{page}}">

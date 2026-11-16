@@ -1,0 +1,518 @@
+<!-- Vygenerováno skriptem nastroje/sestav-web.js ze šablon ve složce sablony/ – upravujte šablony, ne tento soubor. -->
+<!doctype html>
+<html lang="cs" data-page="cenik">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ceník – členství a green fee | Golf Club Teplice</title>
+<meta name="description" content="Ceník Golf Club Teplice: roční členství, green fee na 9 a 18 jamek, vstupní poplatek, buggy a platba QR kódem.">
+<meta name="theme-color" content="#0f2e1f">
+<link rel="canonical" href="https://www.golf-teplice.cz/cenik.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ceník – členství a green fee | Golf Club Teplice">
+<meta property="og:description" content="Ceník Golf Club Teplice: roční členství, green fee na 9 a 18 jamek, vstupní poplatek, buggy a platba QR kódem.">
+<meta property="og:image" content="https://www.golf-teplice.cz/assets/img/894749_10151501515009174_1468383992_o.jpg">
+<meta property="og:url" content="https://www.golf-teplice.cz/cenik.html">
+<link rel="alternate" hreflang="cs" href="https://www.golf-teplice.cz/cenik.html">
+<link rel="alternate" hreflang="de" href="https://www.golf-teplice.cz/cenik.html?lang=de">
+<link rel="alternate" hreflang="x-default" href="https://www.golf-teplice.cz/cenik.html">
+<link rel="icon" href="assets/favicon.ico">
+
+<!-- Písma: Baloo 2 (nadpisy, čísla, popisky – zaoblené, vybráno podle loga „urban“) + Manrope (text) – uložená přímo na webu -->
+<link rel="preload" href="assets/fonts/baloo-2-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/web.css?v=0272822e">
+
+<!-- Strukturovaná data pro vyhledávače -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GolfCourse",
+  "name": "Golf Club Teplice",
+  "alternateName": "Golfové hřiště Cínovec",
+  "url": "https://www.golf-teplice.cz/",
+  "image": "https://www.golf-teplice.cz/assets/img/99690585.jpg",
+  "logo": "https://www.golf-teplice.cz/assets/logo.png",
+  "telephone": "+420777943219",
+  "email": "golf@golf-teplice.cz",
+  "address": { "@type": "PostalAddress", "streetAddress": "Cínovec 275", "addressLocality": "Dubí", "postalCode": "417 32", "addressCountry": "CZ" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 50.729167, "longitude": 13.753333 },
+  "sameAs": ["https://www.facebook.com/golfclubteplice/"],
+  "parentOrganization": { "@type": "SportsClub", "name": "Golf club Teplice z.s.", "identifier": "IČO 26643120" }
+}
+</script>
+
+<!-- Třída .js zapne skryté výchozí stavy animací jen tehdy, když běží JavaScript -->
+<script>document.documentElement.classList.add('js');
+// obsah webu (aktuality, ceník, galerie…) – stahuje se souběžně se zbytkem stránky
+window.GCT_OBSAH = fetch('data/obsah.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)));
+window.GCT_OBSAH.catch(() => {});</script>
+</head>
+<body class="page-cenik">
+<a class="skip-link" href="#main">Přeskočit na obsah</a>
+
+<!-- =====================================================================
+     SVG IKONY (sprite) – použití: <svg class="i"><use href="#i-phone"/></svg>
+     ===================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3.2l1.8 4.6-2.3 1.4a11.5 11.5 0 0 0 6.3 6.3l1.4-2.3L20 15.8V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V3.5M6 4h11l-2.5 4L17 12H6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-golf" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.2"/><path d="M12 11.2V17M9.5 17h5l-1 4h-3z"/><circle cx="10.6" cy="6" r=".5"/><circle cx="13" cy="5.4" r=".5"/><circle cx="12.8" cy="7.8" r=".5"/></symbol>
+    <symbol id="i-club" viewBox="0 0 24 24"><path d="M15 3 9.5 17.5"/><path d="M9.5 17.5 5 19.5a1.6 1.6 0 0 0 .7 3h4.6a1.6 1.6 0 0 0 1.5-1.1l.5-1.6"/><circle cx="18" cy="19" r="2"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 0-3.5 2.5-3.5 6S15 13 17 13"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.2H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 19V6M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11.5" r="2"/></symbol>
+    <symbol id="i-kids" viewBox="0 0 24 24"><path d="M3 21 8 4h8l5 17M8 4l4 9 4-9"/><path d="M9.5 15h5"/></symbol>
+    <symbol id="i-sauna" viewBox="0 0 24 24"><path d="M7 20c-1.6-1.8 1.6-3.6 0-5.4S8.6 11 7 9.2M12 20c-1.6-1.8 1.6-3.6 0-5.4s1.6-3.6 0-5.4M17 20c-1.6-1.8 1.6-3.6 0-5.4s1.6-3.6 0-5.4M4 4h16"/></symbol>
+    <symbol id="i-view" viewBox="0 0 24 24"><path d="M2.5 19.5 9 9l4.2 6.4L16 11l5.5 8.5z"/><circle cx="17" cy="5.5" r="1.8"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 16h18M5 16V8.5h8.5L17 13v3"/><path d="M5 8.5 7 4h6"/><circle cx="7.5" cy="18.5" r="2"/><circle cx="16.5" cy="18.5" r="2"/></symbol>
+    <symbol id="i-parking" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M9.5 17V7.5h3.5a2.8 2.8 0 0 1 0 5.6H9.5"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path d="M14 6v12" stroke-dasharray="2 2"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20.5h18"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5.5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3.4 4M16 6h3a3 3 0 0 1-3.4 4M12 13.5V17M8.5 21h7M9.5 17h5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-5 16-3.2-6.8z"/><path d="M11.8 13.2 20 4"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.2"/></symbol>
+    <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2.5v19M3.8 7.2l16.4 9.6M3.8 16.8l16.4-9.6M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/></symbol>
+    <symbol id="i-ski" viewBox="0 0 24 24"><path d="M3 19.5 21 14.5M3 15.5l18-5"/><path d="M8 8.5 10 15M15 6.5l1.8 6"/></symbol>
+    <symbol id="i-boot" viewBox="0 0 24 24"><path d="M7 3h5v8.5l5.6 2.4a2.5 2.5 0 0 1 1.4 2.3V18H6z"/><path d="M5 21h15M12 8H7"/></symbol>
+    <symbol id="i-poles" viewBox="0 0 24 24"><path d="M8 3.5 9.8 21M16 3.5 14.2 21M6.5 3.5h3M14.5 3.5h3"/><circle cx="9.6" cy="18.5" r="1.4"/><circle cx="14.4" cy="18.5" r="1.4"/></symbol>
+    <symbol id="i-child" viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.6"/><path d="M8 21v-6l-2.5-3.5L8 9.5h8l2.5 2L16 15v6M10.5 21v-4h3v4"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+    <symbol id="i-swipe" viewBox="0 0 24 24"><path d="M4 12h16M7 9l-3 3 3 3M17 9l3 3-3 3"/></symbol>
+    <symbol id="i-water" viewBox="0 0 24 24"><path d="M12 3s6.5 7.2 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10.2 12 3 12 3z"/></symbol>
+    <symbol id="i-spinner" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/></symbol>
+    <!-- Vlajky pro přepínač jazyků -->
+    <symbol id="flag-cz" viewBox="0 0 30 20"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#d7141a"/><path d="M0 0l15 10L0 20z" fill="#11457e"/></symbol>
+    <symbol id="flag-de" viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#000"/><rect y="6.67" width="30" height="6.67" fill="#dd0000"/><rect y="13.33" width="30" height="6.67" fill="#ffce00"/></symbol>
+  </defs>
+</svg>
+
+<!-- =====================================================================
+     HLAVIČKA
+     ===================================================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="topbar">
+    <div class="container--wide topbar__inner">
+      <div class="topbar__group">
+        <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> +420 777 943 219</a>
+        <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg> golf@golf-teplice.cz</a>
+      </div>
+      <div class="topbar__group">
+        <a href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervace tee time</a>
+        <span class="topbar__social" style="display:inline-flex;gap:.5rem">
+          <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
+          <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <nav class="container--wide nav" aria-label="Hlavní navigace">
+      <a class="nav__logo" href="./" aria-label="Golf Club Teplice – úvodní stránka">
+        <img src="assets/logo.png" alt="Golf Club Teplice" width="357" height="186">
+      </a>
+      <ul class="nav__menu">
+        <li><a class="nav__link" href="onas.html" data-page="onas">O nás</a></li>
+        <li><a class="nav__link" href="aktuality.html" data-page="aktuality">Aktuality</a></li>
+        <li><a class="nav__link is-active" href="cenik.html" data-page="cenik" aria-current="page">Ceník</a></li>
+        <li><a class="nav__link" href="hriste.html" data-page="hriste">Hřiště</a></li>
+        <li><a class="nav__link" href="treninky.html" data-page="treninky">Tréninky</a></li>
+        <li><a class="nav__link" href="turnaje.html" data-page="turnaje">Turnaje</a></li>
+        <li><a class="nav__link" href="fotogalerie.html" data-page="fotogalerie">Fotogalerie</a></li>
+        <li><a class="nav__link" href="pujcovna-bezek.html" data-page="pujcovna-bezek">Půjčovna běžek</a></li>
+        <li><a class="nav__link" href="kontakty.html" data-page="kontakty">Kontakty</a></li>
+      </ul>
+      <div class="nav__actions">
+        <div class="lang" role="group" aria-label="Jazyk">
+          <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
+          <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
+        </div>
+        <a class="btn btn--gold nav__cta" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener" aria-label="Rezervovat on-line">
+          <svg class="i"><use href="#i-calendar"/></svg><span>Rezervovat<span class="long"> on-line</span></span>
+        </a>
+        <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="burger__lines"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </nav>
+    <!-- tenká linka průběhu scrollu s míčkem (mobil/tablet) -->
+    <div class="scroll-line" aria-hidden="true"><span class="scroll-line__bar"></span><span class="scroll-line__ball"></span></div>
+  </div>
+</header>
+
+<!-- Mobilní menu -->
+<div class="mobile-menu" id="mobileMenu" aria-label="Menu">
+  <nav class="mobile-menu__links">
+    <a href="onas.html" data-page="onas" style="--i:0"><small>01</small>O nás</a>
+    <a href="aktuality.html" data-page="aktuality" style="--i:1"><small>02</small>Aktuality</a>
+    <a class="is-active" aria-current="page" href="cenik.html" data-page="cenik" style="--i:2"><small>03</small>Ceník</a>
+    <a href="hriste.html" data-page="hriste" style="--i:3"><small>04</small>Hřiště</a>
+    <a href="treninky.html" data-page="treninky" style="--i:4"><small>05</small>Tréninky</a>
+    <a href="turnaje.html" data-page="turnaje" style="--i:5"><small>06</small>Turnaje</a>
+    <a href="fotogalerie.html" data-page="fotogalerie" style="--i:6"><small>07</small>Fotogalerie</a>
+    <a href="pujcovna-bezek.html" data-page="pujcovna-bezek" style="--i:7"><small>08</small>Půjčovna běžek</a>
+    <a href="kontakty.html" data-page="kontakty" style="--i:8"><small>09</small>Kontakty</a>
+  </nav>
+  <div class="mobile-menu__foot">
+    <a class="btn btn--gold btn--block" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervovat on-line</a>
+    <div class="mobile-menu__contacts">
+      <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> +420 777 943 219</a>
+      <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg> golf@golf-teplice.cz</a>
+    </div>
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:1rem">
+      <div class="socials" style="margin:0">
+        <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
+        <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Golfový míček – ukazatel průběhu scrollu (desktop). Klik = zpět nahoru. -->
+<div class="golf-progress" id="golfProgress">
+  <div class="golf-progress__track"></div>
+  <button class="golf-progress__ball" type="button" aria-label="Zpět nahoru">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <defs><radialGradient id="ballGrad" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".65" stop-color="#eef1ec"/><stop offset="1" stop-color="#aeb6ac"/></radialGradient></defs>
+      <circle cx="12" cy="12" r="11" fill="url(#ballGrad)"/>
+      <g class="dimples" fill="#c3cac1">
+        <circle cx="8" cy="7" r="1.1"/><circle cx="12.5" cy="5.5" r="1.1"/><circle cx="16.5" cy="8.5" r="1.1"/>
+        <circle cx="6.5" cy="11.5" r="1.1"/><circle cx="11" cy="10" r="1.1"/><circle cx="15.5" cy="13" r="1.1"/>
+        <circle cx="9" cy="15" r="1.1"/><circle cx="13" cy="17.5" r="1.1"/><circle cx="17.8" cy="16.2" r="1"/><circle cx="6.8" cy="17.5" r="1"/>
+      </g>
+    </svg>
+  </button>
+  <svg class="golf-progress__hole" viewBox="0 0 30 30" aria-hidden="true">
+    <ellipse cx="15" cy="26.5" rx="10" ry="3" fill="#0f2e1f" opacity=".85"/>
+    <g class="golf-progress__flag"><path d="M15 26V5" stroke="#c9a961" stroke-width="1.4"/><path d="M15 5h10l-3 3.5 3 3.5H15z" fill="#c9a961"/></g>
+  </svg>
+</div>
+
+<main id="main">
+
+<!-- =====================================================================
+     CENÍK – úvodní pás stránky
+     ===================================================================== -->
+<section class="page-hero" id="top" aria-labelledby="pageTitle">
+  <div class="page-hero__bg" aria-hidden="true"><img src="assets/img/894749_10151501515009174_1468383992_o.jpg" alt="" fetchpriority="high"></div>
+  <div class="container page-hero__inner">
+    <nav class="crumbs reveal" aria-label="Drobečková navigace"><a href="./">Úvod</a><span aria-hidden="true">/</span><span aria-current="page">Ceník</span></nav>
+    <h1 class="page-hero__title reveal" id="pageTitle" style="--d:.08s">Ceník</h1>
+    <p class="page-hero__lead reveal" style="--d:.16s">Členství, green fee a další poplatky na sezónu.</p>
+  </div>
+</section>
+
+<!-- =====================================================================
+     4. CENÍK
+     ===================================================================== -->
+<section class="section section--dark" id="cenik">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="eyebrow reveal" id="priceEyebrow">Ceník 2026</p>
+        <h2 class="h2 reveal" style="--d:.08s">Členství <em>v klubu</em></h2>
+        <p class="lead reveal" style="--d:.16s" id="priceLead">Roční členské poplatky Golf Club Teplice z.s. pro sezónu 2026. Všichni členové mají parkování zdarma.</p>
+      </div>
+      <div class="reveal" style="--d:.2s">
+        <div class="price-toggle" id="priceToggle" role="group" aria-label="Termín platby">
+          <span class="price-toggle__pill" aria-hidden="true"></span>
+          <button type="button" data-period="early" aria-pressed="false">Placeno do 31. 3.</button>
+          <button type="button" data-period="late" aria-pressed="false">Placeno po 31. 3.</button>
+        </div>
+        <div class="price-now"><svg class="i"><use href="#i-info"/></svg><span id="priceNow">Ceny platné pro rok 2026</span></div>
+      </div>
+    </div>
+
+    <p class="swipe-hint"><svg class="i"><use href="#i-swipe"/></svg>Posuňte do strany</p>
+    <div class="price-cards">
+      <article class="price-card reveal">
+        <h3 class="price-card__name">Dospělý</h3>
+        <p class="price-card__meta">Roční členský poplatek</p>
+        <div class="price-card__price"><span data-price data-early="7000" data-late="7500">7 500</span><small>Kč / rok</small></div>
+        <p class="price-card__alt" data-price-alt></p>
+      </article>
+      <article class="price-card reveal" style="--d:.1s">
+        <h3 class="price-card__name">Junior</h3>
+        <p class="price-card__meta">do 18 let</p>
+        <div class="price-card__price"><span data-price data-early="5500" data-late="6000">6 000</span><small>Kč / rok</small></div>
+        <p class="price-card__alt" data-price-alt></p>
+      </article>
+      <article class="price-card reveal" style="--d:.2s">
+        <h3 class="price-card__name">Senior</h3>
+        <p class="price-card__meta">nad 65 let</p>
+        <div class="price-card__price"><span data-price data-early="5500" data-late="6000">6 000</span><small>Kč / rok</small></div>
+        <p class="price-card__alt" data-price-alt></p>
+      </article>
+    </div>
+
+    <div class="price-extras">
+      <div class="extra reveal">
+        <span class="extra__icon"><svg class="i"><use href="#i-ticket"/></svg></span>
+        <div><h4>Vstupní poplatek nového člena</h4><strong id="priceEntry">1 000 Kč</strong></div>
+      </div>
+      <div class="extra reveal" style="--d:.08s">
+        <span class="extra__icon"><svg class="i"><use href="#i-cart"/></svg></span>
+        <div><h4>Buggy golf cart</h4><strong id="priceBuggy">500 Kč / hra</strong></div>
+      </div>
+      <div class="extra reveal" style="--d:.16s">
+        <span class="extra__icon"><svg class="i"><use href="#i-parking"/></svg></span>
+        <div><h4>Parkování pro členy</h4><strong>Zdarma</strong></div>
+      </div>
+      <div class="extra extra--account reveal" style="--d:.24s">
+        <div style="display:flex;gap:1rem;align-items:center">
+          <span class="extra__icon"><svg class="i"><use href="#i-bank"/></svg></span>
+          <h4>Nové číslo účtu od sezóny 2026</h4>
+        </div>
+        <div class="account">
+          <code id="accountNo">6918554389/0800</code>
+          <button class="copy-btn" type="button" data-copy="6918554389/0800"><svg class="i"><use href="#i-copy"/></svg> Kopírovat</button>
+        </div>
+        <p class="account-iban">IBAN CZ18 0800 0000 0069 1855 4389 · BIC GIBACZPX</p>
+        <figure class="account-qr">
+          <img src="assets/qr-platba.svg" alt="QR platba na účet 6918554389/0800" width="124" height="124" loading="lazy">
+          <figcaption>QR platba – naskenujte v bankovní aplikaci a doplňte částku.</figcaption>
+        </figure>
+        <small>Do zprávy pro příjemce uveďte celé jméno (příp. jména), za které je placeno.</small>
+      </div>
+    </div>
+
+    <!-- Green fee podle PDF ceníku Golf klub Teplice (aktualizováno 04/2026) -->
+    <div class="greenfee reveal">
+      <div class="greenfee__head">
+        <h3>Green fee</h3>
+      </div>
+      <div class="gf-grid">
+        <div class="gf"><h4>9 jamek</h4><div class="gf__row"><span>Denní fee</span><b data-gf="d9">600 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b data-gf="s9">400 Kč</b></div></div>
+        <div class="gf"><h4>18 jamek</h4><div class="gf__row"><span>Denní fee</span><b data-gf="d18">800 Kč</b></div><div class="gf__row"><span>Sleva 30 %<em class="gf__who">senioři, junioři a členové vybraných klubů*</em></span><b data-gf="s18">600 Kč</b></div></div>
+      </div>
+      <p class="greenfee__note"><svg class="i"><use href="#i-info"/></svg><span>* Sleva 30 % platí pouze pro seniory, juniory a členy klubů Barbora, Terezín, Janov, Malevil, Bítozeves a Libouchec.</span></p>
+    </div>
+
+    <div class="price-actions">
+      <p>Členové hrají v rezervačním systému automaticky za 0 Kč, senioři a junioři mají slevu.</p>
+      <a class="btn btn--gold" id="pricePdf" href="assets/cenik/golf-teplice-cenik.pdf" data-href-de="assets/cenik/golf-teplice-preisliste-de.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#i-download"/></svg> Stáhnout kompletní ceník (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     11. PARTNEŘI – pás se generuje z pole PARTNERS
+     ===================================================================== -->
+<section class="partners" aria-labelledby="partnersTitle">
+  <h2 class="partners__title" id="partnersTitle">Partneři klubu</h2>
+  <div class="marquee" id="partnersMarquee"><div class="marquee__track"></div></div>
+</section>
+
+</main>
+
+<!-- =====================================================================
+     PATIČKA
+     ===================================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/logo.png" alt="Golf Club Teplice" width="357" height="186" loading="lazy">
+        <p>Golfové hřiště na Cínovci v&nbsp;Krušných horách. 18 jamek, PAR 72, od roku 1998.</p>
+        <p class="footer__legal">Golf club Teplice z.s. · IČO 26643120<br>Spolek zapsaný u Krajského soudu v Ústí nad Labem, oddíl L, vložka 4878</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
+          <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
+          <a href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener" aria-label="Rezervace on-line"><svg class="i"><use href="#i-calendar"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Klub</h4>
+        <ul class="footer__links">
+          <li><a href="onas.html">O nás</a></li>
+          <li><a href="aktuality.html">Aktuality</a></li>
+          <li><a href="#cenik">Ceník</a></li>
+          <li><a href="hriste.html">Hřiště</a></li>
+          <li><a href="treninky.html">Tréninky</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Více</h4>
+        <ul class="footer__links">
+          <li><a href="turnaje.html">Turnaje</a></li>
+          <li><a href="fotogalerie.html">Fotogalerie</a></li>
+          <li><a href="pujcovna-bezek.html">Půjčovna běžek</a></li>
+          <li><a href="kontakty.html">Kontakty</a></li>
+          <li><a href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener">Rezervace on-line</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <div class="footer__contact">
+          <span><svg class="i"><use href="#i-pin"/></svg>Cínovec 275<br>417 32 Dubí</span>
+          <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg>+420 777 943 219</a>
+          <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg>golf@golf-teplice.cz</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer__wordmark" aria-hidden="true">Golf Club Teplice</p>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> Golf Club Teplice z.s. · <button type="button" class="footer__privacy" data-open-privacy>Ochrana osobních údajů</button></span>
+      <div class="lang" role="group" aria-label="Jazyk">
+        <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
+        <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
+      </div>
+      <a class="to-top" href="#top">Nahoru <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobilní lišta s rezervací (zobrazí se po odscrollování hero) -->
+<div class="mobile-book" id="mobileBook">
+  <a class="btn btn--ghost" href="tel:+420777943219" aria-label="Zavolat"><svg class="i"><use href="#i-phone"/></svg></a>
+  <a class="btn btn--gold" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervovat tee time</a>
+</div>
+
+<!-- =====================================================================
+     DIALOGY
+     ===================================================================== -->
+<!-- Detail aktuality -->
+<dialog class="modal" id="newsModal" aria-labelledby="newsModalTitle">
+  <button class="icon-btn modal__close" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <div class="modal__scroll">
+    <div class="modal__media"><img id="newsModalImg" src="" alt=""></div>
+    <div class="modal__thumbs" id="newsModalThumbs"></div>
+    <div class="modal__body">
+      <div class="modal__meta"><span id="newsModalTag" class="tag"></span><span><svg class="i"><use href="#i-calendar"/></svg><time id="newsModalDate"></time></span></div>
+      <h3 id="newsModalTitle"></h3>
+      <div class="modal__text" id="newsModalText"></div>
+      <div class="modal__cta" id="newsModalCta"></div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Detail jamky -->
+<dialog class="drawer" id="holeDrawer" aria-labelledby="holeTitle">
+  <div class="drawer__inner">
+    <header class="drawer__head">
+      <div>
+        <p class="drawer__eyebrow">Detail jamky</p>
+        <h3 class="drawer__title" id="holeTitle"><span class="sr-only">Jamka</span><span class="drawer__num" data-h="num">1</span><span class="drawer__num-alt">/ <span data-h="num2">10</span></span></h3>
+      </div>
+      <div class="drawer__par">PAR<strong data-h="par">4</strong></div>
+      <button class="icon-btn drawer__close" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+    </header>
+    <div class="drawer__body" id="holeBody">
+      <div class="drawer__plan"><img data-h="plan" src="" alt=""></div>
+      <div>
+        <dl class="hole-stats">
+          <div><dt>HCP</dt><dd data-h="hcp"></dd></div>
+          <div><dt><i class="tee tee--y"></i>Muži</dt><dd data-h="yellow"></dd></div>
+          <div><dt><i class="tee tee--r"></i>Ženy</dt><dd data-h="red"></dd></div>
+        </dl>
+        <p class="hole-note" data-h="note"></p>
+        <p class="hole-desc" data-h="desc"></p>
+        <div class="tips">
+          <div class="tips__tabs" role="tablist" aria-label="Tipy">
+            <button type="button" role="tab" aria-selected="true" data-tip="scratch">Scratch</button>
+            <button type="button" role="tab" aria-selected="false" data-tip="bogey">Bogey</button>
+          </div>
+          <p class="tips__text" data-h="tip" role="tabpanel"></p>
+        </div>
+      </div>
+    </div>
+    <footer class="drawer__foot">
+      <button class="icon-btn" type="button" data-hole-step="-1" aria-label="Předchozí jamka"><svg class="i"><use href="#i-chev-l"/></svg></button>
+      <button class="icon-btn" type="button" data-hole-step="1" aria-label="Další jamka"><svg class="i"><use href="#i-chev-r"/></svg></button>
+      <div class="drawer__dots" id="holeDots"></div>
+      <a class="btn btn--gold btn--sm" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener">Rezervovat tee time</a>
+    </footer>
+  </div>
+</dialog>
+
+<!-- Lightbox fotogalerie -->
+<dialog class="lightbox" id="lightbox" aria-label="Fotogalerie">
+  <div class="lightbox__top">
+    <span id="lbCounter">1 / 1</span>
+    <button class="icon-btn" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="lightbox__stage" id="lbStage">
+    <button class="icon-btn lightbox__nav lightbox__nav--prev" type="button" data-lb-step="-1" aria-label="Předchozí fotka"><svg class="i"><use href="#i-chev-l"/></svg></button>
+    <img id="lbImg" src="" alt="">
+    <button class="icon-btn lightbox__nav lightbox__nav--next" type="button" data-lb-step="1" aria-label="Další fotka"><svg class="i"><use href="#i-chev-r"/></svg></button>
+  </div>
+  <p class="lightbox__caption" id="lbCaption"></p>
+</dialog>
+
+<!-- Zásady ochrany osobních údajů – TODO: před spuštěním nechat zkontrolovat (právník / pověřenec) -->
+<dialog class="modal" id="privacyModal" aria-labelledby="privacyTitle">
+  <button class="icon-btn modal__close" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <div class="modal__scroll">
+    <div class="modal__body privacy" data-i18n-skip>
+      <div data-lang-block="cs">
+        <h3 id="privacyTitle">Zásady ochrany osobních údajů</h3>
+        <h4>Správce</h4>
+        <p>Golf club Teplice z.s., IČO 26643120, se sídlem Cínovec 275, Dubí, zapsaný ve spolkovém rejstříku vedeném Krajským soudem v Ústí nad Labem, oddíl L, vložka 4878. Kontakt: <a href="mailto:golf@golf-teplice.cz">golf@golf-teplice.cz</a>, +420 777 943 219.</p>
+        <h4>Jaké údaje zpracováváme a proč</h4>
+        <ul>
+          <li><strong>Kontaktní formulář</strong> – jméno, e-mail a text zprávy, abychom mohli odpovědět na váš dotaz (čl. 6 odst. 1 písm. b) a f) GDPR). Údaje uchováváme po dobu nezbytnou k vyřízení dotazu, nejdéle 1 rok.</li>
+          <li><strong>Novinky e-mailem</strong> – e-mailová adresa, na základě vašeho souhlasu (čl. 6 odst. 1 písm. a) GDPR). Souhlas můžete kdykoli odvolat e-mailem na golf@golf-teplice.cz; do té doby adresu uchováváme.</li>
+          <li><strong>Rezervace tee time</strong> probíhají v samostatném rezervačním systému (rezervace.golf-teplice.cz), který má vlastní podmínky zpracování.</li>
+        </ul>
+        <h4>Příjemci</h4>
+        <p>Údaje mohou zpracovávat pouze poskytovatelé webhostingu a e-mailových služeb, kteří pro nás pracují. Údaje neprodáváme ani nepředáváme dalším osobám.</p>
+        <h4>Cookies a služby třetích stran</h4>
+        <p>Web nepoužívá analytické ani reklamní cookies. V prohlížeči si ukládá pouze zvolený jazyk. Písma jsou uložena přímo na našem webu. Mapa Google se načte až po kliknutí na „Zobrazit mapu“ – poté může společnost Google zpracovávat údaje o vaší návštěvě (např. IP adresu) podle svých zásad. Odkazy na Facebook a na weby partnerů vedou na stránky třetích stran.</p>
+        <h4>Vaše práva</h4>
+        <p>Máte právo na přístup k údajům, jejich opravu, výmaz, omezení zpracování a přenositelnost, právo vznést námitku a odvolat souhlas. Stížnost můžete podat u Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>
+      </div>
+      <div data-lang-block="de">
+        <h3>Datenschutzerklärung</h3>
+        <h4>Verantwortlicher</h4>
+        <p>Golf club Teplice z.s., IČO (Id.-Nr.) 26643120, Sitz Cínovec 275, Dubí, Tschechien, eingetragen im Vereinsregister des Kreisgerichts Ústí nad Labem, Abteilung L, Einlage 4878. Kontakt: <a href="mailto:golf@golf-teplice.cz">golf@golf-teplice.cz</a>, +420 777 943 219.</p>
+        <h4>Welche Daten wir verarbeiten und warum</h4>
+        <ul>
+          <li><strong>Kontaktformular</strong> – Name, E-Mail und Nachricht, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. b und f DSGVO). Wir speichern die Daten so lange, wie es zur Bearbeitung nötig ist, höchstens 1 Jahr.</li>
+          <li><strong>Newsletter</strong> – E-Mail-Adresse auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können die Einwilligung jederzeit per E-Mail an golf@golf-teplice.cz widerrufen; bis dahin speichern wir die Adresse.</li>
+          <li><strong>Tee-Time-Reservierungen</strong> erfolgen in einem separaten Reservierungssystem (rezervace.golf-teplice.cz) mit eigenen Datenschutzbedingungen.</li>
+        </ul>
+        <h4>Empfänger</h4>
+        <p>Die Daten können nur unsere Webhosting- und E-Mail-Dienstleister verarbeiten. Wir verkaufen keine Daten und geben sie nicht an Dritte weiter.</p>
+        <h4>Cookies und Dienste Dritter</h4>
+        <p>Die Website verwendet keine Analyse- oder Werbe-Cookies. Im Browser wird nur die gewählte Sprache gespeichert. Die Schriften liegen direkt auf unserer Website. Die Google-Karte wird erst nach einem Klick auf „Karte anzeigen“ geladen – danach kann Google Daten über Ihren Besuch (z. B. die IP-Adresse) gemäß seinen eigenen Richtlinien verarbeiten. Links zu Facebook und zu Partnern führen auf Seiten Dritter.</p>
+        <h4>Ihre Rechte</h4>
+        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit, das Recht auf Widerspruch sowie auf Widerruf Ihrer Einwilligung. Beschwerden können Sie beim tschechischen Datenschutzamt einreichen (<a href="https://uoou.gov.cz/en" target="_blank" rel="noopener">uoou.gov.cz/en</a>).</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Malé upozornění v rohu: odkaz na původní web (jen po dobu přechodu, viz OLD_SITE ve skriptu) -->
+<aside class="old-site" id="oldSite" hidden aria-label="Původní web">
+  <button class="old-site__close" type="button" aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <p class="old-site__title">Chcete starý web?</p>
+  <p class="old-site__text">Původní stránky klubu jsou zatím stále dostupné.</p>
+  <a class="old-site__btn" id="oldSiteLink" href="https://www.golf-teplice.cz/">Přejít na starý web <svg class="i"><use href="#i-arrow"/></svg></a>
+</aside>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="assets/js/web.js?v=0a6fa839"></script>
+</body>
+</html>
+

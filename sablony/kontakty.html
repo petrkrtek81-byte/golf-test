@@ -1,0 +1,80 @@
+<!-- =====================================================================
+     10. KONTAKTY
+     ===================================================================== -->
+<section class="section" id="kontakty">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal" style="--d:.08s">Těšíme se <em>na vás</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-list">
+          <a class="contact-item reveal" href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener">
+            <span class="contact-item__icon"><svg class="i"><use href="#i-pin"/></svg></span>
+            <div><small>Adresa</small><strong>Golf Club Teplice z.s.</strong><span>Cínovec 275, 417 32 Dubí, Czech Republic</span></div>
+          </a>
+          <a class="contact-item reveal" style="--d:.06s" href="tel:+420777943219">
+            <span class="contact-item__icon"><svg class="i"><use href="#i-phone"/></svg></span>
+            <div><small>Telefon · rezervace tee time</small><strong>+420 777 943 219</strong></div>
+          </a>
+          <a class="contact-item reveal" style="--d:.12s" href="mailto:golf@golf-teplice.cz">
+            <span class="contact-item__icon"><svg class="i"><use href="#i-mail"/></svg></span>
+            <div><small>E-mail</small><strong>golf@golf-teplice.cz</strong></div>
+          </a>
+          <div class="contact-item reveal" style="--d:.18s">
+            <span class="contact-item__icon"><svg class="i"><use href="#i-clock"/></svg></span>
+            <div><small>Otevírací doba</small><strong>Sezóna duben – listopad</strong><span>Hřiště 9:30 – do setmění · driving range uzavřen</span></div>
+          </div>
+        </div>
+        <!-- Mapa Google se načte až po kliknutí (do té doby web Google nekontaktuje) -->
+        <div class="map-embed reveal" id="mapEmbed">
+          <div class="map-consent">
+            <svg class="i"><use href="#i-map"/></svg>
+            <p>Mapa se načítá ze služby Google Maps. Po jejím zobrazení může Google zpracovávat údaje o vaší návštěvě.</p>
+            <button class="btn btn--gold btn--sm" type="button" id="mapLoad">Zobrazit mapu</button>
+          </div>
+          <a class="btn btn--gold btn--sm" href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener"><svg class="i"><use href="#i-map"/></svg> Navigovat</a>
+        </div>
+      </div>
+
+      <div>
+        <!-- Formuláře odesílá kontakt.php (PHP na hostingu) – viz FORM_ENDPOINT ve skriptu -->
+        <div class="form-card reveal reveal--right" id="contactCard">
+          <h3>Napište nám dotaz či vzkaz</h3>
+          <p>Máte dotaz k hřišti, členství nebo tréninkům? Ozveme se vám co nejdříve.</p>
+          <form id="contactForm" novalidate>
+            <div class="form-grid">
+              <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div class="field"><input id="cf-name" name="name" type="text" placeholder=" " autocomplete="name" required><label for="cf-name">Jméno a příjmení</label></div>
+              <div class="field"><input id="cf-email" name="email" type="email" placeholder=" " autocomplete="email" required><label for="cf-email">E-mail</label></div>
+              <div class="field field--full"><textarea id="cf-msg" name="message" placeholder=" " required></textarea><label for="cf-msg">Vaše zpráva</label></div>
+              <label class="consent field--full"><input type="checkbox" name="consent" value="1" required><span>Souhlasím se <button type="button" class="text-link" data-open-privacy>zpracováním osobních údajů</button> za účelem vyřízení dotazu.</span></label>
+            </div>
+            <div class="form-foot" style="margin-top:1.2rem">
+              <small style="color:var(--muted)">Všechna pole jsou povinná.</small>
+              <button class="btn btn--dark" type="submit"><svg class="i"><use href="#i-send"/></svg> Odeslat zprávu</button>
+            </div>
+          </form>
+          <div class="form-success" role="status">
+            <svg class="check-anim" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="40"/><path d="M26 43l11 11 22-24"/></svg>
+            <h3>Děkujeme za zprávu!</h3>
+            <p style="color:var(--muted)">Zprávu jsme přijali a ozveme se vám na uvedený e-mail.</p>
+            <button class="btn btn--outline" type="button" id="formReset">Napsat další zprávu</button>
+          </div>
+        </div>
+
+        <div class="newsletter reveal reveal--right" style="--d:.1s">
+          <h3>Novinky e-mailem</h3>
+          <p>Otevření sezóny, turnaje a novinky z hřiště přímo do vaší schránky.</p>
+          <form id="newsletterForm" novalidate>
+            <label class="sr-only" for="nl-email">E-mail</label>
+            <input id="nl-email" name="email" type="email" placeholder="váš@email.cz" autocomplete="email" required>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn--gold" type="submit">Odebírat</button>
+          </form>
+          <p class="newsletter__note">Odesláním souhlasíte se zasíláním novinek. Odhlásit se můžete kdykoli. <button type="button" class="text-link" data-open-privacy>Ochrana osobních údajů</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

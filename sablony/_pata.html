@@ -1,0 +1,201 @@
+<!-- =====================================================================
+     11. PARTNEŘI – pás se generuje z pole PARTNERS
+     ===================================================================== -->
+<section class="partners" aria-labelledby="partnersTitle">
+  <h2 class="partners__title" id="partnersTitle">Partneři klubu</h2>
+  <div class="marquee" id="partnersMarquee"><div class="marquee__track"></div></div>
+</section>
+
+</main>
+
+<!-- =====================================================================
+     PATIČKA
+     ===================================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/logo.png" alt="Golf Club Teplice" width="357" height="186" loading="lazy">
+        <p>Golfové hřiště na Cínovci v&nbsp;Krušných horách. 18 jamek, PAR 72, od roku 1998.</p>
+        <p class="footer__legal">Golf club Teplice z.s. · IČO 26643120<br>Spolek zapsaný u Krajského soudu v Ústí nad Labem, oddíl L, vložka 4878</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
+          <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
+          <a href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener" aria-label="Rezervace on-line"><svg class="i"><use href="#i-calendar"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Klub</h4>
+        <ul class="footer__links">
+          <li><a href="#onas">O nás</a></li>
+          <li><a href="#aktuality">Aktuality</a></li>
+          <li><a href="#cenik">Ceník</a></li>
+          <li><a href="#hriste">Hřiště</a></li>
+          <li><a href="#treninky">Tréninky</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Více</h4>
+        <ul class="footer__links">
+          <li><a href="#turnaje">Turnaje</a></li>
+          <li><a href="#fotogalerie">Fotogalerie</a></li>
+          <li><a href="#pujcovna-bezek">Půjčovna běžek</a></li>
+          <li><a href="#kontakty">Kontakty</a></li>
+          <li><a href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener">Rezervace on-line</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <div class="footer__contact">
+          <span><svg class="i"><use href="#i-pin"/></svg>Cínovec 275<br>417 32 Dubí</span>
+          <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg>+420 777 943 219</a>
+          <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg>golf@golf-teplice.cz</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer__wordmark" aria-hidden="true">Golf Club Teplice</p>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> Golf Club Teplice z.s. · <button type="button" class="footer__privacy" data-open-privacy>Ochrana osobních údajů</button></span>
+      <div class="lang" role="group" aria-label="Jazyk">
+        <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
+        <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
+      </div>
+      <a class="to-top" href="#top">Nahoru <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobilní lišta s rezervací (zobrazí se po odscrollování hero) -->
+<div class="mobile-book" id="mobileBook">
+  <a class="btn btn--ghost" href="tel:+420777943219" aria-label="Zavolat"><svg class="i"><use href="#i-phone"/></svg></a>
+  <a class="btn btn--gold" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervovat tee time</a>
+</div>
+
+<!-- =====================================================================
+     DIALOGY
+     ===================================================================== -->
+<!-- Detail aktuality -->
+<dialog class="modal" id="newsModal" aria-labelledby="newsModalTitle">
+  <button class="icon-btn modal__close" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <div class="modal__scroll">
+    <div class="modal__media"><img id="newsModalImg" src="" alt=""></div>
+    <div class="modal__thumbs" id="newsModalThumbs"></div>
+    <div class="modal__body">
+      <div class="modal__meta"><span id="newsModalTag" class="tag"></span><span><svg class="i"><use href="#i-calendar"/></svg><time id="newsModalDate"></time></span></div>
+      <h3 id="newsModalTitle"></h3>
+      <div class="modal__text" id="newsModalText"></div>
+      <div class="modal__cta" id="newsModalCta"></div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Detail jamky -->
+<dialog class="drawer" id="holeDrawer" aria-labelledby="holeTitle">
+  <div class="drawer__inner">
+    <header class="drawer__head">
+      <div>
+        <p class="drawer__eyebrow">Detail jamky</p>
+        <h3 class="drawer__title" id="holeTitle"><span class="sr-only">Jamka</span><span class="drawer__num" data-h="num">1</span><span class="drawer__num-alt">/ <span data-h="num2">10</span></span></h3>
+      </div>
+      <div class="drawer__par">PAR<strong data-h="par">4</strong></div>
+      <button class="icon-btn drawer__close" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+    </header>
+    <div class="drawer__body" id="holeBody">
+      <div class="drawer__plan"><img data-h="plan" src="" alt=""></div>
+      <div>
+        <dl class="hole-stats">
+          <div><dt>HCP</dt><dd data-h="hcp"></dd></div>
+          <div><dt><i class="tee tee--y"></i>Muži</dt><dd data-h="yellow"></dd></div>
+          <div><dt><i class="tee tee--r"></i>Ženy</dt><dd data-h="red"></dd></div>
+        </dl>
+        <p class="hole-note" data-h="note"></p>
+        <p class="hole-desc" data-h="desc"></p>
+        <div class="tips">
+          <div class="tips__tabs" role="tablist" aria-label="Tipy">
+            <button type="button" role="tab" aria-selected="true" data-tip="scratch">Scratch</button>
+            <button type="button" role="tab" aria-selected="false" data-tip="bogey">Bogey</button>
+          </div>
+          <p class="tips__text" data-h="tip" role="tabpanel"></p>
+        </div>
+      </div>
+    </div>
+    <footer class="drawer__foot">
+      <button class="icon-btn" type="button" data-hole-step="-1" aria-label="Předchozí jamka"><svg class="i"><use href="#i-chev-l"/></svg></button>
+      <button class="icon-btn" type="button" data-hole-step="1" aria-label="Další jamka"><svg class="i"><use href="#i-chev-r"/></svg></button>
+      <div class="drawer__dots" id="holeDots"></div>
+      <a class="btn btn--gold btn--sm" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener">Rezervovat tee time</a>
+    </footer>
+  </div>
+</dialog>
+
+<!-- Lightbox fotogalerie -->
+<dialog class="lightbox" id="lightbox" aria-label="Fotogalerie">
+  <div class="lightbox__top">
+    <span id="lbCounter">1 / 1</span>
+    <button class="icon-btn" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="lightbox__stage" id="lbStage">
+    <button class="icon-btn lightbox__nav lightbox__nav--prev" type="button" data-lb-step="-1" aria-label="Předchozí fotka"><svg class="i"><use href="#i-chev-l"/></svg></button>
+    <img id="lbImg" src="" alt="">
+    <button class="icon-btn lightbox__nav lightbox__nav--next" type="button" data-lb-step="1" aria-label="Další fotka"><svg class="i"><use href="#i-chev-r"/></svg></button>
+  </div>
+  <p class="lightbox__caption" id="lbCaption"></p>
+</dialog>
+
+<!-- Zásady ochrany osobních údajů – TODO: před spuštěním nechat zkontrolovat (právník / pověřenec) -->
+<dialog class="modal" id="privacyModal" aria-labelledby="privacyTitle">
+  <button class="icon-btn modal__close" type="button" data-close aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <div class="modal__scroll">
+    <div class="modal__body privacy" data-i18n-skip>
+      <div data-lang-block="cs">
+        <h3 id="privacyTitle">Zásady ochrany osobních údajů</h3>
+        <h4>Správce</h4>
+        <p>Golf club Teplice z.s., IČO 26643120, se sídlem Cínovec 275, Dubí, zapsaný ve spolkovém rejstříku vedeném Krajským soudem v Ústí nad Labem, oddíl L, vložka 4878. Kontakt: <a href="mailto:golf@golf-teplice.cz">golf@golf-teplice.cz</a>, +420 777 943 219.</p>
+        <h4>Jaké údaje zpracováváme a proč</h4>
+        <ul>
+          <li><strong>Kontaktní formulář</strong> – jméno, e-mail a text zprávy, abychom mohli odpovědět na váš dotaz (čl. 6 odst. 1 písm. b) a f) GDPR). Údaje uchováváme po dobu nezbytnou k vyřízení dotazu, nejdéle 1 rok.</li>
+          <li><strong>Novinky e-mailem</strong> – e-mailová adresa, na základě vašeho souhlasu (čl. 6 odst. 1 písm. a) GDPR). Souhlas můžete kdykoli odvolat e-mailem na golf@golf-teplice.cz; do té doby adresu uchováváme.</li>
+          <li><strong>Rezervace tee time</strong> probíhají v samostatném rezervačním systému (rezervace.golf-teplice.cz), který má vlastní podmínky zpracování.</li>
+        </ul>
+        <h4>Příjemci</h4>
+        <p>Údaje mohou zpracovávat pouze poskytovatelé webhostingu a e-mailových služeb, kteří pro nás pracují. Údaje neprodáváme ani nepředáváme dalším osobám.</p>
+        <h4>Cookies a služby třetích stran</h4>
+        <p>Web nepoužívá analytické ani reklamní cookies. V prohlížeči si ukládá pouze zvolený jazyk. Písma jsou uložena přímo na našem webu. Mapa Google se načte až po kliknutí na „Zobrazit mapu“ – poté může společnost Google zpracovávat údaje o vaší návštěvě (např. IP adresu) podle svých zásad. Odkazy na Facebook a na weby partnerů vedou na stránky třetích stran.</p>
+        <h4>Vaše práva</h4>
+        <p>Máte právo na přístup k údajům, jejich opravu, výmaz, omezení zpracování a přenositelnost, právo vznést námitku a odvolat souhlas. Stížnost můžete podat u Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>
+      </div>
+      <div data-lang-block="de">
+        <h3>Datenschutzerklärung</h3>
+        <h4>Verantwortlicher</h4>
+        <p>Golf club Teplice z.s., IČO (Id.-Nr.) 26643120, Sitz Cínovec 275, Dubí, Tschechien, eingetragen im Vereinsregister des Kreisgerichts Ústí nad Labem, Abteilung L, Einlage 4878. Kontakt: <a href="mailto:golf@golf-teplice.cz">golf@golf-teplice.cz</a>, +420 777 943 219.</p>
+        <h4>Welche Daten wir verarbeiten und warum</h4>
+        <ul>
+          <li><strong>Kontaktformular</strong> – Name, E-Mail und Nachricht, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. b und f DSGVO). Wir speichern die Daten so lange, wie es zur Bearbeitung nötig ist, höchstens 1 Jahr.</li>
+          <li><strong>Newsletter</strong> – E-Mail-Adresse auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können die Einwilligung jederzeit per E-Mail an golf@golf-teplice.cz widerrufen; bis dahin speichern wir die Adresse.</li>
+          <li><strong>Tee-Time-Reservierungen</strong> erfolgen in einem separaten Reservierungssystem (rezervace.golf-teplice.cz) mit eigenen Datenschutzbedingungen.</li>
+        </ul>
+        <h4>Empfänger</h4>
+        <p>Die Daten können nur unsere Webhosting- und E-Mail-Dienstleister verarbeiten. Wir verkaufen keine Daten und geben sie nicht an Dritte weiter.</p>
+        <h4>Cookies und Dienste Dritter</h4>
+        <p>Die Website verwendet keine Analyse- oder Werbe-Cookies. Im Browser wird nur die gewählte Sprache gespeichert. Die Schriften liegen direkt auf unserer Website. Die Google-Karte wird erst nach einem Klick auf „Karte anzeigen“ geladen – danach kann Google Daten über Ihren Besuch (z. B. die IP-Adresse) gemäß seinen eigenen Richtlinien verarbeiten. Links zu Facebook und zu Partnern führen auf Seiten Dritter.</p>
+        <h4>Ihre Rechte</h4>
+        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit, das Recht auf Widerspruch sowie auf Widerruf Ihrer Einwilligung. Beschwerden können Sie beim tschechischen Datenschutzamt einreichen (<a href="https://uoou.gov.cz/en" target="_blank" rel="noopener">uoou.gov.cz/en</a>).</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Malé upozornění v rohu: odkaz na původní web (jen po dobu přechodu, viz OLD_SITE ve skriptu) -->
+<aside class="old-site" id="oldSite" hidden aria-label="Původní web">
+  <button class="old-site__close" type="button" aria-label="Zavřít"><svg class="i"><use href="#i-close"/></svg></button>
+  <p class="old-site__title">Chcete starý web?</p>
+  <p class="old-site__text">Původní stránky klubu jsou zatím stále dostupné.</p>
+  <a class="old-site__btn" id="oldSiteLink" href="https://www.golf-teplice.cz/">Přejít na starý web <svg class="i"><use href="#i-arrow"/></svg></a>
+</aside>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="assets/js/web.js?v={{jsVersion}}"></script>
+</body>
+</html>
+

@@ -11,16 +11,16 @@ RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP_HOST} ^(www\.)?golf-teplice\.cz$ [NC]
 RewriteRule ^ https://www.golf-teplice.cz%{REQUEST_URI} [R=301,NE,L]
 
-# --- Staré adresy webu → sekce nové jednostránky (301 = trvale) --------------
-RewriteRule ^onas/?$            /#onas            [R=301,NE,L]
-RewriteRule ^aktuality/?$       /#aktuality       [R=301,NE,L]
-RewriteRule ^cenik/?$           /#cenik           [R=301,NE,L]
-RewriteRule ^hriste/?$          /#hriste          [R=301,NE,L]
-RewriteRule ^treninky/?$        /#treninky        [R=301,NE,L]
-RewriteRule ^turnaje/?$         /#turnaje         [R=301,NE,L]
-RewriteRule ^fotogalerie/?$     /#fotogalerie     [R=301,NE,L]
-RewriteRule ^pujcovna-bezek/?$  /#pujcovna-bezek  [R=301,NE,L]
-RewriteRule ^kontakty/?$        /#kontakty        [R=301,NE,L]
+# --- Staré adresy webu (/cenik…) → stránky nového webu (cenik.html…), 301 = trvale ---
+RewriteRule ^onas/?$            /onas.html            [R=301,L]
+RewriteRule ^aktuality/?$       /aktuality.html       [R=301,L]
+RewriteRule ^cenik/?$           /cenik.html           [R=301,L]
+RewriteRule ^hriste/?$          /hriste.html          [R=301,L]
+RewriteRule ^treninky/?$        /treninky.html        [R=301,L]
+RewriteRule ^turnaje/?$         /turnaje.html         [R=301,L]
+RewriteRule ^fotogalerie/?$     /fotogalerie.html     [R=301,L]
+RewriteRule ^pujcovna-bezek/?$  /pujcovna-bezek.html  [R=301,L]
+RewriteRule ^kontakty/?$        /kontakty.html        [R=301,L]
 
 # Jazykové verze starého webu (index.php?mutace=de / cs)
 RewriteCond %{QUERY_STRING} (^|&)mutace=de(&|$) [NC]
@@ -31,6 +31,9 @@ RewriteRule ^index\.php$ / [R=301,L]
 
 # Ceník v PDF ze starého umístění
 RewriteRule ^files/cenik/golf-teplice-cenik\.pdf$ /assets/cenik/golf-teplice-cenik.pdf [R=301,L]
+
+# Šablony a nástroje pro sestavení webu nejsou určené k prohlížení
+RewriteRule ^(sablony|nastroje)(/|$) - [R=404,L]
 
 # --- Bezpečnostní hlavičky ---------------------------------------------------
 <IfModule mod_headers.c>

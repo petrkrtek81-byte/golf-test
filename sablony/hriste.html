@@ -1,0 +1,76 @@
+<!-- =====================================================================
+     5. HŘIŠTĚ – interaktivní mapa + tabulka vzdáleností
+     ===================================================================== -->
+<section class="section" id="hriste">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <h2 class="h2 reveal" style="--d:.08s">Devět jamek, <em>dvakrát jinak</em></h2>
+        <p class="lead reveal" style="--d:.16s">Hřiště má 9 jamek hraných dvakrát – celkem 18 jamek s&nbsp;parem 72. Klikněte na jamku v&nbsp;plánku a&nbsp;zobrazí se její detail včetně tipů „jak na to“.</p>
+        <ul class="course-facts reveal" style="--d:.22s">
+          <li>18 jamek <span>· 9 × 2</span></li>
+          <li>PAR 72</li>
+          <li><i class="tee tee--y"></i>Muži 5 394 m <span>· CR 68,4 · SR 142</span></li>
+          <li><i class="tee tee--r"></i>Ženy 4 698 m <span>· CR 70,2 · SR 134</span></li>
+          <li>865 m n. m.</li>
+        </ul>
+      </div>
+      <div class="course-book reveal" style="--d:.26s">
+        <a class="btn btn--dark" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervace tee time on-line</a>
+        <a class="btn btn--outline" href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> +420 777 943 219</a>
+      </div>
+    </div>
+
+    <div class="map-card reveal">
+      <div class="map-card__head">
+        <h3>Plánek hřiště</h3>
+        <span class="map-hint"><svg class="i"><use href="#i-target"/></svg> Klikněte na číslo jamky</span>
+        <span class="map-hint map-hint--mobile"><svg class="i"><use href="#i-swipe"/></svg> Plánek lze posouvat do stran</span>
+      </div>
+      <div class="map-scroller">
+        <div class="map" id="courseMap">
+          <img src="assets/mapa.png" alt="Plánek golfového hřiště Cínovec s jamkami 1–9 a klubovnou" width="893" height="366" loading="lazy">
+          <!-- hotspoty jamek doplní JS podle HOLES[].x / .y -->
+        </div>
+      </div>
+      <div class="hole-picker" id="holePicker"><span>Jamka</span></div>
+    </div>
+
+    <div class="dist-card reveal">
+      <div class="dist-card__head">
+        <h3>Parametry a vzdálenosti</h3>
+        <div class="seg" role="group" aria-label="Devítka">
+          <button type="button" class="is-active" data-nine="0" aria-pressed="true">Jamky 1–9</button>
+          <button type="button" data-nine="1" aria-pressed="false">Jamky 10–18</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="dist-table" id="distTable"><caption class="sr-only">Tabulka vzdáleností v metrech</caption></table>
+      </div>
+      <div class="tee-summary">
+        <!-- Oficiální normování ČGF „Cínovec 2025“: https://www.cgf.cz/cz/hriste/detail-hriste?id=51 -->
+        <div class="tee-sum"><h4><i class="tee tee--y"></i>Muži · ČGF 2025</h4><p>9 jamek: <b>2 697</b> m · 18 jamek: <b>5 394</b> m · CR 68,4 · SR 142</p></div>
+        <div class="tee-sum"><h4><i class="tee tee--r"></i>Ženy · ČGF 2025</h4><p>9 jamek: <b>2 349</b> m · 18 jamek: <b>4 698</b> m · CR 70,2 · SR 134</p></div>
+        <div class="tee-sum"><h4><i class="tee" style="background:var(--grass)"></i>Par</h4><p>1–9: <b>36</b> · 10–18: <b>36</b> · celkem <b>72</b></p></div>
+      </div>
+      <div class="dist-foot">
+        <span>Délky jamek v metrech podle původního webu (před přeměřením hřiště v roce 2025). Součty a normování výše jsou oficiální údaje ČGF.</span>
+        <a class="link-arrow" href="https://www.cgf.cz/cz/hriste/detail-hriste?id=51" target="_blank" rel="noopener">Hřiště v registru ČGF <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Parallax pás -->
+<section class="band" aria-label="Rezervace">
+  <div class="band__bg" data-parallax="0.18"><img src="assets/img/slider1.jpg" alt="" loading="lazy"></div>
+  <div class="container">
+    <p class="eyebrow reveal" style="color:var(--gold-2)">Tee time</p>
+    <h2 class="reveal" style="--d:.08s">Odpaliště č. 1 <em>na vás čeká</em></h2>
+    <p class="reveal" style="--d:.16s">Rezervujte si čas na hřišti on-line přes rezervační systém, nebo telefonicky na +420&nbsp;777&nbsp;943&nbsp;219.</p>
+    <div class="band__actions reveal" style="--d:.24s">
+      <a class="btn btn--gold" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervovat on-line</a>
+      <a class="btn btn--ghost" href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> Zavolat</a>
+    </div>
+  </div>
+</section>

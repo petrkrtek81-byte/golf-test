@@ -1,13 +1,17 @@
 # Golf Club Teplice – nový web
 
-Jednostránkový web (HTML + CSS + JS v `index.html`), bez databáze a bez sestavování.
+Web o deseti stránkách (úvod + O nás, Aktuality, Ceník, Hřiště, Tréninky, Turnaje, Fotogalerie, Půjčovna běžek, Kontakty),
+bez databáze. Stránky mají společnou hlavičku a patičku a skládají se ze šablon jedním příkazem (viz níže).
 Obsah, který se často mění, je v souboru `data/obsah.json` a upravuje se v administraci `admin.php`.
 
 ## Struktura
 
 | Soubor / složka | Co obsahuje |
 |---|---|
-| `index.html` | celý web: styly, pevné texty, skript (CZ i DE) |
+| `index.html`, `cenik.html`, `hriste.html`… | hotové stránky (vygenerované ze šablon – needitovat ručně) |
+| `sablony/` | šablony stránek: `_hlava.html`, `_lista.html` (menu), `_pata.html` (patička), obsah každé stránky |
+| `nastroje/sestav-web.js` | složí stránky ze šablon, doplní titulky a `sitemap.xml` |
+| `assets/css/web.css`, `assets/js/web.js` | styly a skript společné pro všechny stránky (CZ i DE) |
 | `data/obsah.json` | obsah z administrace: aktuality, slider, ceník, trenéři, turnaje, fotogalerie, partneři (CZ i DE) |
 | `admin.php` | administrace obsahu (PHP), viz níže |
 | `uploads/` | fotky, loga a PDF nahrané v administraci (vzniká na hostingu, do gitu nepatří) |
@@ -52,11 +56,18 @@ nahrávají se jen fotky JPG/PNG/WebP (vždy se znovu uloží přes GD) a PDF; `
 **Pozor při nahrávání nové verze webu:** složky `data/` a `uploads/` na hostingu nepřepisovat – je v nich obsah z administrace.
 Nahrává se jen `index.html`, `admin.php`, `assets/` atd. (Soubor `data/obsah.json` v gitu je jen výchozí obsah.)
 
-## Úpravy pevných částí (v `index.html`)
+## Úpravy pevných částí
 
-- `HOLES` (na začátku skriptu, sekce „A. DATA“) – jamky (délky, HCP, popisy, tipy), německy v `HOLES_DE`
-- texty sekcí O nás, Hřiště, Tréninky, Půjčovna běžek, Kontakty – přímo v HTML
-- slovník `DE` (sekce „A2. NĚMECKÁ VERZE“) – překlady pevných textů; klíčem je český text, při změně české věty upravte i klíč
+Texty stránek se upravují v šablonách ve složce `sablony/` a potom se stránky složí příkazem:
+
+```
+node nastroje/sestav-web.js
+```
+
+- titulky, popisy a úvodní fotky stránek – seznam `PAGES` v `nastroje/sestav-web.js`
+- `HOLES` (začátek `assets/js/web.js`, sekce „A. DATA“) – jamky (délky, HCP, popisy, tipy), německy v `HOLES_DE`
+- slovník `DE` (`assets/js/web.js`, sekce „A2. NĚMECKÁ VERZE“) – překlady pevných textů; klíčem je český text, při změně české věty upravte i klíč
+- odkaz `#cenik`, `#hriste`… v šabloně se při sestavení sám změní na `cenik.html`, `hriste.html`…
 
 ## Nasazení
 

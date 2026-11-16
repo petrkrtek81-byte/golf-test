@@ -1,0 +1,19 @@
+<!-- =====================================================================
+     7. TURNAJE – seznam se generuje z pole TOURNAMENTS (ukázková data)
+     ===================================================================== -->
+<section class="section section--sand" id="turnaje">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <h2 class="h2 reveal" style="--d:.08s">Turnaje pořádané <em>na Golf Teplice</em></h2>
+      </div>
+      <div class="chips reveal" style="--d:.16s" id="tourFilters" role="group" aria-label="Filtr turnajů">
+        <button class="chip is-active" type="button" data-filter="all">Vše</button>
+        <button class="chip" type="button" data-filter="upcoming">Nadcházející</button>
+        <button class="chip" type="button" data-filter="past">Proběhlé</button>
+      </div>
+    </div>
+    <p class="tour-note reveal"><svg class="i"><use href="#i-info"/></svg><span><strong>Ukázková data.</strong> Termíny a názvy turnajů doplníme – přihlášky probíhají přes systém České golfové federace.</span></p>
+    <div class="tour-list" id="tourList"></div>
+  </div>
+</section>

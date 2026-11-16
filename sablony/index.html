@@ -1,0 +1,198 @@
+<!-- =====================================================================
+     1. HERO – fotky (slider z administrace), případně video
+     ===================================================================== -->
+<section class="hero" id="top" aria-label="Úvod">
+  <!-- Slidy: spravují se v administraci (Slider); tyto jsou jen výchozí pro první vykreslení -->
+  <div class="hero__slides" id="heroSlides">
+    <div class="hero__slide is-active" data-caption="Green s výhledem do kraje">
+      <img src="assets/img/901224_10151579493184174_1058721581_o.jpg" alt="" fetchpriority="high">
+    </div>
+    <div class="hero__slide" data-caption="Čerstvě posečené fairwaye">
+      <img src="assets/img/IMG-20250331-WA0007-2.jpg" alt="" decoding="async">
+    </div>
+    <div class="hero__slide" data-caption="Hřiště z ptačí perspektivy">
+      <img src="assets/img/99690585.jpg" alt="" decoding="async">
+    </div>
+    <div class="hero__slide" data-caption="Green obklopený horským lesem">
+      <img src="assets/img/golf1.jpg" alt="" decoding="async">
+    </div>
+    <div class="hero__slide" data-caption="Turnajová hra na greenu">
+      <img src="assets/img/13475130_838632482938527_8570459729176729686_o.jpg" alt="" decoding="async">
+    </div>
+  </div>
+  <div class="hero__overlay"></div>
+
+  <div class="container hero__content" id="heroContent">
+    <span class="hero__badge"><span class="dot-live"></span> <span id="seasonBadge">Sezóna 2026 otevřena</span></span>
+    <h1 class="hero__title" data-split>Golf Club <em>Teplice</em></h1>
+    <p class="hero__sub" data-split-words>Golf v srdci Krušných hor – Cínovec</p>
+    <div class="hero__actions">
+      <a class="btn btn--gold" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener">
+        <svg class="i"><use href="#i-calendar"/></svg> Rezervovat tee time
+      </a>
+      <a class="btn btn--ghost" href="hriste.html">Prohlédnout hřiště <svg class="i i--go"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <div class="hero__bar">
+    <div class="container hero__bar-inner">
+      <span class="hero__place"><svg class="i"><use href="#i-pin"/></svg> Cínovec<span>&nbsp;· Krušné hory</span></span>
+      <div class="hero__slider-ui">
+        <span class="hero__caption" id="heroCaption" aria-live="polite"></span>
+        <div class="hero__dots" id="heroDots" role="tablist" aria-label="Fotografie"></div>
+      </div>
+    </div>
+  </div>
+  <a class="hero__scroll" href="#rozcestnik" aria-label="Posunout na obsah"><span>Objevte</span><span class="hero__scroll-line"></span></a>
+</section>
+
+<!-- Animované čítače -->
+<section class="stats" aria-label="Hřiště v číslech">
+  <div class="container stats__grid">
+    <div class="stat reveal">
+      <div class="stat__num"><span data-count="18">18</span></div>
+      <div class="stat__label">jamek · 9 × 2</div>
+    </div>
+    <div class="stat reveal" style="--d:.1s">
+      <div class="stat__num"><span class="stat__pre">PAR</span><span data-count="72">72</span></div>
+      <div class="stat__label">par hřiště</div>
+    </div>
+    <div class="stat reveal" style="--d:.2s">
+      <div class="stat__num"><span data-count="5394">5 394</span><span class="stat__unit">m</span></div>
+      <div class="stat__label">délka hřiště · muži</div>
+    </div>
+    <div class="stat reveal" style="--d:.3s">
+      <div class="stat__num"><span class="stat__pre">od</span><span data-count="1998" data-from="1900" data-plain>1998</span></div>
+      <div class="stat__label">golf na Cínovci</div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     2. ROZCESTNÍK – to hlavní na jednom místě, detail je na podstránkách
+     ===================================================================== -->
+<section class="section section--paper home-explore" id="rozcestnik">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="eyebrow reveal">Golf v srdci Krušných hor</p>
+        <h2 class="h2 reveal" style="--d:.08s">Co vás <em>zajímá?</em></h2>
+        <p class="lead reveal" style="--d:.16s">Devět jamek hraných dvakrát, horský vzduch a&nbsp;výhledy na České středohoří. Vyberte si, kam dál.</p>
+      </div>
+      <div class="hours hours--compact reveal" style="--d:.2s" aria-labelledby="hoursTitle">
+        <div class="hours__head">
+          <h3 class="hours__title" id="hoursTitle"><svg class="i"><use href="#i-clock"/></svg> Otevírací doba</h3>
+          <span class="hours__status" id="seasonStatus"><span class="dot-live"></span><span>Sezóna právě probíhá</span></span>
+        </div>
+        <div class="hours__rows">
+          <div class="hours__row"><span>Sezóna</span><strong>duben – listopad</strong></div>
+          <div class="hours__row"><span>Provoz hřiště</span><strong>9:30 – do setmění</strong></div>
+          <div class="hours__row"><span>Driving range</span><strong class="is-closed">uzavřen</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explore">
+      <a class="explore-card explore-card--big reveal" href="hriste.html">
+        <img src="assets/img/99690585.jpg" alt="" loading="lazy" width="1024" height="767">
+        <span class="explore-card__body">
+          <small>18 jamek · PAR 72</small>
+          <strong>Hřiště</strong>
+          <span>Interaktivní plánek, délky jamek a tipy, jak je zahrát.</span>
+        </span>
+        <span class="explore-card__go" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="explore-card reveal" style="--d:.06s" href="cenik.html">
+        <img src="assets/img/thumbs/894749_10151501515009174_1468383992_o.jpg" alt="" loading="lazy">
+        <span class="explore-card__body">
+          <small>Green fee od <b data-gf="s9">400 Kč</b></small>
+          <strong>Ceník</strong>
+          <span>Členství, green fee a platba QR kódem.</span>
+        </span>
+        <span class="explore-card__go" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="explore-card reveal" style="--d:.12s" href="treninky.html">
+        <img src="assets/img/thumbs/img_5558.jpg" alt="" loading="lazy">
+        <span class="explore-card__body">
+          <small>Kurz · lekce · zkouška</small>
+          <strong>Tréninky</strong>
+          <span>Naučte se golf s trenérem, vybavení zapůjčíme.</span>
+        </span>
+        <span class="explore-card__go" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="explore-card reveal" style="--d:.18s" href="turnaje.html">
+        <img src="assets/img/thumbs/13475130_838632482938527_8570459729176729686_o.jpg" alt="" loading="lazy">
+        <span class="explore-card__body">
+          <small>Kalendář sezóny</small>
+          <strong>Turnaje</strong>
+          <span>Klubové i otevřené turnaje, přihlášky přes ČGF.</span>
+        </span>
+        <span class="explore-card__go" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="explore-card reveal" style="--d:.24s" href="onas.html">
+        <img src="assets/img/thumbs/14_img-034-web.jpg" alt="" loading="lazy">
+        <span class="explore-card__body">
+          <small>Od roku 1998</small>
+          <strong>O nás</strong>
+          <span>Historie hřiště, klubovna, hotel a restaurace.</span>
+        </span>
+        <span class="explore-card__go" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="explore-card explore-card--wide reveal" style="--d:.1s" href="pujcovna-bezek.html">
+        <img src="assets/img/dvur4.jpg" alt="" loading="lazy" width="1872" height="640">
+        <span class="explore-card__body">
+          <small><svg class="i"><use href="#i-snow"/></svg> Zima na Cínovci</small>
+          <strong>Půjčovna běžek</strong>
+          <span>Když hřiště zapadne sněhem, vyrazte na běžky.</span>
+        </span>
+        <span class="explore-card__go" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     3. AKTUALITY – tři nejnovější (všechny na stránce Aktuality)
+     ===================================================================== -->
+<section class="section home-news" id="nejnovejsi">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="eyebrow reveal">Aktuality</p>
+        <h2 class="h2 reveal" style="--d:.08s">Co je nového <em>na hřišti</em></h2>
+      </div>
+      <a class="btn btn--outline reveal" style="--d:.16s" href="aktuality.html">Všechny aktuality <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="news-grid" id="newsGrid" data-limit="3"></div>
+  </div>
+</section>
+
+<!-- Parallax pás s rezervací -->
+<section class="band" aria-label="Rezervace">
+  <div class="band__bg" data-parallax="0.18"><img src="assets/img/slider1.jpg" alt="" loading="lazy"></div>
+  <div class="container">
+    <p class="eyebrow reveal" style="color:var(--gold-2)">Tee time</p>
+    <h2 class="reveal" style="--d:.08s">Odpaliště č. 1 <em>na vás čeká</em></h2>
+    <p class="reveal" style="--d:.16s">Rezervujte si čas na hřišti on-line přes rezervační systém, nebo telefonicky na +420&nbsp;777&nbsp;943&nbsp;219.</p>
+    <div class="band__actions reveal" style="--d:.24s">
+      <a class="btn btn--gold" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervovat on-line</a>
+      <a class="btn btn--ghost" href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> Zavolat</a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     4. FOTKY – ochutnávka fotogalerie
+     ===================================================================== -->
+<section class="section section--dark home-photos" id="fotky">
+  <div class="container--wide">
+    <div class="gallery-head">
+      <div>
+        <p class="eyebrow reveal">Fotogalerie</p>
+        <h2 class="h2 reveal" style="--d:.08s">Cínovec <em>objektivem</em></h2>
+      </div>
+      <a class="btn btn--gold reveal" style="--d:.16s" href="fotogalerie.html">Celá fotogalerie <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="teaser-photos reveal" id="galleryTeaser"></div>
+  </div>
+</section>

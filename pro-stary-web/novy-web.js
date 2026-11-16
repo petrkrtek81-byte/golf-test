@@ -10,7 +10,7 @@
    - po chvilce ukáže okno s tlačítkem na nový web (česky / německy podle
      jazyka starého webu),
    - tlačítko vede rovnou na odpovídající sekci nového webu
-     (/cenik → #cenik, německá verze → ?lang=de),
+     (/cenik → cenik.html, německá verze → ?lang=de),
    - křížek / „Zůstat na starém webu“ okno zavře a další 3 dny se znovu
      neukáže (pamatuje si to prohlížeč),
    - styly jsou ve Shadow DOM, takže nekolidují se styly starého webu.
@@ -73,8 +73,8 @@
 
   function targetUrl(de) {
     var slug = location.pathname.replace(/^\/+|\/+$/g, '').split('/')[0];
-    var hash = SECTIONS[slug] ? '#' + SECTIONS[slug] : '';
-    return NEW_SITE + (de ? '?lang=de' : '') + hash;
+    var page = SECTIONS[slug] ? SECTIONS[slug] + '.html' : '';
+    return NEW_SITE + page + (de ? '?lang=de' : '');
   }
 
   function show() {
