@@ -907,7 +907,10 @@ function splitWords(el, text) {
     setTimeout(() => { caption.textContent = capOf(slides[next]); caption.style.opacity = ''; }, 300);
     current = next;
   }
+  let videoOn = false; // když hraje video v pozadí, fotky se dál nestřídají
+  document.addEventListener('gct:herovideo', () => { videoOn = true; clearInterval(timer); });
   function restart() {
+    if (videoOn) return;
     clearInterval(timer);
     if (!reduceMotion) timer = setInterval(() => go((current + 1) % slides.length), DURATION);
   }
@@ -919,6 +922,24 @@ function splitWords(el, text) {
     caption.textContent = capOf(slides[current]);
     dots.forEach((d, k) => d.setAttribute('aria-label', t('Fotografie {k}: {c}', { k: k + 1, c: capOf(slides[k]) })));
   });
+})();
+
+/* ---------- Video v úvodu (jen úvodní stránka) ----------
+   Nenačítá se při „omezit pohyb“, při úsporném režimu dat a na pomalém připojení. */
+(function heroVideo() {
+  const v = $('#heroVideo');
+  if (!v || !v.dataset.src) return;
+  const conn = navigator.connection || {};
+  if (reduceMotion || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')) { v.remove(); return; }
+  v.addEventListener('playing', () => {
+    v.closest('.hero').classList.add('has-video');
+    document.dispatchEvent(new Event('gct:herovideo'));
+  }, { once: true });
+  v.addEventListener('error', () => v.remove(), { once: true });
+  v.src = v.dataset.src;
+  const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
+  tryPlay();
+  document.addEventListener('visibilitychange', () => { if (document.hidden) v.pause(); else tryPlay(); });
 })();
 
 /* ---------- Scroll reveal ---------- */

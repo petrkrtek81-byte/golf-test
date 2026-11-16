@@ -22,7 +22,7 @@
 <link rel="preload" href="assets/fonts/baloo-2-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
-<link rel="stylesheet" href="assets/css/web.css?v=0272822e">
+<link rel="stylesheet" href="assets/css/web.css?v=c4e47755">
 
 <!-- Strukturovaná data pro vyhledávače -->
 <script type="application/ld+json">
@@ -232,6 +232,10 @@ window.GCT_OBSAH.catch(() => {});</script>
       <img src="assets/img/13475130_838632482938527_8570459729176729686_o.jpg" alt="" decoding="async">
     </div>
   </div>
+  <!-- Video v pozadí (vytvořené z fotky hřiště). Načte se jen na rychlém připojení a bez „omezit pohyb“;
+       do té doby a jinak běží fotky výše. -->
+  <video class="hero__video" id="heroVideo" muted loop playsinline preload="none" aria-hidden="true"
+         data-src="assets/video/uvod.mp4" poster="assets/video/uvod-poster.jpg"></video>
   <div class="hero__overlay"></div>
 
   <div class="container hero__content" id="heroContent">
@@ -606,7 +610,7 @@ window.GCT_OBSAH.catch(() => {});</script>
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
 
-<script src="assets/js/web.js?v=0a6fa839"></script>
+<script src="assets/js/web.js?v=45f13d6f"></script>
 </body>
 </html>
 
