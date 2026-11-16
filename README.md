@@ -69,6 +69,14 @@ node nastroje/sestav-web.js
 - slovník `DE` (`assets/js/web.js`, sekce „A2. NĚMECKÁ VERZE“) – překlady pevných textů; klíčem je český text, při změně české věty upravte i klíč
 - odkaz `#cenik`, `#hriste`… v šabloně se při sestavení sám změní na `cenik.html`, `hriste.html`…
 
+### Videa
+
+V `assets/video/` jsou krátké smyčky bez zvuku (vytvořené v Gemini z fotek hřiště):
+`uvod.mp4` (úvodní stránka), `hriste.mp4` (stránka Hřiště), `bezky.mp4` (Půjčovna běžek), ke každému `*-poster.jpg`.
+Videa se ukážou i v sekci „Méně slov. Víc Cínovce.“ na úvodní stránce (seznam `VIDEOS` v `nastroje/sestav-web.js`).
+Nové video: uložit jako MP4 720p bez zvuku (ideálně do 2 MB) + plakátek, doplnit do `VIDEOS` / `video:` u stránky a sestavit web.
+Návštěvníci s „omezit pohyb“ nebo úsporným režimem dat vidí místo videí fotky; video jde pozastavit tlačítkem.
+
 ## Nasazení
 
 1. Zálohovat starý web.
