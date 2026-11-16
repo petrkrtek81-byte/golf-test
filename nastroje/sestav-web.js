@@ -37,7 +37,7 @@ const PAGES = [
     title: 'Ceník – členství a green fee | Golf Club Teplice',
     description: 'Ceník Golf Club Teplice: roční členství, green fee na 9 a 18 jamek, vstupní poplatek, buggy a platba QR kódem.',
     lead: 'Členství, green fee a další poplatky na sezónu.' },
-  { page: 'hriste', file: 'hriste.html', nav: 'Hřiště', img: '901224_10151579493184174_1058721581_o.jpg',
+  { page: 'hriste', file: 'hriste.html', nav: 'Hřiště', img: '901224_10151579493184174_1058721581_o.jpg', video: 'hriste',
     title: 'Hřiště – 18 jamek, PAR 72 | Golf Club Teplice',
     description: 'Golfové hřiště Cínovec: 9 jamek hraných dvakrát, PAR 72, 865 m n. m. Interaktivní plánek, délky jamek a tipy, jak je zahrát.',
     lead: '9 jamek hraných dvakrát, PAR 72, 865 m nad mořem.' },
@@ -53,7 +53,7 @@ const PAGES = [
     title: 'Fotogalerie | Golf Club Teplice',
     description: 'Fotografie golfového hřiště na Cínovci, okolí Krušných hor, turnajů a zimy na Cínovci.',
     lead: 'Hřiště, okolí a zima na Cínovci.' },
-  { page: 'pujcovna-bezek', file: 'pujcovna-bezek.html', nav: 'Půjčovna běžek', img: 'dvur4.jpg',
+  { page: 'pujcovna-bezek', file: 'pujcovna-bezek.html', nav: 'Půjčovna běžek', img: 'dvur4.jpg', video: 'bezky',
     title: 'Půjčovna běžek na Cínovci | Golf Club Teplice',
     description: 'Půjčovna běžek na Cínovci: kompletní vybavení na klasiku i backcountry, ceník a objednávka.',
     lead: 'V zimě na běžky přímo z Cínovce.' },
@@ -63,6 +63,32 @@ const PAGES = [
     lead: 'Cínovec 275, 417 32 Dubí – jak nás najít a kontaktovat.' },
 ];
 const SECTION_PAGES = PAGES.filter(p => p.nav).map(p => p.page);
+
+// videa na úvodní stránce (sekce „Méně slov. Víc Cínovce.“) – ukáže se jen to, co je v assets/video
+const VIDEOS = [
+  { file: 'uvod', title: 'Hřiště z dronu', sub: 'Cínovec v podvečerním světle' },
+  { file: 'hriste', title: 'Green s výhledem', sub: 'Nízký průlet k vlajce' },
+  { file: 'bezky', title: 'Zimní Cínovec', sub: 'Běžkařská stopa v čerstvém sněhu' },
+];
+const videoGrid = () => {
+  const list = VIDEOS.filter(v => fs.existsSync(path.join(ROOT, 'assets/video', v.file + '.mp4')));
+  if (!list.length) return '';
+  return `<section class="section section--dark videos" id="videa" aria-labelledby="videosTitle">
+  <div class="container">
+    <div class="videos__head">
+      <h2 class="videos__title reveal" id="videosTitle">Méně slov. <em>Víc Cínovce.</em></h2>
+      <p class="lead reveal" style="--d:.1s">Hřiště a okolí v pohybu – záběry vytvořené s pomocí AI z našich fotografií.</p>
+    </div>
+    <div class="videos__grid">
+${list.map((v, i) => `      <button class="video-card reveal" type="button" style="--d:${(i * 0.08).toFixed(2)}s" data-video="assets/video/${v.file}.mp4" data-title="${v.title}">
+        <span class="video-card__media"><img src="assets/video/${v.file}-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
+        <span class="video-card__title">${v.title}</span>
+        <span class="video-card__sub">${v.sub}</span>
+      </button>`).join('\n')}
+    </div>
+  </div>
+</section>`;
+};
 
 const read = f => fs.readFileSync(path.join(SRC, f), 'utf8').replace(/\r\n/g, '\n');
 const hash = f => crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, f))).digest('hex').slice(0, 8);
@@ -74,12 +100,20 @@ const bar = read('_lista.html');
 const foot = read('_pata.html');
 const versions = { cssVersion: hash('assets/css/web.css'), jsVersion: hash('assets/js/web.js') };
 
-// úvodní pás podstránky: fotka, drobečková navigace, nadpis, krátký popis
+// video v pásu (assets/video/<název>.mp4 + <název>-poster.jpg) – jen když soubor existuje
+const pageVideo = p => (p.video && fs.existsSync(path.join(ROOT, 'assets/video', p.video + '.mp4')))
+  ? `
+  <video class="page-hero__video hero-video" muted loop playsinline preload="none" aria-hidden="true"
+         data-src="assets/video/${p.video}.mp4" poster="assets/video/${p.video}-poster.jpg"></video>
+  <button class="video-toggle" type="button" aria-pressed="false" aria-label="Pozastavit video"><svg class="i"><use href="#i-pause"/></svg></button>`
+  : '';
+
+// úvodní pás podstránky: fotka (případně video), drobečková navigace, nadpis, krátký popis
 const pageHero = p => `<!-- =====================================================================
      ${p.nav.toUpperCase()} – úvodní pás stránky
      ===================================================================== -->
 <section class="page-hero" id="top" aria-labelledby="pageTitle">
-  <div class="page-hero__bg" aria-hidden="true"><img src="assets/img/${p.img}" alt="" fetchpriority="high"></div>
+  <div class="page-hero__bg" aria-hidden="true"><img src="assets/img/${p.img}" alt="" fetchpriority="high"></div>${pageVideo(p)}
   <div class="container page-hero__inner">
     <nav class="crumbs reveal" aria-label="Drobečková navigace"><a href="./">Úvod</a><span aria-hidden="true">/</span><span aria-current="page">${p.nav}</span></nav>
     <h1 class="page-hero__title reveal" id="pageTitle" style="--d:.08s">${p.nav}</h1>
@@ -101,7 +135,7 @@ for (const p of PAGES) {
     pg === p.page ? `${a} is-active" ${rest} aria-current="page"` : m)
     .replace(/(<a )(href="[^"]*" data-page="([^"]+)")/g, (m, a, rest, pg) =>
       pg === p.page ? `${a}class="is-active" aria-current="page" ${rest}` : m);
-  html += '\n' + (p.nav ? pageHero(p) : '') + read(p.file) + '\n' + fill(foot, versions);
+  html += '\n' + (p.nav ? pageHero(p) : '') + read(p.file).replace('{{videoGrid}}', videoGrid) + '\n' + fill(foot, versions);
 
   // odkazy na sekce jiných stránek: #cenik → cenik.html
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]));

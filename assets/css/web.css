@@ -288,6 +288,14 @@ ul{ margin:0; padding:0; list-style:none; }
 .hero__video{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.6s ease; pointer-events:none; }
 .hero.has-video .hero__video{ opacity:1; }
 .hero.has-video .hero__slider-ui{ visibility:hidden; }
+.page-hero__video{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.6s ease; pointer-events:none; }
+.page-hero.has-video .page-hero__video{ opacity:1; }
+/* tlačítko pozastavit / přehrát video (pohyb delší než 5 s musí jít zastavit) */
+.video-toggle{ position:absolute; right:clamp(16px, 3vw, 32px); bottom:clamp(1.2rem, 3vw, 2rem); z-index:3; display:none; place-items:center; width:42px; height:42px; border-radius:50%; color:#fff; background:rgba(10,33,22,.35); border:1px solid rgba(255,255,255,.35); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); transition:background .3s, border-color .3s; }
+.video-toggle:hover{ background:rgba(10,33,22,.6); border-color:var(--gold); }
+.has-video > .video-toggle{ display:grid; }
+.hero .video-toggle{ bottom:auto; top:calc(100% - 9.5rem); }
+@media (max-width:767px){ .hero .video-toggle{ top:auto; bottom:5.2rem; } }
 .hero__slide{ position:absolute; inset:0; opacity:0; transition:opacity 1.8s ease; }
 .hero__slide.is-active{ opacity:1; }
 .hero__slide img{ width:100%; height:100%; object-fit:cover; transform:scale(1.06); will-change:transform; }
@@ -1200,4 +1208,100 @@ em, i{ font-style:normal; }
 }
 @media (prefers-reduced-motion: reduce){
   .page-hero__bg img{ animation:none; transform:none; }
+}
+
+/* =====================================================================
+   27. STYL PODLE VZORU – minimální hlavička s „Menu“, velké nadpisy,
+       seznam se šipkami, příběh z velkých fotek, mřížka videí
+   ===================================================================== */
+/* hlavička: logo · jazyk · rezervace · Menu (všechny stránky jsou v menu přes celou obrazovku) */
+.topbar{ display:none; }
+.nav__menu{ display:none !important; }
+.burger{ display:inline-flex !important; align-items:center; gap:.65rem; width:auto; height:46px; padding:0 1.15rem 0 1rem; border-radius:999px; font-size:.84rem; font-weight:700; letter-spacing:.02em; }
+.burger__label{ line-height:1; }
+@media (max-width:480px){ .burger{ width:46px; padding:0; justify-content:center; } .burger__label{ display:none; } }
+.mobile-menu{ display:flex !important; }
+@media (min-width:900px){
+  .mobile-menu{ display:grid !important; grid-template-columns:minmax(0, 1.5fr) minmax(280px, 1fr); align-items:center; gap:3rem 5rem; padding:150px max(var(--gutter), calc((100vw - 1200px) / 2)) 4rem; }
+  .mobile-menu__links a{ font-size:clamp(1.8rem, 2.8vw, 2.6rem); }
+  .mobile-menu__foot{ margin-top:0; padding:0 0 0 3rem; border-top:0; border-left:1px solid rgba(245,240,230,.14); }
+}
+.mobile-menu__links a.is-active{ color:var(--gold-2); }
+@media (min-width:1200px){ .mobile-menu__links{ grid-template-columns:repeat(2, minmax(0, 1fr)); column-gap:2.5rem; } }
+
+/* úvod: nadpis na dva řádky, druhý zvýrazněný */
+.hero__eyebrow{ margin:0 0 1.2rem; font-size:.78rem; font-weight:800; letter-spacing:.26em; text-transform:uppercase; color:rgba(255,255,255,.88); opacity:0; animation:fadeUp .9s var(--ease) .2s forwards; }
+.hero__statement{ margin:0 0 1.3rem; font-size:clamp(3rem, 8vw, 7rem); line-height:.98; letter-spacing:-.01em; }
+.hero__statement .line{ display:block; opacity:0; animation:fadeUp 1.1s var(--ease-out) .35s forwards; }
+.hero__statement em.line{ animation-delay:.6s; font-style:italic; font-synthesis:style; color:var(--gold-2); }
+.hero--statement .hero__sub{ max-width:46ch; font-family:var(--ff-sans); font-style:normal; font-size:clamp(1rem, 1.5vw, 1.2rem); line-height:1.6; color:rgba(255,255,255,.86); }
+.hero--statement .hero__place .dot-live{ margin-right:.1rem; }
+
+/* rozcestník: seznam se šipkami */
+.directory{ padding:clamp(3rem, 6vw, 5rem) 0 clamp(3.5rem, 7vw, 6rem); background:var(--paper); }
+.directory__eyebrow{ margin:0 0 1.4rem; font-size:.76rem; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--forest); }
+.directory__list{ display:grid; gap:0 4.5rem; margin:0; padding:0; list-style:none; }
+@media (min-width:860px){ .directory__list{ grid-template-columns:1fr 1fr; } }
+.directory__list a{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.15rem 0; border-bottom:1px solid var(--line); font-size:clamp(1.12rem, 1.7vw, 1.45rem); font-weight:600; color:var(--ink); transition:color .3s, padding .45s var(--ease); }
+.directory__list a .i{ flex:none; width:22px; height:22px; color:var(--grass); transition:transform .45s var(--ease); }
+.directory__list a:hover{ color:var(--grass); padding-left:.45rem; }
+.directory__list a:hover .i{ transform:translateX(6px); }
+.directory__more{ margin:1.5rem 0 0; font-size:.92rem; color:var(--muted); }
+.directory__more a{ display:inline-flex; align-items:center; gap:.35rem; font-weight:700; color:var(--forest); }
+.directory__more a .i{ width:16px; height:16px; }
+
+/* příběh: fotky přes celou obrazovku, další se při scrollu přesune přes předchozí */
+.story{ position:relative; background:var(--forest-deep); }
+.story__panel{ position:sticky; top:0; isolation:isolate; display:grid; place-items:center; height:100vh; height:100svh; overflow:hidden; padding:0 var(--gutter); }
+.story__panel img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+.story__panel::before{ content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(90% 75% at 50% 50%, rgba(10,33,22,.2), rgba(10,33,22,.62)); }
+.story__text{ margin:0; max-width:15ch; font-family:var(--ff-display); font-size:clamp(2.6rem, 7.2vw, 6.2rem); font-weight:800; line-height:1; text-align:center; color:#fff; text-shadow:0 10px 40px rgba(0,0,0,.35); }
+.story__text em{ display:block; font-style:italic; font-synthesis:style; color:var(--gold-2); }
+
+/* pro koho: velký nadpis + tři sloupce + čísla */
+.audience__title{ max-width:14ch; margin:0 0 clamp(2.5rem, 5vw, 4rem); font-size:clamp(2.6rem, 6vw, 5rem); line-height:1; color:var(--cream); }
+.audience__title em{ display:block; font-style:italic; font-synthesis:style; color:var(--gold-2); }
+.audience__grid{ display:grid; gap:2.2rem; padding-top:2.2rem; border-top:1px solid rgba(245,240,230,.16); }
+@media (min-width:860px){ .audience__grid{ grid-template-columns:repeat(3, 1fr); gap:3rem; } }
+.audience__item small{ display:block; margin-bottom:.7rem; font-size:.72rem; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); }
+.audience__item h3{ margin:0 0 .8rem; font-size:clamp(1.5rem, 2.2vw, 1.9rem); color:var(--cream); }
+.audience__item p{ margin:0 0 1.2rem; line-height:1.7; }
+.audience__item .link-arrow{ color:var(--gold-2); }
+.audience__stats{ display:grid; grid-template-columns:repeat(2, 1fr); margin-top:clamp(3rem, 6vw, 4.5rem); border-top:1px solid rgba(245,240,230,.16); }
+@media (min-width:860px){ .audience__stats{ grid-template-columns:repeat(4, 1fr); } }
+.audience__stats .stat__label{ color:var(--cream); }
+
+/* videa: mřížka karet + přehrávač */
+.videos{ background:var(--forest-deep); }
+.videos__head{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1rem 3rem; margin-bottom:clamp(2rem, 4vw, 3rem); }
+.videos__title{ margin:0; font-size:clamp(2.4rem, 5.5vw, 4.6rem); line-height:1; color:var(--cream); }
+.videos__title em{ display:block; font-style:italic; font-synthesis:style; color:var(--gold-2); }
+.videos__head .lead{ max-width:40ch; margin:0; color:rgba(245,240,230,.7); }
+.videos__grid{ display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); }
+.video-card{ display:flex; flex-direction:column; gap:.3rem; text-align:left; color:var(--cream); }
+.video-card__media{ position:relative; display:block; overflow:hidden; aspect-ratio:16 / 9; border-radius:18px; background:var(--forest-2); }
+.video-card__media img{ width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease); }
+.video-card:hover .video-card__media img{ transform:scale(1.05); }
+.video-card__play{ position:absolute; left:1rem; bottom:1rem; display:grid; place-items:center; width:52px; height:52px; border-radius:50%; color:#fff; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.5); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:background .3s, color .3s, border-color .3s; }
+.video-card:hover .video-card__play{ background:var(--gold); border-color:var(--gold); color:var(--forest); }
+.video-card__title{ margin-top:.7rem; font-family:var(--ff-display); font-size:1.35rem; font-weight:700; }
+.video-card__sub{ font-size:.88rem; opacity:.65; }
+.video-card:focus-visible{ outline:3px solid var(--gold); outline-offset:6px; border-radius:18px; }
+.video-modal{ width:min(1100px, 94vw); max-width:none; padding:0; border:0; border-radius:20px; overflow:hidden; color:#fff; background:#000; }
+.video-modal::backdrop{ background:rgba(5,15,10,.85); }
+.video-modal video{ display:block; width:100%; aspect-ratio:16 / 9; background:#000; }
+.video-modal__title{ margin:0; padding:.9rem 1.2rem; font-weight:700; background:var(--forest-deep); }
+.video-modal__close{ position:absolute; top:.7rem; right:.7rem; z-index:2; display:grid; place-items:center; width:42px; height:42px; border-radius:50%; color:#fff; background:rgba(0,0,0,.45); }
+
+/* závěr: kdy si zahrajete */
+.closing{ background:var(--paper); }
+.closing__grid{ display:grid; gap:2.5rem; align-items:center; }
+@media (min-width:900px){ .closing__grid{ grid-template-columns:1.2fr 1fr; gap:5rem; } }
+.closing__title{ margin:0 0 1.2rem; font-size:clamp(2.6rem, 6vw, 4.8rem); line-height:1; }
+.closing__title em{ font-style:italic; font-synthesis:style; color:var(--grass); }
+.closing .band__actions{ justify-content:flex-start; margin-top:1.6rem; }
+.closing .hours{ margin-top:0; background:#fff; }
+
+@media (prefers-reduced-motion: reduce){
+  .hero__eyebrow, .hero__statement .line{ animation:none; opacity:1; }
 }

@@ -6,3 +6,6 @@ data/.zamek
 data/*.tmp-*
 uploads/*
 !uploads/.htaccess
+
+# podklady (fotky) pro generování v Gemini – jen pracovní kopie
+podklady-gemini/

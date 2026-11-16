@@ -508,7 +508,56 @@ const DE = {
   'Historie hřiště, klubovna, hotel a restaurace.': 'Geschichte des Platzes, Clubhaus, Hotel und Restaurant.',
   'Když hřiště zapadne sněhem, vyrazte na běžky.': 'Wenn der Platz unter Schnee liegt: ab auf die Langlaufski.',
   'Všechny aktuality': 'Alle Neuigkeiten',
-  'Celá fotogalerie': 'Zur Fotogalerie'
+  'Celá fotogalerie': 'Zur Fotogalerie',
+  'Pozastavit video': 'Video anhalten',
+  // úvodní stránka ve stylu vzoru
+  'Golf v srdci': 'Golf im Herzen',
+  'Krušných hor.': 'des Erzgebirges.',
+  'Devět jamek hraných dvakrát, horský vzduch a výhledy na České středohoří.': 'Neun Löcher, zweimal gespielt, Bergluft und Ausblicke auf das Böhmische Mittelgebirge.',
+  'Ceník a green fee': 'Preise und Greenfee',
+  'Pro hráče, členy i návštěvníky': 'Für Spieler, Mitglieder und Gäste',
+  'Hřiště a plánek jamek': 'Golfplatz und Lochplan',
+  'Rezervace tee time on-line': 'Online-Reservierung der Tee-Time',
+  'Tréninky a golfový kurz': 'Training und Golfkurs',
+  'Zima: půjčovna běžek': 'Winter: Langlaufski-Verleih',
+  'O nás a Krušnohorský dvůr': 'Über uns und Krušnohorský dvůr',
+  'Kontakty a mapa': 'Kontakt und Karte',
+  'Golf na Cínovci': 'Golf in Cínovec',
+  'Odpal': 'Abschlag',
+  's výhledem.': 'mit Aussicht.',
+  'Devět jamek.': 'Neun Löcher.',
+  'Dvakrát jinak.': 'Zweimal anders.',
+  'A po hře': 'Und nach dem Spiel',
+  'terasa.': 'die Terrasse.',
+  'Green s vlajkou a výhledem na Milešovku': 'Grün mit Fahne und Blick auf den Milleschauer',
+  'Hřiště a klubovna z ptačí perspektivy': 'Platz und Clubhaus aus der Vogelperspektive',
+  'Jedno hřiště.': 'Ein Platz.',
+  'Pro každého.': 'Für alle.',
+  'Členové': 'Mitglieder',
+  '„Tady jsem doma.“': '„Hier bin ich zu Hause.“',
+  'Roční členství s hrou bez green fee a parkováním zdarma. Při platbě do konce března ušetříte.': 'Jahresmitgliedschaft: Spielen ohne Greenfee und kostenlos parken. Bei Zahlung bis Ende März sparen Sie.',
+  'Členství a ceník': 'Mitgliedschaft und Preise',
+  'Hosté': 'Gäste',
+  '„Tohle si zahrajeme.“': '„Das spielen wir.“',
+  'Green fee na 9 i 18 jamek, sleva 30 % pro seniory a juniory. Tee time si rezervujete on-line.': 'Greenfee für 9 und 18 Löcher, 30 % Rabatt für Senioren und Jugendliche. Die Tee-Time reservieren Sie online.',
+  'Začátečníci': 'Einsteiger',
+  '„Chci to zkusit.“': '„Ich will es probieren.“',
+  'Golfový kurz se zkouškou a lekce s trenérem. Hole a míče vám zapůjčíme.': 'Golfkurs mit Prüfung und Unterricht beim Trainer. Schläger und Bälle leihen wir Ihnen.',
+  'Tréninky a kurz': 'Training und Kurs',
+  'nad mořem': 'über dem Meer',
+  'Kdy si': 'Wann spielen',
+  'zahrajete?': 'Sie?',
+  'Rezervujte si čas na hřišti on-line, nebo zavolejte na +420 777 943 219. Parkujte na horním parkovišti u odpaliště jamky č. 1.': 'Reservieren Sie Ihre Startzeit online oder rufen Sie +420 777 943 219 an. Parken Sie auf dem oberen Parkplatz am Abschlag von Loch 1.',
+  'Méně slov.': 'Weniger Worte.',
+  'Víc Cínovce.': 'Mehr Cínovec.',
+  'Hřiště a okolí v pohybu – záběry vytvořené s pomocí AI z našich fotografií.': 'Platz und Umgebung in Bewegung – mit KI aus unseren Fotos erstellte Aufnahmen.',
+  'Hřiště z dronu': 'Der Platz aus der Drohne',
+  'Cínovec v podvečerním světle': 'Cínovec im Abendlicht',
+  'Green s výhledem': 'Grün mit Aussicht',
+  'Nízký průlet k vlajce': 'Tiefflug zur Fahne',
+  'Běžkařská stopa v čerstvém sněhu': 'Langlaufspur im frischen Schnee',
+  'Video': 'Video',
+  'Přehrát video': 'Video abspielen'
 };
 
 /* Jamky – německé popisy a tipy (klíč = číslo jamky) */
@@ -816,11 +865,12 @@ function setMenu(open) {
   root.classList.toggle('is-locked', open);
   burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', t(open ? 'Zavřít menu' : 'Otevřít menu'));
+  const lbl = $('.burger__label', burger);
+  if (lbl) lbl.textContent = t(open ? 'Zavřít' : 'Menu');
 }
 burger.addEventListener('click', () => setMenu(!root.classList.contains('nav-open')));
 mobileMenu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && root.classList.contains('nav-open')) setMenu(false); });
-window.addEventListener('resize', () => { if (window.innerWidth >= 1280 && root.classList.contains('nav-open')) setMenu(false); });
 
 /* ---------- Menu: aktuální stránka je označená přímo v HTML (nastroje/sestav-web.js) ---------- */
 
@@ -926,20 +976,49 @@ function splitWords(el, text) {
 
 /* ---------- Video v úvodu (jen úvodní stránka) ----------
    Nenačítá se při „omezit pohyb“, při úsporném režimu dat a na pomalém připojení. */
-(function heroVideo() {
-  const v = $('#heroVideo');
-  if (!v || !v.dataset.src) return;
+(function heroVideos() {
   const conn = navigator.connection || {};
-  if (reduceMotion || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')) { v.remove(); return; }
-  v.addEventListener('playing', () => {
-    v.closest('.hero').classList.add('has-video');
-    document.dispatchEvent(new Event('gct:herovideo'));
-  }, { once: true });
-  v.addEventListener('error', () => v.remove(), { once: true });
-  v.src = v.dataset.src;
-  const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
-  tryPlay();
-  document.addEventListener('visibilitychange', () => { if (document.hidden) v.pause(); else tryPlay(); });
+  const skip = reduceMotion || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+  $$('video.hero-video').forEach(v => {
+    const box = v.parentElement;
+    const btn = $('.video-toggle', box);
+    if (skip || !v.dataset.src) { v.remove(); if (btn) btn.remove(); return; }
+    let userPaused = false;
+    const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
+    const label = () => {
+      if (!btn) return;
+      btn.setAttribute('aria-pressed', String(userPaused));
+      btn.setAttribute('aria-label', t(userPaused ? 'Přehrát video' : 'Pozastavit video'));
+      btn.innerHTML = icon(userPaused ? 'i-play' : 'i-pause');
+    };
+    v.addEventListener('playing', () => {
+      box.classList.add('has-video');
+      if (v.id === 'heroVideo') document.dispatchEvent(new Event('gct:herovideo'));
+    }, { once: true });
+    v.addEventListener('error', () => { v.remove(); if (btn) btn.remove(); }, { once: true });
+    if (btn) btn.addEventListener('click', () => { userPaused = !userPaused; userPaused ? v.pause() : tryPlay(); label(); });
+    v.src = v.dataset.src;
+    tryPlay();
+    document.addEventListener('visibilitychange', () => { if (document.hidden) v.pause(); else if (!userPaused) tryPlay(); });
+    refreshers.push(label);
+  });
+})();
+
+/* ---------- Přehrávač videí (karty „Méně slov. Víc Cínovce.“) ---------- */
+(function videoModal() {
+  const modal = $('#videoModal');
+  if (!modal) return;
+  const player = $('#videoModalPlayer');
+  const title = $('#videoModalTitle');
+  document.addEventListener('click', e => {
+    const card = e.target.closest('[data-video]');
+    if (!card) return;
+    player.src = card.dataset.video;
+    title.textContent = t(card.dataset.title || '');
+    openDialog(modal);
+    const p = player.play(); if (p) p.catch(() => {});
+  });
+  modal.addEventListener('close', () => { player.pause(); player.removeAttribute('src'); player.load(); });
 })();
 
 /* ---------- Scroll reveal ---------- */
@@ -1690,7 +1769,7 @@ $$('[data-toast]:not(#galleryFilters [data-toast])').forEach(b => b.addEventList
    Volba jazyka se pamatuje v prohlížeči; odkaz s ?lang=de otevře rovnou němčinu. */
 const I18N_SKIP = [
   'script', 'style', 'svg', 'code', '[data-i18n-skip]',
-  '.hero__title', '.hero__slides', '#coaches', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
+  '.burger__label', '.hero__slides', '#coaches', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
   '#priceNow', '#seasonStatus', '#seasonBadge', '.account-iban', '#galleryMore', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
   '#newsModal .modal__body', '#newsModalThumbs', '#tourList', '#gallery', '#distTable',
   '#courseMap .hotspot', '#holePicker .hole-pick', '#holeDots', '#lbCounter', '#lbCaption',
