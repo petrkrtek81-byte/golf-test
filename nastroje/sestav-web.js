@@ -33,7 +33,7 @@ const PAGES = [
     title: 'Aktuality | Golf Club Teplice',
     description: 'Novinky z golfového hřiště na Cínovci: otevření sezóny, rezervace, údržba hřiště a dění v klubu.',
     lead: 'Novinky z hřiště a klubu.' },
-  { page: 'cenik', file: 'cenik.html', nav: 'Ceník', img: '894749_10151501515009174_1468383992_o.jpg',
+  { page: 'cenik', file: 'cenik.html', nav: 'Ceník', img: 'ai-par-na-greenu.jpg', ai: true,
     title: 'Ceník – členství a green fee | Golf Club Teplice',
     description: 'Ceník Golf Club Teplice: roční členství, green fee na 9 a 18 jamek, vstupní poplatek, buggy a platba QR kódem.',
     lead: 'Členství, green fee a další poplatky na sezónu.' },
@@ -41,7 +41,7 @@ const PAGES = [
     title: 'Hřiště – 18 jamek, PAR 72 | Golf Club Teplice',
     description: 'Golfové hřiště Cínovec: 9 jamek hraných dvakrát, PAR 72, 865 m n. m. Interaktivní plánek, délky jamek a tipy, jak je zahrát.',
     lead: '9 jamek hraných dvakrát, PAR 72, 865 m nad mořem.' },
-  { page: 'treninky', file: 'treninky.html', nav: 'Tréninky', img: 'img_5558.jpg',
+  { page: 'treninky', file: 'treninky.html', nav: 'Tréninky', img: 'ai-patovani.jpg', ai: true,
     title: 'Tréninky a golfový kurz | Golf Club Teplice',
     description: 'Golfový kurz se zkouškou, individuální lekce a seznámení s golfem s trenérem na Cínovci. Vybavení zapůjčíme.',
     lead: 'Kurzy, zelená karta a lekce s trenérem.' },
@@ -66,9 +66,9 @@ const SECTION_PAGES = PAGES.filter(p => p.nav).map(p => p.page);
 
 // videa na úvodní stránce (sekce „Méně slov. Víc Cínovce.“) – ukáže se jen to, co je v assets/video
 const VIDEOS = [
-  { file: 'uvod', title: 'Hřiště z dronu', sub: 'Cínovec v podvečerním světle' },
   { file: 'hriste', title: 'Green s výhledem', sub: 'Nízký průlet k vlajce' },
-  { file: 'bezky', title: 'Zimní Cínovec', sub: 'Běžkařská stopa v čerstvém sněhu' },
+  { file: 'uvod', title: 'Hřiště z dronu', sub: 'Cínovec v podvečerním světle' },
+  // zimní video je jen na stránce Půjčovna běžek (na úvodní stránce golf)
 ];
 const videoGrid = () => {
   const list = VIDEOS.filter(v => fs.existsSync(path.join(ROOT, 'assets/video', v.file + '.mp4')));
@@ -118,7 +118,7 @@ const pageHero = p => `<!-- ====================================================
     <nav class="crumbs reveal" aria-label="Drobečková navigace"><a href="./">Úvod</a><span aria-hidden="true">/</span><span aria-current="page">${p.nav}</span></nav>
     <h1 class="page-hero__title reveal" id="pageTitle" style="--d:.08s">${p.nav}</h1>
     <p class="page-hero__lead reveal" style="--d:.16s">${p.lead}</p>
-  </div>
+  </div>${p.ai ? '\n  <span class="story__note">Ilustrační foto vytvořené s pomocí AI</span>' : ''}
 </section>
 
 `;

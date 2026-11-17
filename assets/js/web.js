@@ -523,6 +523,8 @@ const DE = {
   'O nás a Krušnohorský dvůr': 'Über uns und Krušnohorský dvůr',
   'Kontakty a mapa': 'Kontakt und Karte',
   'Golf na Cínovci': 'Golf in Cínovec',
+  'Ilustrační foto vytvořené s pomocí AI': 'Illustrationsfoto, mit KI erstellt',
+  'Golfistka při odpalu na greenu s výhledem na Milešovku': 'Golferin beim Abschlag mit Blick auf den Milleschauer',
   'Odpal': 'Abschlag',
   's výhledem.': 'mit Aussicht.',
   'Devět jamek.': 'Neun Löcher.',
@@ -984,7 +986,45 @@ function splitWords(el, text) {
     const btn = $('.video-toggle', box);
     if (skip || !v.dataset.src) { v.remove(); if (btn) btn.remove(); return; }
     let userPaused = false;
-    const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
+    // víc videí za sebou (data-playlist): dva přehrávače se prolínají
+    const list = (v.dataset.playlist || '').split(',').map(s => s.trim()).filter(Boolean);
+    if (list.length > 1) {
+      v.loop = false;
+      const v2 = v.cloneNode(false);
+      v2.removeAttribute('id');
+      v2.removeAttribute('poster');
+      v2.preload = 'auto';
+      v.after(v2);
+      const vids = [v, v2];
+      let cur = 0, idx = 0, switching = false;
+      vids.forEach(x => x.classList.add('is-playlist'));
+      v.classList.add('is-on');
+      v2.src = list[1];
+      const onTime = e => {
+        const a = vids[cur];
+        if (e.target !== a || switching || !a.duration) return;
+        if (a.duration - a.currentTime < 1.1) {
+          switching = true;
+          const b = vids[1 - cur];
+          b.currentTime = 0;
+          if (!userPaused) { const p = b.play(); if (p) p.catch(() => {}); }
+          b.classList.add('is-on');
+          a.classList.remove('is-on');
+          setTimeout(() => {
+            a.pause();
+            idx = (idx + 1) % list.length;
+            a.src = list[(idx + 1) % list.length];
+            a.load();
+            cur = 1 - cur;
+            switching = false;
+          }, 1300);
+        }
+      };
+      vids.forEach(x => x.addEventListener('timeupdate', onTime));
+    }
+    const activeVideo = () => $('video.hero-video.is-on', box) || v;
+    const tryPlay = () => { const p = activeVideo().play(); if (p) p.catch(() => {}); };
+    const pauseAll = () => $$('video.hero-video', box).forEach(x => x.pause());
     const label = () => {
       if (!btn) return;
       btn.setAttribute('aria-pressed', String(userPaused));
@@ -996,10 +1036,10 @@ function splitWords(el, text) {
       if (v.id === 'heroVideo') document.dispatchEvent(new Event('gct:herovideo'));
     }, { once: true });
     v.addEventListener('error', () => { v.remove(); if (btn) btn.remove(); }, { once: true });
-    if (btn) btn.addEventListener('click', () => { userPaused = !userPaused; userPaused ? v.pause() : tryPlay(); label(); });
+    if (btn) btn.addEventListener('click', () => { userPaused = !userPaused; userPaused ? pauseAll() : tryPlay(); label(); });
     v.src = v.dataset.src;
     tryPlay();
-    document.addEventListener('visibilitychange', () => { if (document.hidden) v.pause(); else if (!userPaused) tryPlay(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pauseAll(); else if (!userPaused) tryPlay(); });
     refreshers.push(label);
   });
 })();

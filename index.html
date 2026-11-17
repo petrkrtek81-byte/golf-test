@@ -22,7 +22,7 @@
 <link rel="preload" href="assets/fonts/baloo-2-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
-<link rel="stylesheet" href="assets/css/web.css?v=fbd2063f">
+<link rel="stylesheet" href="assets/css/web.css?v=85c5ccb7">
 
 <!-- Strukturovaná data pro vyhledávače -->
 <script type="application/ld+json">
@@ -234,10 +234,10 @@ window.GCT_OBSAH.catch(() => {});</script>
       <img src="assets/img/13475130_838632482938527_8570459729176729686_o.jpg" alt="" decoding="async">
     </div>
   </div>
-  <!-- Video v pozadí (vytvořené z fotky hřiště). Načte se jen na rychlém připojení a bez „omezit pohyb“;
-       do té doby a jinak běží fotky výše. -->
+  <!-- Videa v pozadí (vytvořená z fotek hřiště): nejdřív green, pak let dronem, a stále dokola.
+       Načtou se jen na rychlém připojení a bez „omezit pohyb“; do té doby a jinak běží fotky výše. -->
   <video class="hero__video hero-video" id="heroVideo" muted loop playsinline preload="none" aria-hidden="true"
-         data-src="assets/video/uvod.mp4" poster="assets/video/uvod-poster.jpg"></video>
+         data-src="assets/video/hriste.mp4" data-playlist="assets/video/hriste.mp4,assets/video/uvod.mp4" poster="assets/video/hriste-poster.jpg"></video>
   <button class="video-toggle" type="button" aria-pressed="false" aria-label="Pozastavit video"><svg class="i"><use href="#i-pause"/></svg></button>
   <div class="hero__overlay"></div>
 
@@ -290,8 +290,9 @@ window.GCT_OBSAH.catch(() => {});</script>
      ===================================================================== -->
 <div class="story" aria-label="Golf na Cínovci">
   <section class="story__panel">
-    <img src="assets/img/901224_10151579493184174_1058721581_o.jpg" alt="Green s vlajkou a výhledem na Milešovku" loading="lazy">
+    <img src="assets/img/ai-golfistka-odpal.jpg" alt="Golfistka při odpalu na greenu s výhledem na Milešovku" loading="lazy">
     <p class="story__text">Odpal <em>s výhledem.</em></p>
+    <span class="story__note">Ilustrační foto vytvořené s pomocí AI</span>
   </section>
   <section class="story__panel">
     <img src="assets/img/99690585.jpg" alt="Hřiště a klubovna z ptačí perspektivy" loading="lazy">
@@ -376,20 +377,15 @@ window.GCT_OBSAH.catch(() => {});</script>
       <p class="lead reveal" style="--d:.1s">Hřiště a okolí v pohybu – záběry vytvořené s pomocí AI z našich fotografií.</p>
     </div>
     <div class="videos__grid">
-      <button class="video-card reveal" type="button" style="--d:0.00s" data-video="assets/video/uvod.mp4" data-title="Hřiště z dronu">
-        <span class="video-card__media"><img src="assets/video/uvod-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
-        <span class="video-card__title">Hřiště z dronu</span>
-        <span class="video-card__sub">Cínovec v podvečerním světle</span>
-      </button>
-      <button class="video-card reveal" type="button" style="--d:0.08s" data-video="assets/video/hriste.mp4" data-title="Green s výhledem">
+      <button class="video-card reveal" type="button" style="--d:0.00s" data-video="assets/video/hriste.mp4" data-title="Green s výhledem">
         <span class="video-card__media"><img src="assets/video/hriste-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
         <span class="video-card__title">Green s výhledem</span>
         <span class="video-card__sub">Nízký průlet k vlajce</span>
       </button>
-      <button class="video-card reveal" type="button" style="--d:0.16s" data-video="assets/video/bezky.mp4" data-title="Zimní Cínovec">
-        <span class="video-card__media"><img src="assets/video/bezky-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
-        <span class="video-card__title">Zimní Cínovec</span>
-        <span class="video-card__sub">Běžkařská stopa v čerstvém sněhu</span>
+      <button class="video-card reveal" type="button" style="--d:0.08s" data-video="assets/video/uvod.mp4" data-title="Hřiště z dronu">
+        <span class="video-card__media"><img src="assets/video/uvod-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
+        <span class="video-card__title">Hřiště z dronu</span>
+        <span class="video-card__sub">Cínovec v podvečerním světle</span>
       </button>
     </div>
   </div>
@@ -627,7 +623,7 @@ window.GCT_OBSAH.catch(() => {});</script>
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
 
-<script src="assets/js/web.js?v=1f67c5b0"></script>
+<script src="assets/js/web.js?v=a85da488"></script>
 </body>
 </html>
 
