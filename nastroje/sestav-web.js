@@ -25,7 +25,7 @@ const PAGES = [
   { page: 'uvod', file: 'index.html', og: '99690585.jpg',
     title: 'Golf Club Teplice – golf v srdci Krušných hor | Cínovec',
     description: 'Golf Club Teplice na Cínovci v Krušných horách: 18 jamek (9 × 2), PAR 72, on-line rezervace tee time, tréninky, turnaje a v zimě půjčovna běžek.' },
-  { page: 'onas', file: 'onas.html', nav: 'O nás', img: '14_img-034-web.jpg',
+  { page: 'onas', file: 'onas.html', nav: 'O nás', img: '14_img-034-web.jpg', video: 'onas',
     title: 'O nás – historie hřiště a Krušnohorský dvůr | Golf Club Teplice',
     description: 'Golfové hřiště na Cínovci od roku 1998: otevírací doba, historie hřiště a klubovna, hotel a restaurace Krušnohorský dvůr.',
     lead: 'Golf na Cínovci od roku 1998 – hřiště, historie a Krušnohorský dvůr.' },
@@ -33,7 +33,7 @@ const PAGES = [
     title: 'Aktuality | Golf Club Teplice',
     description: 'Novinky z golfového hřiště na Cínovci: otevření sezóny, rezervace, údržba hřiště a dění v klubu.',
     lead: 'Novinky z hřiště a klubu.' },
-  { page: 'cenik', file: 'cenik.html', nav: 'Ceník', img: 'ai-par-na-greenu.jpg', ai: true,
+  { page: 'cenik', file: 'cenik.html', nav: 'Ceník', img: 'ai-par-na-greenu.jpg', ai: true, video: 'cenik',
     title: 'Ceník – členství a green fee | Golf Club Teplice',
     description: 'Ceník Golf Club Teplice: roční členství, green fee na 9 a 18 jamek, vstupní poplatek, buggy a platba QR kódem.',
     lead: 'Členství, green fee a další poplatky na sezónu.' },
@@ -41,7 +41,7 @@ const PAGES = [
     title: 'Hřiště – 18 jamek, PAR 72 | Golf Club Teplice',
     description: 'Golfové hřiště Cínovec: 9 jamek hraných dvakrát, PAR 72, 865 m n. m. Interaktivní plánek, délky jamek a tipy, jak je zahrát.',
     lead: '9 jamek hraných dvakrát, PAR 72, 865 m nad mořem.' },
-  { page: 'treninky', file: 'treninky.html', nav: 'Tréninky', img: 'ai-patovani.jpg', ai: true,
+  { page: 'treninky', file: 'treninky.html', nav: 'Tréninky', img: 'ai-patovani.jpg', ai: true, video: 'treninky',
     title: 'Tréninky a golfový kurz | Golf Club Teplice',
     description: 'Golfový kurz se zkouškou, individuální lekce a seznámení s golfem s trenérem na Cínovci. Vybavení zapůjčíme.',
     lead: 'Kurzy, zelená karta a lekce s trenérem.' },
@@ -108,6 +108,14 @@ const pageVideo = p => (p.video && fs.existsSync(path.join(ROOT, 'assets/video',
   <button class="video-toggle" type="button" aria-pressed="false" aria-label="Pozastavit video"><svg class="i"><use href="#i-pause"/></svg></button>`
   : '';
 
+// poznámka o AI (fotky a videa vytvořené v Gemini) – drobný text pod popisem stránky
+const hasVideo = p => !!(p.video && fs.existsSync(path.join(ROOT, 'assets/video', p.video + '.mp4')));
+const aiNote = p => {
+  const text = p.ai ? (hasVideo(p) ? 'Ilustrační foto a video vytvořené s pomocí AI' : 'Ilustrační foto vytvořené s pomocí AI')
+    : hasVideo(p) ? 'Video vytvořené s pomocí AI z naší fotografie' : '';
+  return text ? `\n    <p class="page-hero__note reveal" style="--d:.22s">${text}</p>` : '';
+};
+
 // úvodní pás podstránky: fotka (případně video), drobečková navigace, nadpis, krátký popis
 const pageHero = p => `<!-- =====================================================================
      ${p.nav.toUpperCase()} – úvodní pás stránky
@@ -117,8 +125,8 @@ const pageHero = p => `<!-- ====================================================
   <div class="container page-hero__inner">
     <nav class="crumbs reveal" aria-label="Drobečková navigace"><a href="./">Úvod</a><span aria-hidden="true">/</span><span aria-current="page">${p.nav}</span></nav>
     <h1 class="page-hero__title reveal" id="pageTitle" style="--d:.08s">${p.nav}</h1>
-    <p class="page-hero__lead reveal" style="--d:.16s">${p.lead}</p>
-  </div>${p.ai ? '\n  <span class="story__note">Ilustrační foto vytvořené s pomocí AI</span>' : ''}
+    <p class="page-hero__lead reveal" style="--d:.16s">${p.lead}</p>${aiNote(p)}
+  </div>
 </section>
 
 `;
