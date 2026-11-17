@@ -234,10 +234,10 @@ window.GCT_OBSAH.catch(() => {});</script>
       <img src="assets/img/13475130_838632482938527_8570459729176729686_o.jpg" alt="" decoding="async">
     </div>
   </div>
-  <!-- Videa v pozadí (vytvořená z fotek hřiště): nejdřív green, pak let dronem, a stále dokola.
+  <!-- Videa v pozadí (vytvořená z fotek hřiště): nejdřív let dronem ke klubovně, pak green, a stále dokola.
        Načtou se jen na rychlém připojení a bez „omezit pohyb“; do té doby a jinak běží fotky výše. -->
   <video class="hero__video hero-video" id="heroVideo" muted loop playsinline preload="none" aria-hidden="true"
-         data-src="assets/video/hriste.mp4" data-playlist="assets/video/hriste.mp4,assets/video/uvod.mp4" poster="assets/video/hriste-poster.jpg"></video>
+         data-src="assets/video/uvod.mp4" data-playlist="assets/video/uvod.mp4,assets/video/hriste.mp4" poster="assets/video/uvod-poster.jpg"></video>
   <button class="video-toggle" type="button" aria-pressed="false" aria-label="Pozastavit video"><svg class="i"><use href="#i-pause"/></svg></button>
   <div class="hero__overlay"></div>
 
@@ -377,15 +377,15 @@ window.GCT_OBSAH.catch(() => {});</script>
       <p class="lead reveal" style="--d:.1s">Hřiště a okolí v pohybu – záběry vytvořené s pomocí AI z našich fotografií.</p>
     </div>
     <div class="videos__grid">
-      <button class="video-card reveal" type="button" style="--d:0.00s" data-video="assets/video/hriste.mp4" data-title="Green s výhledem">
-        <span class="video-card__media"><img src="assets/video/hriste-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
-        <span class="video-card__title">Green s výhledem</span>
-        <span class="video-card__sub">Nízký průlet k vlajce</span>
-      </button>
-      <button class="video-card reveal" type="button" style="--d:0.08s" data-video="assets/video/uvod.mp4" data-title="Hřiště z dronu">
+      <button class="video-card reveal" type="button" style="--d:0.00s" data-video="assets/video/uvod.mp4" data-title="Hřiště z dronu">
         <span class="video-card__media"><img src="assets/video/uvod-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
         <span class="video-card__title">Hřiště z dronu</span>
         <span class="video-card__sub">Cínovec v podvečerním světle</span>
+      </button>
+      <button class="video-card reveal" type="button" style="--d:0.08s" data-video="assets/video/hriste.mp4" data-title="Green s výhledem">
+        <span class="video-card__media"><img src="assets/video/hriste-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
+        <span class="video-card__title">Green s výhledem</span>
+        <span class="video-card__sub">Nízký průlet k vlajce</span>
       </button>
     </div>
   </div>

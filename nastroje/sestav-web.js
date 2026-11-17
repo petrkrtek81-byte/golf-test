@@ -66,8 +66,8 @@ const SECTION_PAGES = PAGES.filter(p => p.nav).map(p => p.page);
 
 // videa na úvodní stránce (sekce „Méně slov. Víc Cínovce.“) – ukáže se jen to, co je v assets/video
 const VIDEOS = [
-  { file: 'hriste', title: 'Green s výhledem', sub: 'Nízký průlet k vlajce' },
   { file: 'uvod', title: 'Hřiště z dronu', sub: 'Cínovec v podvečerním světle' },
+  { file: 'hriste', title: 'Green s výhledem', sub: 'Nízký průlet k vlajce' },
   // zimní video je jen na stránce Půjčovna běžek (na úvodní stránce golf)
 ];
 const videoGrid = () => {
