@@ -18,7 +18,7 @@ Obsah, který se často mění, je v souboru `data/obsah.json` a upravuje se v a
 | `assets/img/` | fotky v plném rozlišení (lightbox, hero, modaly) |
 | `assets/img/thumbs/` | náhledy 800 px (galerie, karty aktualit) |
 | `assets/hriste/`, `assets/partneri/` | plánky jamek 1–9, loga partnerů (DanCzek, XXL Auto, Vaněrka, VUM park) |
-| `assets/fonts/` | písma Baloo 2 (nadpisy, čísla, popisky – zaoblené jako logo „urban“) a Manrope (text) – bez Google Fonts |
+| `assets/fonts/` | písma Manrope (nadpisy a text) a Instrument Serif Italic (akcentní slova v nadpisech) – bez Google Fonts |
 | `assets/cenik/` | PDF ceník – oficiální český a jeho německý překlad (`golf-teplice-preisliste-de.pdf`, otevírá se v němčině) |
 | `assets/qr-platba.svg`, `assets/qr-platba-de.svg` | QR Platba pro české banky a GiroCode (IBAN) pro německé – při změně účtu je nutné je vygenerovat znovu |
 | `kontakt.php` | odesílání kontaktního formuláře a přihlášek k novinkám e-mailem |
