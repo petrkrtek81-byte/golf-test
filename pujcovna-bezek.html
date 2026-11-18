@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Půjčovna běžek na Cínovci | Golf Club Teplice</title>
 <meta name="description" content="Půjčovna běžek na Cínovci: kompletní vybavení na klasiku i backcountry, ceník a objednávka.">
-<meta name="theme-color" content="#0f2e1f">
+<meta name="theme-color" content="#16241C">
 <link rel="canonical" href="https://www.golf-teplice.cz/pujcovna-bezek.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Půjčovna běžek na Cínovci | Golf Club Teplice">
@@ -23,7 +23,7 @@
 <link rel="preload" href="assets/fonts/manrope-normal-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
-<link rel="stylesheet" href="assets/css/web.css?v=611b4ac2">
+<link rel="stylesheet" href="assets/css/web.css?v=78a77e49">
 
 <!-- Strukturovaná data pro vyhledávače -->
 <script type="application/ld+json">
@@ -48,7 +48,11 @@
 <script>document.documentElement.classList.add('js');
 // obsah webu (aktuality, ceník, galerie…) – stahuje se souběžně se zbytkem stránky
 window.GCT_OBSAH = fetch('data/obsah.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)));
-window.GCT_OBSAH.catch(() => {});</script>
+window.GCT_OBSAH.catch(() => {});
+// němčina: stránku ukázat až přeložená (web.js třídu odebere; pojistka po 3 s)
+try { var gctLang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('gct-lang');
+  if (gctLang === 'de') { document.documentElement.lang = 'de'; document.documentElement.classList.add('lang-pending');
+    setTimeout(function () { document.documentElement.classList.remove('lang-pending'); }, 3000); } } catch (e) {}</script>
 </head>
 <body class="page-pujcovna-bezek">
 <a class="skip-link" href="#main">Přeskočit na obsah</a>
@@ -103,9 +107,6 @@ window.GCT_OBSAH.catch(() => {});</script>
     <symbol id="i-spinner" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
-    <!-- Vlajky pro přepínač jazyků -->
-    <symbol id="flag-cz" viewBox="0 0 30 20"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#d7141a"/><path d="M0 0l15 10L0 20z" fill="#11457e"/></symbol>
-    <symbol id="flag-de" viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#000"/><rect y="6.67" width="30" height="6.67" fill="#dd0000"/><rect y="13.33" width="30" height="6.67" fill="#ffce00"/></symbol>
   </defs>
 </svg>
 
@@ -113,42 +114,15 @@ window.GCT_OBSAH.catch(() => {});</script>
      HLAVIČKA
      ===================================================================== -->
 <header class="site-header" id="siteHeader">
-  <div class="topbar">
-    <div class="container--wide topbar__inner">
-      <div class="topbar__group">
-        <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> +420 777 943 219</a>
-        <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg> golf@golf-teplice.cz</a>
-      </div>
-      <div class="topbar__group">
-        <a href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervace tee time</a>
-        <span class="topbar__social" style="display:inline-flex;gap:.5rem">
-          <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
-          <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
-        </span>
-      </div>
-    </div>
-  </div>
-
   <div class="nav-wrap">
     <nav class="container--wide nav" aria-label="Hlavní navigace">
       <a class="nav__logo" href="./" aria-label="Golf Club Teplice – úvodní stránka">
         <img src="assets/logo.png" alt="Golf Club Teplice" width="357" height="186">
       </a>
-      <ul class="nav__menu">
-        <li><a class="nav__link" href="onas.html" data-page="onas">O nás</a></li>
-        <li><a class="nav__link" href="aktuality.html" data-page="aktuality">Aktuality</a></li>
-        <li><a class="nav__link" href="cenik.html" data-page="cenik">Ceník</a></li>
-        <li><a class="nav__link" href="hriste.html" data-page="hriste">Hřiště</a></li>
-        <li><a class="nav__link" href="treninky.html" data-page="treninky">Tréninky</a></li>
-        <li><a class="nav__link" href="turnaje.html" data-page="turnaje">Turnaje</a></li>
-        <li><a class="nav__link" href="fotogalerie.html" data-page="fotogalerie">Fotogalerie</a></li>
-        <li><a class="nav__link is-active" href="pujcovna-bezek.html" data-page="pujcovna-bezek" aria-current="page">Půjčovna běžek</a></li>
-        <li><a class="nav__link" href="kontakty.html" data-page="kontakty">Kontakty</a></li>
-      </ul>
       <div class="nav__actions">
         <div class="lang" role="group" aria-label="Jazyk">
-          <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
-          <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
+          <button type="button" class="is-active" data-lang="cs" aria-pressed="true" aria-label="Čeština">CZ</button><span class="lang__sep" aria-hidden="true">/</span>
+          <button type="button" data-lang="de" aria-pressed="false" aria-label="Deutsch">DE</button>
         </div>
         <a class="btn btn--gold nav__cta" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener" aria-label="Rezervovat on-line">
           <svg class="i"><use href="#i-calendar"/></svg><span>Rezervovat<span class="long"> on-line</span></span>
@@ -158,23 +132,23 @@ window.GCT_OBSAH.catch(() => {});</script>
         </button>
       </div>
     </nav>
-    <!-- tenká linka průběhu scrollu s míčkem (mobil/tablet) -->
-    <div class="scroll-line" aria-hidden="true"><span class="scroll-line__bar"></span><span class="scroll-line__ball"></span></div>
+    <!-- tenká linka průběhu scrollu pod hlavičkou -->
+    <div class="scroll-line" aria-hidden="true"><span class="scroll-line__bar"></span></div>
   </div>
 </header>
 
 <!-- Mobilní menu -->
 <div class="mobile-menu" id="mobileMenu" aria-label="Menu">
   <nav class="mobile-menu__links">
-    <a href="onas.html" data-page="onas" style="--i:0"><small>01</small>O nás</a>
-    <a href="aktuality.html" data-page="aktuality" style="--i:1"><small>02</small>Aktuality</a>
-    <a href="cenik.html" data-page="cenik" style="--i:2"><small>03</small>Ceník</a>
-    <a href="hriste.html" data-page="hriste" style="--i:3"><small>04</small>Hřiště</a>
-    <a href="treninky.html" data-page="treninky" style="--i:4"><small>05</small>Tréninky</a>
-    <a href="turnaje.html" data-page="turnaje" style="--i:5"><small>06</small>Turnaje</a>
-    <a href="fotogalerie.html" data-page="fotogalerie" style="--i:6"><small>07</small>Fotogalerie</a>
-    <a class="is-active" aria-current="page" href="pujcovna-bezek.html" data-page="pujcovna-bezek" style="--i:7"><small>08</small>Půjčovna běžek</a>
-    <a href="kontakty.html" data-page="kontakty" style="--i:8"><small>09</small>Kontakty</a>
+    <a href="onas.html" data-page="onas"><small>01</small>O nás</a>
+    <a href="aktuality.html" data-page="aktuality"><small>02</small>Aktuality</a>
+    <a href="cenik.html" data-page="cenik"><small>03</small>Ceník</a>
+    <a href="hriste.html" data-page="hriste"><small>04</small>Hřiště</a>
+    <a href="treninky.html" data-page="treninky"><small>05</small>Tréninky</a>
+    <a href="turnaje.html" data-page="turnaje"><small>06</small>Turnaje</a>
+    <a href="fotogalerie.html" data-page="fotogalerie"><small>07</small>Fotogalerie</a>
+    <a class="is-active" aria-current="page" href="pujcovna-bezek.html" data-page="pujcovna-bezek"><small>08</small>Půjčovna běžek</a>
+    <a href="kontakty.html" data-page="kontakty"><small>09</small>Kontakty</a>
   </nav>
   <div class="mobile-menu__foot">
     <a class="btn btn--gold btn--block" href="https://rezervace.golf-teplice.cz/rezervace" target="_blank" rel="noopener"><svg class="i"><use href="#i-calendar"/></svg> Rezervovat on-line</a>
@@ -182,33 +156,11 @@ window.GCT_OBSAH.catch(() => {});</script>
       <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg> +420 777 943 219</a>
       <a href="mailto:golf@golf-teplice.cz"><svg class="i"><use href="#i-mail"/></svg> golf@golf-teplice.cz</a>
     </div>
-    <div style="display:flex;justify-content:flex-end;align-items:center;gap:1rem">
-      <div class="socials" style="margin:0">
+    <div class="socials">
         <a href="https://www.facebook.com/golfclubteplice/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--fill"><use href="#i-fb"/></svg></a>
         <a href="https://maps.app.goo.gl/P9TLXHuS1fgtnRDh6" target="_blank" rel="noopener" aria-label="Google Maps"><svg class="i"><use href="#i-pin"/></svg></a>
-      </div>
     </div>
   </div>
-</div>
-
-<!-- Golfový míček – ukazatel průběhu scrollu (desktop). Klik = zpět nahoru. -->
-<div class="golf-progress" id="golfProgress">
-  <div class="golf-progress__track"></div>
-  <button class="golf-progress__ball" type="button" aria-label="Zpět nahoru">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <defs><radialGradient id="ballGrad" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".65" stop-color="#eef1ec"/><stop offset="1" stop-color="#aeb6ac"/></radialGradient></defs>
-      <circle cx="12" cy="12" r="11" fill="url(#ballGrad)"/>
-      <g class="dimples" fill="#c3cac1">
-        <circle cx="8" cy="7" r="1.1"/><circle cx="12.5" cy="5.5" r="1.1"/><circle cx="16.5" cy="8.5" r="1.1"/>
-        <circle cx="6.5" cy="11.5" r="1.1"/><circle cx="11" cy="10" r="1.1"/><circle cx="15.5" cy="13" r="1.1"/>
-        <circle cx="9" cy="15" r="1.1"/><circle cx="13" cy="17.5" r="1.1"/><circle cx="17.8" cy="16.2" r="1"/><circle cx="6.8" cy="17.5" r="1"/>
-      </g>
-    </svg>
-  </button>
-  <svg class="golf-progress__hole" viewBox="0 0 30 30" aria-hidden="true">
-    <ellipse cx="15" cy="26.5" rx="10" ry="3" fill="#0f2e1f" opacity=".85"/>
-    <g class="golf-progress__flag"><path d="M15 26V5" stroke="#c9a961" stroke-width="1.4"/><path d="M15 5h10l-3 3.5 3 3.5H15z" fill="#c9a961"/></g>
-  </svg>
 </div>
 
 <main id="main">
@@ -223,9 +175,9 @@ window.GCT_OBSAH.catch(() => {});</script>
   <button class="video-toggle" type="button" aria-pressed="false" aria-label="Pozastavit video"><svg class="i"><use href="#i-pause"/></svg></button>
   <div class="container page-hero__inner">
     <nav class="crumbs reveal" aria-label="Drobečková navigace"><a href="./">Úvod</a><span aria-hidden="true">/</span><span aria-current="page">Půjčovna běžek</span></nav>
-    <h1 class="page-hero__title reveal" id="pageTitle" style="--d:.08s">Půjčovna běžek</h1>
-    <p class="page-hero__lead reveal" style="--d:.16s">V zimě na běžky přímo z Cínovce.</p>
-    <p class="page-hero__note reveal" style="--d:.22s">Video vytvořené s pomocí AI z naší fotografie</p>
+    <h1 class="page-hero__title reveal" id="pageTitle">Půjčovna běžek</h1>
+    <p class="page-hero__lead reveal">V zimě na běžky přímo z Cínovce.</p>
+    <p class="page-hero__note reveal">Video vytvořené s pomocí AI z naší fotografie</p>
   </div>
 </section>
 
@@ -233,52 +185,45 @@ window.GCT_OBSAH.catch(() => {});</script>
      9. PŮJČOVNA BĚŽEK – zimní sekce
      ===================================================================== -->
 <section class="section winter" id="pujcovna-bezek">
-  <!-- zasněžený hřeben nahoře -->
-  <svg class="winter__ridge" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 0h1440v34l-90 30-110-44-120 52-140-38-130 46-150-56-140 50-120-36-140 44-130-48L0 60z" fill="#0f2e1f"/>
-  </svg>
   <canvas id="snow" aria-hidden="true"></canvas>
   <div class="container">
     <div class="winter__grid">
       <div>
         <p class="eyebrow reveal"><svg class="i"><use href="#i-snow"/></svg> Zima na Cínovci</p>
-        <h2 class="h2 reveal" style="--d:.08s">Půjčovna <em>běžek</em></h2>
-        <p class="lead reveal" style="--d:.16s">Když hřiště zapadne sněhem, vyrazte na běžky. Zapůjčíme vám kompletní vybavení na klasiku i&nbsp;backcountry.</p>
-        <div class="winter__order reveal" style="--d:.24s">
+        <h2 class="h2 reveal">Půjčovna <em>běžek</em></h2>
+        <p class="lead reveal">Když hřiště zapadne sněhem, vyrazte na běžky. Zapůjčíme vám kompletní vybavení na klasiku i&nbsp;backcountry.</p>
+        <div class="winter__order reveal">
           <a href="tel:+420770666449"><span class="icon-btn"><svg class="i"><use href="#i-phone"/></svg></span> +420 770 666 449</a>
           <a href="mailto:mysik@golf-teplice.cz"><span class="icon-btn"><svg class="i"><use href="#i-mail"/></svg></span> mysik@golf-teplice.cz</a>
         </div>
       </div>
-      <div class="winter__photos reveal reveal--zoom">
+      <div class="winter__photos reveal">
         <img class="p1" src="assets/img/bezkyhezky.jpg" alt="Zasněžená cesta mezi smrky" loading="lazy" width="871" height="799">
-        <img class="p2" src="assets/img/dvur2.jpg" alt="Běžkařské stopy u Cínovce" loading="lazy" width="960" height="544" data-parallax="-0.06">
+        <img class="p2" src="assets/img/dvur2.jpg" alt="Běžkařské stopy u Cínovce" loading="lazy" width="960" height="544">
       </div>
     </div>
 
-    <h3 class="reveal" style="margin-top:clamp(3rem,6vw,4.5rem);margin-bottom:0;font-size:2rem">Ceník na 1 den</h3>
-    <div class="ski-grid" style="margin-top:1.4rem">
+    <h3 class="winter__subtitle reveal">Ceník na 1 den</h3>
+    <div class="ski-grid">
       <div class="ski reveal"><span class="ski__icon"><svg class="i"><use href="#i-ski"/></svg></span><div><h4>Set klasika skin</h4><p>kompletní set · mohérový pás</p></div><span class="ski__price">490 <small>Kč</small></span></div>
-      <div class="ski reveal" style="--d:.06s"><span class="ski__icon"><svg class="i"><use href="#i-ski"/></svg></span><div><h4>Běžky klasika skin</h4><p>samotné běžky</p></div><span class="ski__price">390 <small>Kč</small></span></div>
-      <div class="ski reveal" style="--d:.12s"><span class="ski__icon"><svg class="i"><use href="#i-child"/></svg></span><div><h4>Dětský set klasika skin</h4><p>pro malé běžkaře</p></div><span class="ski__price">290 <small>Kč</small></span></div>
-      <div class="ski reveal" style="--d:.18s"><span class="ski__icon"><svg class="i"><use href="#i-boot"/></svg></span><div><h4>Boty</h4><p>běžkařské boty</p></div><span class="ski__price">250 <small>Kč</small></span></div>
-      <div class="ski reveal" style="--d:.24s"><span class="ski__icon"><svg class="i"><use href="#i-poles"/></svg></span><div><h4>Hůlky</h4><p>pár hůlek</p></div><span class="ski__price">120 <small>Kč</small></span></div>
-      <div class="ski reveal" style="--d:.3s"><span class="ski__icon"><svg class="i"><use href="#i-snow"/></svg></span><div><h4>Set backcountry</h4><p>do terénu mimo stopu</p></div><span class="ski__price">490 <small>Kč</small></span></div>
+      <div class="ski reveal"><span class="ski__icon"><svg class="i"><use href="#i-ski"/></svg></span><div><h4>Běžky klasika skin</h4><p>samotné běžky</p></div><span class="ski__price">390 <small>Kč</small></span></div>
+      <div class="ski reveal"><span class="ski__icon"><svg class="i"><use href="#i-child"/></svg></span><div><h4>Dětský set klasika skin</h4><p>pro malé běžkaře</p></div><span class="ski__price">290 <small>Kč</small></span></div>
+      <div class="ski reveal"><span class="ski__icon"><svg class="i"><use href="#i-boot"/></svg></span><div><h4>Boty</h4><p>běžkařské boty</p></div><span class="ski__price">250 <small>Kč</small></span></div>
+      <div class="ski reveal"><span class="ski__icon"><svg class="i"><use href="#i-poles"/></svg></span><div><h4>Hůlky</h4><p>pár hůlek</p></div><span class="ski__price">120 <small>Kč</small></span></div>
+      <div class="ski reveal"><span class="ski__icon"><svg class="i"><use href="#i-snow"/></svg></span><div><h4>Set backcountry</h4><p>do terénu mimo stopu</p></div><span class="ski__price">490 <small>Kč</small></span></div>
     </div>
     <p class="winter__note reveal"><svg class="i"><use href="#i-info"/></svg><span>Na více dní stanovíme individuální cenu podle počtu osob, vybavení a&nbsp;doby zapůjčení.</span></p>
   </div>
-  <!-- závěj dole přechází do krémové sekce Kontakty -->
-  <svg class="winter__drift" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 70c120-30 230-40 360-18s250 40 380 16 260-58 400-40 220 36 300 30v62H0z" fill="#ffffff" opacity=".18"/>
-    <path d="M0 92c140-26 260-30 400-12s260 30 400 8 280-44 400-30 180 26 240 22v40H0z" fill="#f5f0e6"/>
-  </svg>
 </section>
 
 <!-- =====================================================================
-     11. PARTNEŘI – pás se generuje z pole PARTNERS
+     11. PARTNEŘI – loga v řadě, generují se z pole PARTNERS (data/obsah.json)
      ===================================================================== -->
 <section class="partners" aria-labelledby="partnersTitle">
-  <h2 class="partners__title" id="partnersTitle">Partneři klubu</h2>
-  <div class="marquee" id="partnersMarquee"><div class="marquee__track"></div></div>
+  <div class="container">
+    <h2 class="partners__title" id="partnersTitle">Partneři klubu</h2>
+    <div class="marquee" id="partnersMarquee"><div class="marquee__track"></div></div>
+  </div>
 </section>
 
 </main>
@@ -300,7 +245,7 @@ window.GCT_OBSAH.catch(() => {});</script>
         </div>
       </div>
       <div>
-        <h4>Klub</h4>
+        <h2 class="footer__title">Klub</h2>
         <ul class="footer__links">
           <li><a href="onas.html">O nás</a></li>
           <li><a href="aktuality.html">Aktuality</a></li>
@@ -310,7 +255,7 @@ window.GCT_OBSAH.catch(() => {});</script>
         </ul>
       </div>
       <div>
-        <h4>Více</h4>
+        <h2 class="footer__title">Více</h2>
         <ul class="footer__links">
           <li><a href="turnaje.html">Turnaje</a></li>
           <li><a href="fotogalerie.html">Fotogalerie</a></li>
@@ -320,7 +265,7 @@ window.GCT_OBSAH.catch(() => {});</script>
         </ul>
       </div>
       <div>
-        <h4>Kontakt</h4>
+        <h2 class="footer__title">Kontakt</h2>
         <div class="footer__contact">
           <span><svg class="i"><use href="#i-pin"/></svg>Cínovec 275<br>417 32 Dubí</span>
           <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg>+420 777 943 219</a>
@@ -328,12 +273,11 @@ window.GCT_OBSAH.catch(() => {});</script>
         </div>
       </div>
     </div>
-    <p class="footer__wordmark" aria-hidden="true">Golf Club Teplice</p>
     <div class="footer__bottom">
       <span>© <span id="year">2026</span> Golf Club Teplice z.s. · <button type="button" class="footer__privacy" data-open-privacy>Ochrana osobních údajů</button></span>
       <div class="lang" role="group" aria-label="Jazyk">
-        <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
-        <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
+        <button type="button" class="is-active" data-lang="cs" aria-pressed="true" aria-label="Čeština">CZ</button><span class="lang__sep" aria-hidden="true">/</span>
+        <button type="button" data-lang="de" aria-pressed="false" aria-label="Deutsch">DE</button>
       </div>
       <a class="to-top" href="#top">Nahoru <svg class="i"><use href="#i-arrow"/></svg></a>
     </div>
@@ -470,7 +414,7 @@ window.GCT_OBSAH.catch(() => {});</script>
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
 
-<script src="assets/js/web.js?v=41cfa88f"></script>
+<script src="assets/js/web.js?v=added0d7"></script>
 </body>
 </html>
 

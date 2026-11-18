@@ -1,9 +1,11 @@
 <!-- =====================================================================
-     11. PARTNEŘI – pás se generuje z pole PARTNERS
+     11. PARTNEŘI – loga v řadě, generují se z pole PARTNERS (data/obsah.json)
      ===================================================================== -->
 <section class="partners" aria-labelledby="partnersTitle">
-  <h2 class="partners__title" id="partnersTitle">Partneři klubu</h2>
-  <div class="marquee" id="partnersMarquee"><div class="marquee__track"></div></div>
+  <div class="container">
+    <h2 class="partners__title" id="partnersTitle">Partneři klubu</h2>
+    <div class="marquee" id="partnersMarquee"><div class="marquee__track"></div></div>
+  </div>
 </section>
 
 </main>
@@ -25,7 +27,7 @@
         </div>
       </div>
       <div>
-        <h4>Klub</h4>
+        <h2 class="footer__title">Klub</h2>
         <ul class="footer__links">
           <li><a href="#onas">O nás</a></li>
           <li><a href="#aktuality">Aktuality</a></li>
@@ -35,7 +37,7 @@
         </ul>
       </div>
       <div>
-        <h4>Více</h4>
+        <h2 class="footer__title">Více</h2>
         <ul class="footer__links">
           <li><a href="#turnaje">Turnaje</a></li>
           <li><a href="#fotogalerie">Fotogalerie</a></li>
@@ -45,7 +47,7 @@
         </ul>
       </div>
       <div>
-        <h4>Kontakt</h4>
+        <h2 class="footer__title">Kontakt</h2>
         <div class="footer__contact">
           <span><svg class="i"><use href="#i-pin"/></svg>Cínovec 275<br>417 32 Dubí</span>
           <a href="tel:+420777943219"><svg class="i"><use href="#i-phone"/></svg>+420 777 943 219</a>
@@ -53,12 +55,11 @@
         </div>
       </div>
     </div>
-    <p class="footer__wordmark" aria-hidden="true">Golf Club Teplice</p>
     <div class="footer__bottom">
       <span>© <span id="year">2026</span> Golf Club Teplice z.s. · <button type="button" class="footer__privacy" data-open-privacy>Ochrana osobních údajů</button></span>
       <div class="lang" role="group" aria-label="Jazyk">
-        <button type="button" class="is-active" data-lang="cs" aria-pressed="true"><svg><use href="#flag-cz"/></svg>CZ</button>
-        <button type="button" data-lang="de" aria-pressed="false"><svg><use href="#flag-de"/></svg>DE</button>
+        <button type="button" class="is-active" data-lang="cs" aria-pressed="true" aria-label="Čeština">CZ</button><span class="lang__sep" aria-hidden="true">/</span>
+        <button type="button" data-lang="de" aria-pressed="false" aria-label="Deutsch">DE</button>
       </div>
       <a class="to-top" href="#top">Nahoru <svg class="i"><use href="#i-arrow"/></svg></a>
     </div>

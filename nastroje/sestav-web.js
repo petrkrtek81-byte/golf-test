@@ -76,11 +76,11 @@ const videoGrid = () => {
   return `<section class="section section--dark videos" id="videa" aria-labelledby="videosTitle">
   <div class="container">
     <div class="videos__head">
-      <h2 class="videos__title reveal" id="videosTitle">Méně slov. <em>Víc Cínovce.</em></h2>
-      <p class="lead reveal" style="--d:.1s">Hřiště a okolí v pohybu – záběry vytvořené s pomocí AI z našich fotografií.</p>
+      <h2 class="videos__title reveal" id="videosTitle"><span>Méně slov.</span> <span>Víc Cínovce.</span></h2>
+      <p class="lead reveal">Hřiště a okolí v pohybu – záběry vytvořené s pomocí AI z našich fotografií.</p>
     </div>
     <div class="videos__grid">
-${list.map((v, i) => `      <button class="video-card reveal" type="button" style="--d:${(i * 0.08).toFixed(2)}s" data-video="assets/video/${v.file}.mp4" data-title="${v.title}">
+${list.map((v, i) => `      <button class="video-card reveal" type="button" data-video="assets/video/${v.file}.mp4" data-title="${v.title}">
         <span class="video-card__media"><img src="assets/video/${v.file}-poster.jpg" alt="" loading="lazy"><span class="video-card__play"><svg class="i"><use href="#i-play"/></svg></span></span>
         <span class="video-card__title">${v.title}</span>
         <span class="video-card__sub">${v.sub}</span>
@@ -113,7 +113,7 @@ const hasVideo = p => !!(p.video && fs.existsSync(path.join(ROOT, 'assets/video'
 const aiNote = p => {
   const text = p.ai ? (hasVideo(p) ? 'Ilustrační foto a video vytvořené s pomocí AI' : 'Ilustrační foto vytvořené s pomocí AI')
     : hasVideo(p) ? 'Video vytvořené s pomocí AI z naší fotografie' : '';
-  return text ? `\n    <p class="page-hero__note reveal" style="--d:.22s">${text}</p>` : '';
+  return text ? `\n    <p class="page-hero__note reveal">${text}</p>` : '';
 };
 
 // úvodní pás podstránky: fotka (případně video), drobečková navigace, nadpis, krátký popis
@@ -124,8 +124,8 @@ const pageHero = p => `<!-- ====================================================
   <div class="page-hero__bg" aria-hidden="true"><img src="assets/img/${p.img}" alt="" fetchpriority="high"></div>${pageVideo(p)}
   <div class="container page-hero__inner">
     <nav class="crumbs reveal" aria-label="Drobečková navigace"><a href="./">Úvod</a><span aria-hidden="true">/</span><span aria-current="page">${p.nav}</span></nav>
-    <h1 class="page-hero__title reveal" id="pageTitle" style="--d:.08s">${p.nav}</h1>
-    <p class="page-hero__lead reveal" style="--d:.16s">${p.lead}</p>${aiNote(p)}
+    <h1 class="page-hero__title reveal" id="pageTitle">${p.nav}</h1>
+    <p class="page-hero__lead reveal">${p.lead}</p>${aiNote(p)}
   </div>
 </section>
 

@@ -236,6 +236,8 @@ const DE = {
   'QR platba – naskenujte v bankovní aplikaci a doplňte částku.': 'GiroCode (SEPA) – in der Banking-App scannen und Betrag ergänzen.',
   'QR platba na účet 6918554389/0800': 'GiroCode für die Überweisung auf IBAN CZ18 0800 0000 0069 1855 4389',
   'Vyplňte prosím toto pole.': 'Bitte füllen Sie dieses Feld aus.',
+  'Čeština': 'Tschechisch',
+  'Deutsch': 'Deutsch',
   'Zadejte platnou e-mailovou adresu.': 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
   'Pro odeslání je potřeba souhlas.': 'Zum Absenden ist Ihre Zustimmung erforderlich.',
   'Posuňte do strany': 'Zur Seite wischen',
@@ -796,15 +798,11 @@ $$('dialog').forEach(d => {
   d.addEventListener('close', () => { if (!$$('dialog').some(x => x.open)) root.classList.remove('is-locked'); });
 });
 
-/* ---------- Hlavička, průběh scrollu, parallax, timeline (jeden rAF smyčka) ---------- */
+/* ---------- Hlavička, průběh scrollu, parallax (jedna rAF smyčka) ---------- */
 const header = $('#siteHeader');
 const scrollLine = $('.scroll-line');
-const golfProgress = $('#golfProgress');
 const mobileBook = $('#mobileBook');
 const heroContent = $('#heroContent');
-const timeline = $('#timeline');
-const timelineFill = $('#timelineFill');
-const tlItems = $$('.tl-item');
 const parallaxEls = reduceMotion ? [] : $$('[data-parallax]');
 const footer = $('.footer');
 let ticking = false;
@@ -816,13 +814,10 @@ function onScrollFrame() {
 
   header.classList.toggle('is-scrolled', y > 40);
 
-  // průběh stránky 0–1 → golfový míček / linka
+  // průběh stránky 0–1 → linka pod hlavičkou
   const max = document.documentElement.scrollHeight - vh;
   const p = max > 0 ? clamp(y / max, 0, 1) : 0;
   scrollLine.style.setProperty('--p', p.toFixed(4));
-  golfProgress.style.setProperty('--p', p.toFixed(4));
-  golfProgress.classList.toggle('is-visible', y > vh * 0.5);
-  golfProgress.classList.toggle('is-holed', p > 0.995);
 
   // mobilní lišta s rezervací – po hero, skrytá u patičky
   const nearFooter = footer.getBoundingClientRect().top < vh;
@@ -843,24 +838,12 @@ function onScrollFrame() {
     el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
   }
 
-  // timeline – linka se „kreslí“ podle scrollu
-  if (timeline) {
-    const r = timeline.getBoundingClientRect();
-    const line = vh * 0.62;
-    const tp = clamp((line - r.top) / r.height, 0, 1);
-    timelineFill.style.transform = `scaleY(${tp})`;
-    tlItems.forEach(item => {
-      const dot = item.querySelector('.tl-item__dot').getBoundingClientRect();
-      item.classList.toggle('is-active', dot.top < line);
-    });
-  }
 }
 const requestFrame = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScrollFrame); } };
 window.addEventListener('scroll', requestFrame, { passive: true });
 window.addEventListener('resize', requestFrame);
 onScrollFrame();
 
-$('.golf-progress__ball').addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 
 /* ---------- Mobilní menu ---------- */
 const burger = $('.burger');
@@ -878,47 +861,6 @@ mobileMenu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(f
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && root.classList.contains('nav-open')) setMenu(false); });
 
 /* ---------- Menu: aktuální stránka je označená přímo v HTML (nastroje/sestav-web.js) ---------- */
-
-/* ---------- Hero: rozdělení nadpisu na písmena, podnadpisu na slova ---------- */
-(function splitHeroText() {
-  const h1 = $('[data-split]');
-  if (!h1) return;
-  let i = 0;
-  const splitNode = node => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const frag = document.createDocumentFragment();
-      node.textContent.split(/(\s+)/).forEach(part => {
-        if (!part) return;
-        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
-        const word = document.createElement('span');
-        word.className = 'word';
-        [...part].forEach(ch => {
-          const c = document.createElement('span');
-          c.className = 'char';
-          c.style.setProperty('--i', i++);
-          c.textContent = ch;
-          word.appendChild(c);
-        });
-        frag.appendChild(word);
-      });
-      node.replaceWith(frag);
-    } else {
-      [...node.childNodes].forEach(splitNode);
-    }
-  };
-  h1.setAttribute('aria-label', h1.textContent.trim());
-  [...h1.childNodes].forEach(splitNode);
-  $$('.char, .word', h1).forEach(el => el.setAttribute('aria-hidden', 'true'));
-
-  const sub = $('[data-split-words]');
-  if (sub) splitWords(sub, sub.textContent);
-})();
-// podnadpis hero rozdělený na slova (český originál si pamatuje v data-cs)
-function splitWords(el, text) {
-  if (!el.dataset.cs) el.dataset.cs = text.trim();
-  el.innerHTML = text.trim().split(/\s+/)
-    .map((w, k) => `<span class="w" style="--i:${k}">${esc(w)}</span>`).join(' ');
-}
 
 /* ---------- Hero slider (crossfade + Ken Burns v CSS) ---------- */
 (function heroSlider() {
@@ -1076,31 +1018,6 @@ const revealObserver = new IntersectionObserver(entries => {
 const observeReveals = (ctx = document) => $$('.reveal:not(.is-visible)', ctx).forEach(el => revealObserver.observe(el));
 observeReveals();
 
-/* ---------- Animace čísel ---------- */
-function animateNumber(el, from, to, duration = 1800, plain = false) {
-  const write = v => { el.textContent = plain ? String(Math.round(v)) : fmt(v); };
-  if (reduceMotion || from === to) return write(to);
-  const start = performance.now();
-  const ease = t => 1 - Math.pow(1 - t, 3);
-  (function step(now) {
-    const t = clamp((now - start) / duration, 0, 1);
-    write(from + (to - from) * ease(t));
-    if (t < 1) requestAnimationFrame(step);
-  })(start);
-}
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    animateNumber(el, Number(el.dataset.from || 0), Number(el.dataset.count), 2000, el.hasAttribute('data-plain'));
-    counterObserver.unobserve(el);
-  });
-}, { threshold: 0.6 });
-$$('[data-count]').forEach(el => {
-  if (!reduceMotion) el.textContent = el.hasAttribute('data-plain') ? (el.dataset.from || '0') : '0';
-  counterObserver.observe(el);
-});
-
 /* ---------- Otevírací doba: stav sezóny (duben–listopad) ---------- */
 function seasonStatus() {
   const box = $('#seasonStatus');
@@ -1113,7 +1030,6 @@ function seasonStatus() {
   const badge = $('#seasonBadge');
   if (!badge) return;
   badge.textContent = inSeason ? t('Sezóna {y} otevřena', { y: year }) : t('Sezóna {y} začíná v dubnu', { y: m === 11 ? year + 1 : year });
-  badge.previousElementSibling.style.background = inSeason ? '' : 'var(--gold-2)';
 }
 $('#year').textContent = new Date().getFullYear();
 seasonStatus();
@@ -1140,16 +1056,14 @@ refreshers.push(seasonStatus);
       return;
     }
     grid.innerHTML = (LIMIT ? NEWS.slice(0, LIMIT) : NEWS).map((n, k) => {
-      const d = parseDate(n.date);
       const hidden = !LIMIT && !expanded && k >= NEWS_INITIAL;
       return `
-      <article class="news-card reveal${instant ? ' is-visible' : ''} ${k === 0 && !LIMIT ? 'news-card--featured' : ''}" style="--d:${(k % 3) * 0.08}s" ${hidden ? 'hidden' : ''}>
+      <article class="news-card reveal${instant ? ' is-visible' : ''} ${k === 0 && !LIMIT ? 'news-card--featured' : ''}" ${hidden ? 'hidden' : ''}>
         <div class="news-card__media">
-          <span class="news-card__date"><b>${d.getDate()}</b><span>${monthName(d)} ${d.getFullYear()}</span></span>
           <img src="${esc(thumbUrl(n.img || NEWS_FALLBACK_IMG))}" alt="" loading="lazy" decoding="async">
         </div>
         <div class="news-card__body">
-          <span class="tag">${esc(L(n, 'tag'))}</span>
+          <p class="news-card__meta"><time datetime="${esc(n.date)}">${czDate(n.date)}</time><span>${esc(L(n, 'tag'))}</span></p>
           <h3 class="news-card__title">${esc(L(n, 'title'))}</h3>
           <p class="news-card__excerpt">${esc(L(n, 'excerpt'))}</p>
           <button class="link-arrow news-card__more" type="button" data-news="${k}">${t('Číst více')} ${icon('i-arrow')}</button>
@@ -1170,7 +1084,6 @@ refreshers.push(seasonStatus);
     $$('.news-card[hidden]', grid).forEach((c, i) => {
       c.hidden = false;
       c.classList.remove('is-visible');
-      c.style.setProperty('--d', (i * 0.1) + 's');
       requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('is-visible')));
     });
     moreBtn.hidden = true;
@@ -1258,9 +1171,8 @@ refreshers.push(seasonStatus);
       if (on) movePill(b);
     });
     prices.forEach(el => {
-      const from = Number(el.textContent.replace(/\D/g, '')) || 0;
       const to = Number(el.dataset[period]);
-      animate ? animateNumber(el, from, to, 600) : (el.textContent = fmt(to));
+      el.textContent = fmt(to);
       const other = period === 'early' ? 'late' : 'early';
       const alt = el.closest('.price-card').querySelector('[data-price-alt]');
       alt.textContent = t(other === 'late' ? 'Při platbě po {d}:' : 'Při platbě do {d}:', { d: deadlineLong() })
@@ -1677,9 +1589,55 @@ async function sendForm(formEl, type) {
   const card = $('#contactCard');
   const form = $('#contactForm');
   if (!form) return;
+  const nl = $('#newsletterForm');
+  // prohlížeč neukazuje vlastní bubliny – chyba je červeně pod polem (u souhlasu a novinek na konci řádku)
+  form.noValidate = true;
+  nl.noValidate = true;
+  const errText = el => {
+    const v = el.validity;
+    return v.valueMissing ? t(el.type === 'checkbox' ? 'Pro odeslání je potřeba souhlas.' : 'Vyplňte prosím toto pole.')
+      : v.typeMismatch ? t('Zadejte platnou e-mailovou adresu.') : el.validationMessage;
+  };
+  const errBox = el => el.closest('.field, .consent') || el.closest('form');
+  const errId = el => (el.id || el.name) + '-chyba';
+  function showError(el) {
+    const box = errBox(el);
+    let msg = document.getElementById(errId(el));
+    if (!msg) {
+      msg = document.createElement('p');
+      msg.className = 'field__error';
+      msg.id = errId(el);
+      if (box.classList.contains('field')) el.before(msg); // popisek je za polem (zobrazí se nad ním), chyba před ním (zobrazí se pod ním)
+      else box.append(msg);
+    }
+    msg.textContent = errText(el);
+    box.classList.add('is-invalid');
+    el.setAttribute('aria-invalid', 'true');
+    el.setAttribute('aria-describedby', msg.id);
+  }
+  function clearError(el) {
+    const box = errBox(el);
+    const msg = document.getElementById(errId(el));
+    if (msg) msg.remove();
+    if (!box.querySelector('.field__error')) box.classList.remove('is-invalid');
+    el.removeAttribute('aria-invalid');
+    el.removeAttribute('aria-describedby');
+  }
+  function checkForm(f) {
+    const fields = $$('input:not(.hp), textarea', f);
+    const invalid = fields.filter(el => !el.checkValidity());
+    fields.forEach(el => (invalid.includes(el) ? showError(el) : clearError(el)));
+    if (invalid.length) invalid[0].focus();
+    return !invalid.length;
+  }
+  $$('input:not(.hp), textarea', form).concat($$('input:not(.hp)', nl)).forEach(el => {
+    ['input', 'change'].forEach(ev => el.addEventListener(ev, () => { if (el.hasAttribute('aria-invalid') && el.checkValidity()) clearError(el); }));
+    refreshers.push(() => { if (el.hasAttribute('aria-invalid')) showError(el); }); // po přepnutí jazyka text chyby v novém jazyce
+  });
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (!checkForm(form)) return;
     const btn = $('button[type="submit"]', form);
     btn.classList.add('is-loading');
     btn.innerHTML = `${icon('i-spinner')} ${t('Odesílám…')}`;
@@ -1694,23 +1652,12 @@ async function sendForm(formEl, type) {
       btn.innerHTML = `${icon('i-send')} ${t('Odeslat zprávu')}`;
     }
   });
-  $('#formReset').addEventListener('click', () => card.classList.remove('is-sent'));
+  $('#formReset').addEventListener('click', () => { card.classList.remove('is-sent'); $$('input:not(.hp), textarea', form).forEach(clearError); });
 
-  $$('#contactForm input, #contactForm textarea, #newsletterForm input').forEach(el => {
-    el.addEventListener('invalid', () => {
-      const v = el.validity;
-      el.setCustomValidity(v.valueMissing
-        ? t(el.type === 'checkbox' ? 'Pro odeslání je potřeba souhlas.' : 'Vyplňte prosím toto pole.')
-        : v.typeMismatch ? t('Zadejte platnou e-mailovou adresu.') : '');
-    });
-    ['input', 'change'].forEach(ev => el.addEventListener(ev, () => el.setCustomValidity('')));
-    refreshers.push(() => el.setCustomValidity('')); // po přepnutí jazyka nenechat hlášku v jiném jazyce
-  });
 
-  const nl = $('#newsletterForm');
   nl.addEventListener('submit', async e => {
     e.preventDefault();
-    if (!nl.checkValidity()) { nl.reportValidity(); return; }
+    if (!checkForm(nl)) return;
     const btn = $('button[type="submit"]', nl);
     btn.classList.add('is-loading');
     try {
@@ -1748,24 +1695,19 @@ document.addEventListener('click', e => {
   $('.modal__scroll', privacyModal).scrollTop = 0;
 });
 
-/* ---------- PARTNEŘI – nekonečný pás ---------- */
+/* ---------- PARTNEŘI – loga v řadě ---------- */
 (function partners() {
   const track = $('#partnersMarquee .marquee__track');
   if (!PARTNERS.length) { $('#partnersMarquee').hidden = true; return; }
-  const reps = Math.max(1, Math.ceil(8 / PARTNERS.length)); // aspoň ~8 log na skupinu
-  const item = (p, hidden, dup) => {
+  const item = p => {
     const src = isPath(p.logo) ? p.logo : PARTNER_IMG + p.logo;
-    const img = `<img src="${esc(src)}" alt="${hidden ? '' : esc(p.name || '')}" loading="lazy">`;
-    const cls = 'partner' + (dup ? ' is-dup' : '');
+    const img = `<img src="${esc(src)}" alt="${esc(p.name || '')}" loading="lazy">`;
     const url = /^https?:\/\//i.test(p.url || '') ? p.url : '';
     return url
-      ? `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener" ${hidden ? 'tabindex="-1" aria-hidden="true"' : ''} aria-label="${esc(p.name || '')}">${img}</a>`
-      : `<span class="${cls}">${img}</span>`;
+      ? `<a class="partner" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(p.name || '')}">${img}</a>`
+      : `<span class="partner">${img}</span>`;
   };
-  const group = hidden => `<div class="marquee__group" ${hidden ? 'aria-hidden="true"' : ''}>${
-    Array.from({ length: reps }, (_, r) => PARTNERS.map(p => item(p, hidden || r > 0, r > 0)).join('')).join('')
-  }</div>`;
-  track.innerHTML = group(false) + group(true); // druhá kopie = plynulá smyčka
+  track.innerHTML = PARTNERS.map(item).join('');
 })();
 
 /* ---------- Ostatní tlačítka s oznámením ---------- */
@@ -1812,7 +1754,7 @@ $$('[data-toast]:not(#galleryFilters [data-toast])').forEach(b => b.addEventList
    Volba jazyka se pamatuje v prohlížeči; odkaz s ?lang=de otevře rovnou němčinu. */
 const I18N_SKIP = [
   'script', 'style', 'svg', 'code', '[data-i18n-skip]',
-  '.burger__label', '.hero__slides', '#coaches', '[data-split-words]', '[data-count]', '[data-price]', '[data-price-alt]', '[data-h]',
+  '.burger__label', '.hero__slides', '#coaches', '[data-price]', '[data-price-alt]', '[data-h]',
   '#priceNow', '#seasonStatus', '#seasonBadge', '.account-iban', '#galleryMore', '#heroCaption', '#heroDots', '#newsGrid', '#newsMore',
   '#newsModal .modal__body', '#newsModalThumbs', '#tourList', '#gallery', '#distTable',
   '#courseMap .hotspot', '#holePicker .hole-pick', '#holeDots', '#lbCounter', '#lbCaption',
@@ -1823,9 +1765,6 @@ const i18nTexts = [];
 const i18nAttrs = [];
 const metaDesc = $('meta[name="description"]');
 const META_CS = { title: document.title, desc: metaDesc.content };
-const ringText = $('#ringText');
-const RING_CS = ringText ? ringText.textContent : '';
-const heroSub = $('[data-split-words]');
 
 (function captureI18n() {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -1853,13 +1792,11 @@ function setLang(lang, remember = true) {
   i18nAttrs.forEach(({ el, a, cs }) => el.setAttribute(a, LANG === 'de' ? t(cs) : cs));
   document.title = t(META_CS.title);
   metaDesc.content = t(META_CS.desc);
-  if (ringText) ringText.textContent = t(RING_CS);
   // odkazy s německou variantou (PDF ceník, předmět e-mailu…)
   $$('[data-href-de]').forEach(a => {
     if (!a.dataset.hrefCs) a.dataset.hrefCs = a.getAttribute('href');
     a.setAttribute('href', LANG === 'de' ? a.dataset.hrefDe : a.dataset.hrefCs);
   });
-  if (heroSub) splitWords(heroSub, t(heroSub.dataset.cs));
   $$('.lang [data-lang]').forEach(b => {
     const on = b.dataset.lang === LANG;
     b.classList.toggle('is-active', on);
@@ -1886,5 +1823,6 @@ document.addEventListener('click', e => {
 let startLang = 'cs';
 try { startLang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('gct-lang') || 'cs'; } catch { /* bez úložiště */ }
 if (startLang === 'de') setLang('de', false);
+root.classList.remove('lang-pending'); // stránka se ukáže až v cílovém jazyce (viz _hlava.html)
 
 })();
